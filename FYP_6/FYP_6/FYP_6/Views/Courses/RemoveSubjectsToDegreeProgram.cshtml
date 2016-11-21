@@ -1,0 +1,87 @@
+﻿@model FYP_6.Degree_Program
+
+@{
+    Layout = null;
+}
+@Html.Partial("EmployeeView")
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br />
+        @if (ViewBag.Message == "Successfully Record Added")
+        {
+            <br />
+            <div class="alert bg-success" role="alert">
+                <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+        else if (ViewBag.Message != "")
+        {
+            <br />
+            <div class="alert bg-danger" role="alert">
+                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header"> Remove Subjects To Degree Programs</h1>
+            </div>
+        </div><!--/.row-->
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <div class="bootstrap-table">
+                            <div class="fixed-table-header"><table></table></div><div class="fixed-table-body">
+                                @using (Html.BeginForm("RemoveSubjectsForSelectedDegree", "Courses", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+
+                                    if (ViewBag.Degrees != null)
+                                    {
+                                        <label style="padding-right:40px">Select Degree</label>
+                                        <select name="degree" onchange="FillCity()" id="level" class="form-control" style="width:170px; display:inline;">
+                                            @foreach (var item in ViewBag.Degrees)
+                                            {
+                                                <option value="@item.ProgramID"> @item.Degree_ProgramName</option>
+                                            }
+                                        </select>
+                                        <div style="color:red; display:inline">*</div>
+                                    }
+
+
+                                    <br />
+                                    <br />
+                                    @*<input type="hidden" value="@Html.DisplayFor(model=>model.ProgramID)" name="programID" />*@
+                                    <input type="submit" value="Next" class="btn btn-primary" style="margin-left:155px" />
+                                    @Html.ActionLink("Back", "ManageCourses", "Courses", null, new { @class = "btn btn-primary" })
+
+                                }
+
+                            </div>
+
+
+
+                        </div><div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+</body>
+</html>

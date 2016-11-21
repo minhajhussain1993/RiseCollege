@@ -1,0 +1,458 @@
+﻿@model FYP_6.Registeration
+
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+<html>
+<body>
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br /><br /><br /><br /><br />
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body tabs">
+                        <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab1" data-toggle="tab">Student Profile</a></li>
+                                <li><a href="#tab2" data-toggle="tab"> Registeration</a></li>
+                            <li><a href="#tab3" data-toggle="tab"> Fee Details</a></li>
+                            <li><a href="#tab4" data-toggle="tab"> Subject Details</a></li>
+
+                        </ul>
+
+                        <div class="tab-content">
+                            
+                                
+                                    <div class="tab-pane fade in active" id="tab1">
+                                        <div class="panel panel-primary" style="padding-left:2px">
+
+                                            <div class="panel-body">
+
+                                                @using (Html.BeginForm("EditStudent", "Employees", FormMethod.Post
+                                                             ,
+                            new { enctype = "multipart/form-data" }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.ValidationSummary(true)
+                                                    <div style="float:right; display:inline">
+                                                        @if (Model.Student_Profile.Picture != null)
+                                                        {
+
+                                                            var base64 = Convert.ToBase64String((byte[])Model.Student_Profile.Picture);
+                                                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                            <img src='@imgSrc' style="width:200px; height:200px; padding: 0px; display:inline;float:right;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;}" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/MyProjectImages/user icon.png" style="width:200px; height:200px; padding: 0px;float:right;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;}" />
+                                                        }
+
+                                                    </div>
+                                                    
+                                                    <br />
+                                                    <br />
+                                                    <label style="padding-right:140px">RollNo</label>
+                                                    <span class="categoryDiv">@Html.DisplayFor(model => model.Rollno)</span>
+                                                    <br />
+                                                    <br />
+                                                    <label style="padding-right:105px; display:inline">First Name:</label>
+                                                <span class="categoryDiv">
+                                                    @Html.DisplayFor(model => model.Student_Profile.FirstName, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+
+                                                    <br />
+                                                    <br />
+                                                    <label style="padding-right:105px; display:inline">Last Name:</label>
+                                                <span class="categoryDiv">
+                                                    @Html.DisplayFor(model => model.Student_Profile.LastName, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+
+                                                        <br />
+                                                        <br />
+
+
+                                                        <label style="padding-right:90px;display:inline">Date of Birth:</label>
+                                                <span class="categoryDiv">
+                                                    @Html.DisplayFor(model => model.Student_Profile.Date_of_Birth, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+
+                                                    <br />
+                                                    <br />
+                                                    <label style="padding-right:125px; display:inline">Gender:</label>
+                                                <span class="categoryDiv">
+                                                    @Html.DisplayFor(model => model.Student_Profile.Gender, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+
+                                                    <br />
+                                                    <br />
+                                                    <label style="padding-right:145px">CNIC</label>
+                                                <span class="categoryDiv">
+                                                    @Html.DisplayFor(model => model.Student_Profile.CNIC, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+
+                                                    <br />
+                                                    <br />
+                                                    <label style="padding-right:115px; display:inline">Address:</label>
+                                                <span class="categoryDiv">
+                                                    @Html.DisplayFor(model => model.Student_Profile.Address, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+
+                                                    <br />
+                                                    <br />
+                                                    <label style="padding-right:112px;">Domicile:</label>
+                                                <span class="categoryDiv">
+                                                    @Html.DisplayFor(model => model.Student_Profile.Domicile, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+
+                                                    <br />
+                                                    <br />
+                                                    <label style="padding-right:95px;display:inline">Nationality:</label>
+                                                <span class="categoryDiv">
+                                                    @Html.DisplayFor(model => model.Student_Profile.Nationality, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+
+                                                    <br />
+                                                    <br />
+                                                    <label style="padding-right:10px;">Father/Guardian_Name:</label>
+                                                <span class="categoryDiv">
+                                                    @Html.DisplayFor(model => model.Student_Profile.FatherName_Guardian_Name, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+
+                                                    <br />
+                                                    <br />
+                                                    <label style="padding-right:10px;display:inline">Father/GuardianPhone:</label>
+                                                <span class="categoryDiv">
+                                                    @Html.DisplayFor(model => model.Student_Profile.Father_Guardian_Contact, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+                                                    <br /><br />
+                                                    @Html.ActionLink("Back", "StudentRecords", "Employees", new { @class = "btn btn-primary" })
+                                                    }
+</div>
+                                        </div>
+                                    </div>
+
+                                
+                                
+                                
+                                
+                                    <div class="tab-pane fade in" id="tab2">
+                                        <div class="panel panel-primary" style="padding-left:2px">
+
+                                            <div class="panel-body">
+                                
+                                                @using (Html.BeginForm("", "Employees", FormMethod.Post))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.ValidationSummary(true)
+
+                                                    <label style="padding-right:130px">RollNo</label>
+                                                    <span class="categoryDiv">@Html.DisplayFor(model => model.Rollno, new { @class = "form-control", @style = "width:200px; display:inline" })</span>
+                                                    <br />
+                                                    <br />
+
+                                                    <label style="padding-right:135px; display:inline">Name:</label>
+                                                    <span class="categoryDiv">
+                                                        @Html.DisplayFor(model => model.Student_Profile.FirstName, new { @class = "form-control", @style = "width:200px; display:inline" })
+
+                                                        @Html.DisplayFor(model => model.Student_Profile.LastName, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+                                                    <br />
+                                                    <br />
+
+                                                    <label style="padding-right:55px">Registeration No:</label>
+                                                    <span class="categoryDiv">
+                                                        @Html.DisplayFor(model => model.RegisterationNo, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+                                                    
+
+                                                    <br />
+                                                    <br />
+                                                    <label style="padding-right:145px">Degree</label>
+                                                    <span class="categoryDiv">
+                                                        @Html.DisplayFor(model => model.Batch.Degree_Program.Degree_ProgramName)
+                                                    </span>
+                                                    <br />
+                                                    <br />
+                                                    
+                                                    <label style="padding-right:127px; display:inline">Batch:</label>
+                                                    <span class="categoryDiv">
+                                                        @Html.DisplayFor(model => model.BatchID, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+                                                    <br />
+                                                    <br />
+                                                    
+                                                    <label style="padding-right:165px; display:inline">Part:</label>
+                                                    <span class="categoryDiv">
+                                                        @Html.DisplayFor(model => model.Part, new { @class = "form-control" })
+                                                    </span>
+                                                    <br />
+                                                    <br />
+                                                    
+                                                    <label style="padding-right:142px;">Section:</label>
+                                                    <span class="categoryDiv">
+                                                        @Html.DisplayFor(model => model.Batch.Section.SectionName, new { @class = "form-control" })
+                                                    </span>
+                                                    <br />
+                                                    <br />
+                                                    
+                                                    <label style="padding-right:105px;display:inline">Password:</label>
+                                                <span class="categoryDiv">
+                                                    @Html.DisplayFor(model => model.Password, new { @class = "form-control", @style = "width:200px; display:inline" })
+                                                    </span>
+
+                                                    <br />
+                                                    <br />
+    @Html.ActionLink("Back", "StudentRecords", "Employees", new { @class = "btn btn-primary" })
+                                                }
+</div>
+                                        </div>
+                                    </div>
+                            <div class="tab-pane fade in" id="tab3">
+                                <div class="panel panel-primary" style="padding-left:2px">
+
+                                    <div class="panel-body">
+
+                                        @using (Html.BeginForm("", "Employees", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true)
+
+                                            
+    <div class="fixed-table-container table-responsive">
+        <div class="fixed-table-body">
+            <table border="1" data-toggle="table"
+                   data-url="tables/data1.json" data-show-refresh="true"
+                   data-show-toggle="true" data-show-columns="true"
+                   data-search="true" data-select-item-name="toolbar1"
+                   data-pagination="true" data-sort-name="name"
+                   data-sort-order="desc" class="table table-hover ">
+
+                <thead>
+                    <tr>
+                        <th style=""><div class="th-inner sortable">Rollno</div><div class="fht-cell"></div></th>
+                        <th style=""><div class="th-inner sortable">Registeration Fees</div><div class="fht-cell"></div></th>
+                        <th style="">
+                            <div class="th-inner sortable">
+                                Tution Fees
+                                @*<span class="order"><span class="caret" style="margin: 10px 5px;"></span></span>*@<span class="order"><span class="caret" style="margin: 10px 5px;"></span></span>
+                            </div><div class="fht-cell"></div>
+                        </th>
+                        <th style="">
+                            <div class="th-inner sortable">
+                                Admission Fees
+
+                            </div><div class="fht-cell"></div>
+                        </th>
+                        <th style="">
+                            <div class="th-inner sortable">
+                                Exam_Fee
+
+                            </div><div class="fht-cell"></div>
+                        </th>
+                        <th style="">
+                            <div class="th-inner sortable">
+                                Total Installments
+
+                            </div><div class="fht-cell"></div>
+                        </th>
+                        <th style="">
+                            <div class="th-inner sortable">
+                                Paid Installments
+
+                            </div><div class="fht-cell"></div>
+                        </th>
+                        <th style="">
+                            <div class="th-inner sortable">
+                                Fine
+
+                            </div><div class="fht-cell"></div>
+                        </th>
+                        <th style="">
+                            <div class="th-inner sortable">
+                                Total_Fee
+                            </div><div class="fht-cell"></div>
+                        </th>
+                        <th style="">
+                            <div class="th-inner sortable">
+                                Dated
+
+                            </div><div class="fht-cell"></div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                                            var stdProfile = Model.Student_Profile;
+                                            var regStd = stdProfile.Registerations;
+
+                                            foreach (var item in regStd)
+                                            {
+                                                foreach (var item2 in item.Fees)
+                                                {
+                                                    <tr>
+                                                        
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Rollno)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Registeration_Fee)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Tution_Fee)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Admission_Fee)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Exam_Fee)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Total_Installments)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Installment)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Fine)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Total_Fee)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Dated)
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                }
+                                            }
+                    }
+                    </tbody>
+                </table>
+        </div>
+    </div>
+                                            <br />
+                                            <br />
+                                            @Html.ActionLink("Back", "StudentRecords", "Employees", new { @class = "btn btn-primary" })
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade in" id="tab4">
+                                <div class="panel panel-primary" style="padding-left:2px">
+
+                                    <div class="panel-body">
+
+                                        @using (Html.BeginForm("", "Employees", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true)
+
+
+                                            <div class="fixed-table-container table-responsive">
+                                                <div class="fixed-table-body">
+                                                    <table border="1" data-toggle="table"
+                                                            class="table table-hover ">
+
+                                                        <thead>
+                                                            <tr>
+                                                                <th style=""><div class="th-inner sortable">Rollno</div><div class="fht-cell"></div></th>
+                                                                <th style=""><div class="th-inner sortable">Batch Name</div><div class="fht-cell"></div></th>
+                                                                <th style=""><div class="th-inner sortable">Degree Program</div><div class="fht-cell"></div></th>
+                                                                <th style=""><div class="th-inner sortable">Section</div><div class="fht-cell"></div></th>
+                                                                <th style=""><div class="th-inner sortable">Subject Name</div></th>
+                                                                <th style=""><div class="th-inner sortable">Part</div><div class="fht-cell"></div></th>
+                                                                <th style=""><div class="th-inner sortable">Status</div><div class="fht-cell"></div></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @{
+                                            var stdProfile = Model.Student_Profile;
+                                            var regStd = stdProfile.Registerations;
+                                            
+
+                                            foreach (var item in regStd)
+                                            {
+                                                foreach (var item2 in item.Assign_Subject)
+                                                {
+                                                    <tr>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Rollno)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Batch_Subjects_Parts.BatchName)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Batch_Subjects_Parts.Batch.Degree_Program.Degree_ProgramName)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Batch_Subjects_Parts.Batch.Section.SectionName)
+
+                                                        </td>
+                                                        
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Batch_Subjects_Parts.Subject.SubjectName)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item2.Batch_Subjects_Parts.Part)
+                                                        </td>
+                                                        
+                                                            @if (Html.DisplayFor(modelItem => item.Status.Value).ToString() == "1")
+                                                            {
+                                                            <td>Active</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>UnActive</td>
+                                                            }
+
+                                                        
+                                                    </tr>
+                                                }
+                                            }
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <br />
+                                            @Html.ActionLink("Back", "StudentRecords", "Employees", new { @class = "btn btn-primary" })
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                                
+                                
+                            
+
+                        </div>
+                    </div>
+                </div><!--/.panel-->
+            </div><!--/.col-->
+        </div><!-- /.row -->
+
+    </div><!--/.main-->
+
+    
+</body>
+</html>

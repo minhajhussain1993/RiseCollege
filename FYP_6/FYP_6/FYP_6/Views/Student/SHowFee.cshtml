@@ -1,0 +1,224 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FYP_6.Fee>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+@Html.Partial("StudentView")
+<body>
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            
+        </div><!--/.row-->
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary feePanel">
+                    <div class="panel-heading">Yearly Fee Record</div>
+                    <div class="panel-body">
+                        
+
+      
+                        @using (Html.BeginForm("SHowFee", "Student", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            
+                            <br />
+
+                            if (ViewBag.Year != null)
+                            {
+                              
+                                    <b style="display:inline">Select Year:</b>
+                                    <select name="selectedYear"
+                                            class="form-control" style="width:150px;display:inline;margin-bottom:3%">
+                                        @foreach (var item in ViewBag.Year)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    </select>
+                              
+                            }
+
+
+                            <input type="hidden" value=@Session["rollno"] />
+                            <input type="submit" value="Show Results" class="btn btn-primary" />
+                        }
+                        <br />
+                        <div class="fixed-table-container table-responsive">
+                            <div class="fixed-table-body">
+                                <table border="1"
+                                       data-toggle="table" data-url="tables/data1.json"
+                                       data-show-refresh="true" data-show-toggle="true"
+                                       data-show-columns="true" data-search="true"
+                                       data-select-item-name="toolbar1" data-pagination="true"
+                                       data-sort-name="name" data-sort-order="desc"
+                                       class="table table-hover">
+                                    <thead>
+                                        @if (@ViewBag.Message == null)
+                                        {
+                                            <tr>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        @Html.DisplayNameFor(model => model.First().StudentName)
+                                                        @*<span class="order"><span class="caret" style="margin: 10px 5px;"></span></span></div><div class="fht-cell"></div>*@
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        @Html.DisplayNameFor(model => model.First().Registeration_Fee)
+                                                        @*<span class="order"><span class="caret" style="margin: 10px 5px;"></span></span></div><div class="fht-cell"></div>*@
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        @Html.DisplayNameFor(model => model.First().Tution_Fee)
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        @Html.DisplayNameFor(model => model.First().Admission_Fee)
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        @Html.DisplayNameFor(model => model.First().Exam_Fee)
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        @Html.DisplayNameFor(model => model.First().Total_Installments)
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        Paid Installments
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        @Html.DisplayNameFor(model => model.First().Fine)
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        @Html.DisplayNameFor(model => model.First().Total_Fee)
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        @Html.DisplayNameFor(model => model.First().Dated)
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        }
+                                    </thead>
+                                    <tbody>
+                                        @if (@ViewBag.Message == null)
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                <tr>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.StudentName)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Registeration_Fee)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Tution_Fee)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Admission_Fee)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Exam_Fee)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Total_Installments)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Installment)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Fine)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Total_Fee)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Dated)
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                                <br />
+                                @if (@ViewBag.Message != null)
+                                {
+                                    <div class="alert bg-danger" role="alert">
+                                        <svg class="glyph stroked cancel">
+                                            <use xlink:href="#stroked-cancel"></use>
+                                        </svg> @ViewBag.Message
+                                        <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                    </div>
+                                }
+                                
+                                @Html.ActionLink("Refresh", "SHowFee", "Student",
+                                                           null, new
+                                                           {
+                                                               @type = "submit",
+                                                               @class = "btn btn-success buttonRefresh",
+                                                               @style = "margin-left:0%; margin-top:0%; style=display:inline; width:150px"
+                                                           })
+                                @if (ViewBag.Message == null)
+                                {
+                                    @Html.PagedListPager(Model, page => Url.Action("SHowMarks",
+                            new
+                            {
+                                page,
+                                searchBy = Request.QueryString["searchBy"],
+                                search = Request.QueryString["search"]
+
+                            }), new PagedListRenderOptions()
+                                     {
+                                         Display = PagedListDisplayMode.IfNeeded,
+                                         DisplayPageCountAndCurrentLocation = true
+                                     }
+                            )
+                                }
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+                    </div>
+        </div>
+        
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,228 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FYP_6.Teacher>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+<body>
+
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <br>
+        <br>
+
+        <br /><br /><br />
+      @if (ViewBag.Message != null)
+      {
+          if (ViewBag.Message == "Successfully Records Deleted")
+          {
+            <br />
+            <div class="alert bg-success" role="alert">
+                <svg class="glyph stroked checkmark">
+                    <use xlink:href="#stroked-checkmark"></use>
+                </svg> @ViewBag.Message<a href="#" class="pull-right">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </div>
+          }
+          else
+          {
+            <div class="alert bg-danger" role="alert">
+                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+          }
+      }
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Teachers</div>
+                    <div class="panel-body">
+
+                        @using (Html.BeginForm("TeacherRecords", "Employees", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+
+                            <label>Search By TeacherID</label>
+    <span>
+        <span class="categoryDiv">
+            @Html.TextBox("search", "", new { @class = "form-control", @style = "width:200px;display:inline; ", @id = "search", @autocomplete = "off" })
+        </span>
+        <span class="loadingImageWhileTyping" style="display: none;">
+            <img src="~/MyProjectImages/Loading Circle.gif" style="width:3.5% " />
+        </span>
+        </span>
+        <b>Select Category:</b>
+        <span class="categoryDiv">
+            @Html.DropDownList("TeacherType", new List<SelectListItem>
+                              {
+                                  new SelectListItem{Text="Current Teachers",Value="Active",Selected=true},
+                                  new SelectListItem{Text="Past Teachers",Value="UnActive"},
+
+                              }, new { @class = "form-control", @style = "width:200px; display:inline" })
+
+            <input type="submit" value="Search" class="btn btn-primary" name="submitButtonPressed" />
+        </span>
+        }
+
+        <br />
+        <br />
+        <div class="fixed-table-container table-responsive">
+            <div class="fixed-table-body">
+                @using (Html.BeginForm("TeacherRecords", "Employees", FormMethod.Post))
+                                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                                    int i = 1;
+                                    <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="">
+                                                    <div class="th-inner sortable">Select</div>
+                                                    <div class="fht-cell"><input type="checkbox" name="checkUncheckAll" id="checkUncheckAll" class="checkUncheckAll" /></div>
+                                                </th>
+                                                <th style=""><div class="th-inner sortable">TeacherID</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Name</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Gender</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Graduation Details</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Post_Graduation_Details</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Major_Subject</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Salary</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Action</div><div class="fht-cell"></div></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (ViewBag.SearchQuery == "True")
+                                            {
+                                                i=1;
+                                                foreach (var item in Model)
+                                                {
+                                                    <tr class="roo_@i">
+                                                        <td>
+                                                            <input type="checkbox" name="deleteTeacher" id="deleteTeacher" value="@Html.DisplayFor(modelItem => item.TeacherID)" class="roo_@i" />
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.TeacherID)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Name)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Gender)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Graduation_Details)
+                                                        </td>
+                                                        @*<td>
+                                                                @Html.DisplayFor(modelItem => item.Part)
+
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Month)
+
+                                                            </td>*@
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Post_Graduation_Details)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Major_Subject)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Salary)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.ActionLink("Edit", "EditTeacher", "Employees", new { @id = item.TeacherID }, null)
+                                                            |
+                                                            @Html.ActionLink("Details", "DetailTeacher", "Employees", new { @id = item.TeacherID }, null)
+                                                        </td>
+                                                    </tr>
+                                                    i++;
+                                                }
+
+                                            }
+                                            else if (ViewBag.SearchQuery == "Nothing")
+                                            {
+                                                <tr>
+
+                                                    <div class="alert bg-danger" role="alert">
+                                                        <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                                                        No Records Found<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                                    </div>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                if (Model != null)
+                                                {
+                                                    i=1;
+                                                    foreach (var item in Model)
+                                                    {
+                                                        <tr class="roo_@i">
+                                                            <td>
+                                                                <input type="checkbox" name="deleteTeacher" id="deleteTeacher" value="@Html.DisplayFor(modelItem => item.TeacherID)" class="roo_@i" />
+                                                            </td>
+                                                            <td>@item.TeacherID</td>
+                                                            <td>
+                                                                @item.Name
+                                                            </td>
+                                                            <td>@item.Gender</td>
+                                                            <td>@item.Graduation_Details</td>
+                                                            <td>@item.Post_Graduation_Details</td>
+                                                            <td>@item.Major_Subject</td>
+                                                            <td>@item.Salary</td>
+                                                            <td>
+                                                                @Html.ActionLink("Edit", "EditTeacher", "Employees", new { @id = item.TeacherID }, null)
+                                                                |
+                                                                @Html.ActionLink("Details", "DetailTeacher", "Employees", new { @id = item.TeacherID }, null)
+                                                            </td>
+                                                        </tr>
+                                                        i++;
+                                                    }
+
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                    <input type="hidden" id="hiddenInput" name="hiddenInput" />
+                                    <input type="submit" value="Delete" class="btn btn-danger" onclick="return FormSubmitted();" style="display:inline;" name="delTeacher" />
+                                    @Html.ActionLink("Refresh", "TeacherRecords", "Employees", null, new { @type = "submit", @class = "btn btn-success", @style = "margin-left:0px;  style=display:inline;" })
+                                }
+            </div>
+        </div>
+        @if (Model != null)
+                        {
+            @Html.PagedListPager(Model, page => Url.Action("TeacherRecords",
+            new
+            {
+                page,
+                searchBy = Request.QueryString["searchBy"],
+                search = Request.QueryString["search"],
+
+            })
+            , new PagedListRenderOptions()
+                {
+                    Display = PagedListDisplayMode.IfNeeded,
+                    DisplayPageCountAndCurrentLocation = true
+                })
+
+                        }
+
+
+        <div class="clearfix"></div>
+    </div>
+                </div>
+
+            </div>
+        </div>
+    
+    </div>
+
+</body>
+</html>

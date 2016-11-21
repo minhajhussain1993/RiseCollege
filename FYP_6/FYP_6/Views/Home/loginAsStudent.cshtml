@@ -1,0 +1,169 @@
+﻿ @{
+     Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+    @Scripts.Render("~/Scripts/login")
+    @Styles.Render("~/Scripts/login1")
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><span>Rise College</span>Information System</a>
+                <ul class="user-menu">
+                    <li class="dropdown pull-right">
+                        @Html.ActionLink("Back to Website", "Index", "Home")
+                    </li>
+                </ul>
+            </div>
+
+        </div><!-- /.container-fluid -->
+    </nav>
+    <br>
+    <br>
+
+    <br>
+    <br>
+    <br>
+    <br>
+        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-primary">
+                <div class="panel-heading"><img src="~/MyProjectImages/lock.png" style="display:inline;" width="50px" />Student Login</div>
+                <div class="panel-body">
+
+                    @using (Html.BeginForm("loginAsStudent", "Home", FormMethod.Post))
+                    {
+                        @Html.ValidationSummary(true)
+                        <fieldset>
+                            @*<span class="col-md-12">
+                                @Html.Label("Select Login Type:")
+
+                                @Html.DropDownList("Categories")
+                            </span>
+                            <br />*@
+                            @*@Html.DropDownList("Actors", new List<SelectListItem>
+                                {
+                                    new SelectListItem{Text="Student",Value="1" },
+                                    new SelectListItem{Text="Teacher",Value="2"},
+                                    new SelectListItem{Text="Employees",Value="3"},
+                                    new SelectListItem{Text="Admin",Value="4"}
+                                }, new { @id = "typedropdown", @class = "form-control loginControls", @style = "width:60%" })*@
+
+                            @if (ViewBag.Message == null)
+                            {
+                                <br>
+                                @Html.Label("Username")
+                                <div class="form-group">
+                                    @Html.TextBox("Username", null, new
+           {
+               @id = "usernameTextbox",@*@pattern = "^[0-9]*$"*@ @required = true,
+               @class = "form-control loginControls",
+               placeholder = "Enter Username",
+               @style = "width:60%"
+           })
+                                    @*@Html.Label("usernameLabel", new { @id = "usernameLabel", @style = "display:none" })*@
+                                    <br>
+                                    <div style="color: red">
+                                        @ViewBag.Message2
+                                    </div>
+                                </div>
+                                @Html.Label("Password")
+                                <div class="form-group">
+                                    @Html.Password("Password", null,
+                                new
+                                {
+                                    @id = "passwordTextbox",
+                                    @required = true,
+                                    @class = "form-control loginControls",
+                                    placeholder = "Enter Password",
+                                    @style = "width:60%"
+                                })
+
+                                    <div style="color: red">
+                                        @ViewBag.Message3
+                                    </div>
+                                </div>
+                                <input type="submit" value="Login" class="btn btn-primary" style="width:100px" id="loginIdforButton" />
+                                <br />
+                                <br />
+                            }
+                            else
+                            {
+                                <br>
+                                @Html.Label("Username")
+                                <div class="form-group has-error">
+                                    @Html.TextBox("Username", null, new
+           {
+               @id = "usernameTextbox",@*@pattern = "^[0-9]*$"*@ @required = true,
+               @class = "form-control loginControls",
+               placeholder = "Enter Username",
+               @style = "width:60%"
+           })
+                                    @*@Html.Label("usernameLabel", new { @id = "usernameLabel", @style = "display:none" })*@
+                                    <br>
+                                    <div style="color: red">
+                                        @ViewBag.Message2
+                                    </div>
+                                </div>
+                                @Html.Label("Password")
+                                <div class="form-group has-error">
+                                    @Html.Password("Password", null, new
+   {
+       @id = "passwordTextbox",
+       @required = true,
+       @class = "form-control loginControls",
+       placeholder = "Enter Password",
+       @style = "width:60%"
+   })
+
+                                    <div style="color: red">
+                                        @ViewBag.Message3
+                                    </div>
+                                </div>
+                                <input type="submit" value="Login" class="btn btn-primary" style="width:100px" id="loginIdforButton" />
+
+                                <br />
+                                <br />
+                            }
+                            @if (ViewBag.Message != null)
+                            {
+                                <div class="alert bg-danger" role="alert">
+                                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                                    @ViewBag.Message
+                                    <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                </div>
+                            }
+
+                        </fieldset>
+
+                    }
+                </div>
+            </div>
+        </div><!-- /.col-->
+
+
+
+
+</body>
+
+</html>

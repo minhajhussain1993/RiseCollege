@@ -1,0 +1,144 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FYP_6.Registeration>
+ 
+
+<!DOCTYPE html>
+@Html.Partial("TeacherView")
+<body>
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br><br><br><br><br>
+        @if (ViewBag.SearchQuery == "Roll no Doesnot Exists")
+        {
+            <div class="alert bg-danger" role="alert">
+                <svg class="glyph stroked cancel">
+                    <use xlink:href="#stroked-cancel"></use>
+                </svg> No Records Found!
+                <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+
+        }
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">View Students</div>
+                    <div class="panel-body">
+
+                        @using (Html.BeginForm("ViewStudents", "Teacher", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <label>Search By Rollno</label>
+                            @Html.TextBox("search", "", new
+                       {
+                           @class = "form-control",
+                           @style = "width:200px;display:inline;margin-bottom:2%; "
+                       })
+                            <input type="submit" value="Search" class="btn btn-primary" />
+
+                        }
+                        <br />
+                        <br />
+                        <div class="fixed-table-container table-responsive">
+                            <div class="fixed-table-body">
+                                <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style=""><div class="th-inner sortable">RollNo</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Name</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Gender</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">DegreeName</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Part</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Section</div><div class="fht-cell"></div></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@item.Rollno</td>
+                                                    <td>@item.Student_Profile.FirstName @item.Student_Profile.LastName</td>
+                                                    <td>@item.Student_Profile.Gender</td>
+                                                    <td>@item.Batch.Degree_Program.Degree_ProgramName</td>
+                                                    <td>@item.Part</td>
+                                                    <td>@item.Batch.Section.SectionName</td>
+
+                                                </tr>
+                                            }
+                                        }
+
+                                        @*@if (ViewBag.SearchQuery == "True")
+                                            {
+                                                <tr class="no-records-found">
+                                                    @foreach (var item in ViewBag.Data)
+                                                    {
+                                                        <td>@item</td>
+                                                    }
+                                                </tr>
+                                            }
+                                            else if (ViewBag.SearchQuery == "Roll no Doesnot Exists")
+                                            {
+                                                <tr></tr>
+                                            }
+                                            else if (ViewBag.SearchQuery == "Not A Number")
+                                            {
+                                                <text>Plz Enter Valid Rollno</text>
+                                            }
+                                            else
+                                            {
+                                                foreach (var item in ViewBag.Data)
+                                                {
+                                                    <tr class="no-records-found">
+                                                        @foreach (var item2 in item)
+                                                        {
+                                                            <td>@item2</td>
+                                                        }
+                                                    </tr>
+                                                }
+
+                                            }*@
+
+                                    </tbody>
+                                </table>
+                                @Html.ActionLink("Refresh", "ViewStudents", "Teacher",
+                                new { @class = "btn btn-primary", @style = "" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div style="display:inline">
+                            @if (Model != null)
+                            {
+                                @Html.PagedListPager(Model, page => Url.Action("ViewStudents",
+            new
+            {
+                page,
+                searchBy = Request.QueryString["searchBy"],
+                search = Request.QueryString["search"],
+
+            })
+            , new PagedListRenderOptions()
+                {
+                    Display = PagedListDisplayMode.IfNeeded,
+                    DisplayPageCountAndCurrentLocation = true
+                })
+
+                            }
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

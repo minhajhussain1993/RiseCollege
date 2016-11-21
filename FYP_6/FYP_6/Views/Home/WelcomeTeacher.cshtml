@@ -1,0 +1,207 @@
+﻿@model FYP_6.Teacher
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("TeacherView")
+@*<head>
+
+        <!--Icons-->
+
+
+        <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+
+    </head>*@
+
+<body>
+
+    <div style="position:absolute;width:100%;height:200%;z-index:9999;
+    background-color:rgba(1,1,1,0.5);display:none;" id="screenblurLoadingSubjectsTeacher">
+        <div class="col-md-4" style="margin:20%;margin-left:35%;margin-top:15%">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="margin:0%">Plz Wait Loading Subjects</div>
+                <div class="panel-body">
+                    <img src="~/MyProjectImages/16.gif" style="width:100%;height:2%" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li class="active"></li>
+            </ol>
+        </div><!--/.row-->
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Welcome @Session["UserName"]</h1>
+            </div>
+        </div><!--/.row-->
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-blue panel-widget ">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil" /></svg>
+                        </div>
+                        @if (ViewBag.Graduation != null)
+                        {
+                            @*<div class="col-sm-12 col-lg-12 widget-right">
+                                <div class="large">@ViewBag.Graduation</div>
+                                <div class="text-muted">Graduation</div>
+                            </div>*@
+                            <div class="col-sm-12 col-lg-12 widget-right">
+                                <div style="font-size:inherit"><b>@ViewBag.Graduation</b></div>
+                                <div class="text-muted">Graduation</div>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="col-sm-12 col-lg-12 widget-right">
+                                <div class="large">None</div>
+                                <div class="text-muted">Graduation Details</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-orange panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked star"><use xlink:href="#stroked-star" /></svg>
+
+
+                        </div>
+                        @if (ViewBag.Major != null)
+                        {
+                            <div class="col-sm-12 col-lg-12 widget-right">
+                                <div style="font-size:inherit"><b>@ViewBag.Major</b></div>
+                                <div class="text-muted">Major Subject</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-12 col-lg-12 widget-right">
+                                <div class="large">None</div>
+                                <div class="text-muted">Major Subject</div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-teal panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked clipboard with paper teachersubjectClassForView"><use xlink:href="#stroked-clipboard-with-paper" /></svg>
+
+                        </div>
+                        @if (ViewBag.Subjects != null)
+                        {
+                            <div class="col-sm-12 col-lg-12 widget-right">
+                                <div class="large">@ViewBag.Subjects</div>
+                                <div class="text-muted">Subjects</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-12 col-lg-12 widget-right">
+                                <div class="large">0</div>
+                                <div class="text-muted">Subjects</div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-red panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            @if (ViewBag.Status != null && ViewBag.Status == "Active")
+                            {
+                                <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark" /></svg>
+                            }
+                            else
+                            {
+                                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel" /></svg>
+                            }
+                        </div>
+                        @if (ViewBag.Status != null)
+                        {
+                            <div class="col-sm-12 col-lg-12 widget-right">
+                                <div class="large">@ViewBag.Status</div>
+                                <div class="text-muted">Status</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-12 col-lg-12 widget-right">
+                                <div class="large">UnActive</div>
+                                <div class="text-muted">Status</div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div><!--/.row-->
+        <div class="row SubjectShowKrwa" style="display:none;">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" style="text-align:center">Subjects</div>
+                    <div class="panel-body">
+                        <div class="bootstrap-table">
+
+                            <div class="fixed-table-body">
+                                <div class="fixed-table-container table-responsive">
+                                    <br /><br />
+
+
+                                    <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style=""><div class="th-inner sortable">No.</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Subject Name</div><div class="fht-cell"></div></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="SubjectDiBody">
+
+                                        </tbody>
+                                    </table> 
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div><div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+         
+        </div>
+        
+        
+</body>
+
+</html>
+

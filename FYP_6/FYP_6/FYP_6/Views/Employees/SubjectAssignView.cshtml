@@ -1,0 +1,83 @@
+﻿@model IEnumerable<FYP_6.Batch_Subjects_Parts>
+
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+<html>
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        
+        <div class="row">
+            
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading" style="text-align:center">Step 4:Subject Registeration</div>
+                        <div class="panel-body">
+                            <div class="bootstrap-table">
+                                <div class="fixed-table-header"><table></table></div><div class="fixed-table-body">
+                                @if (Session["Success"] != "Successfully Record Added")
+                                {
+                                    using (Html.BeginForm("SubjectAssignView", "Employees", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+
+                                        foreach (var item in Model)
+                                        {
+                                            <label>
+                                                <input type="checkbox" checked="checked" value="@item.Subject.SubjectID" name="subj" id="subj">
+                                                @item.Subject.SubjectName
+                                            </label>
+                                            <br />
+                                        }
+                                        <input type="submit" value="Finish" class="btn btn-primary" style="display:inline;" />
+                                        @*@Html.ActionLink("Back", "RegisterationForNewAdmission", "Employees", new { @class = "btn btn-warning", @style = "margin-left:10px" })*@
+
+                                    }
+                                    <br />
+                                    <br />
+                                    if (ViewBag.Message != null)
+                                    {
+                                        <div class="alert bg-danger" role="alert">
+                                            <svg class="glyph stroked cancel">
+                                            <use xlink:href="#stroked-cancel"></use></svg>
+                                            @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                        </div>
+                                    }
+
+                                }
+                                else
+                                {
+                                    using (Html.BeginForm("SubjectAssignView", "Employees", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                        <h2>No Records Found</h2>
+                                        <input type="submit" value="Next" class="btn btn-primary" style="margin-left:200px;width:200px;" name="newAdmission" />
+                                    }
+                                }
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div><!--/.panel-->
+                </div><!--/.col-->
+            </div>
+        </div>
+    </div>
+
+
+    
+</body>
+</html>

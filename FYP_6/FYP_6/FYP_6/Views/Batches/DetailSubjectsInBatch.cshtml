@@ -1,0 +1,96 @@
+﻿@model IEnumerable<FYP_6.Batch_Subjects_Parts>
+
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+<html>
+<body>
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        
+        <div class="row">
+            
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading" style="text-align:center">Batch Subjects</div>
+                        <div class="panel-body">
+                            <label style="font-size:large">BatchName:</label> @if (ViewBag.BatchName != null)
+                            { <a style="font-size:medium;color:black;">@ViewBag.BatchName </a>}
+                            <label style="margin-left:10%;font-size:large">Degree Program:</label> @if (ViewBag.DegreeProgram != null)
+                            { <a style="font-size:medium;color:black;">@ViewBag.DegreeProgram </a>}
+                            <label style="margin-left:10%;font-size:large">Section:</label> @if (ViewBag.Section != null)
+                            { <a style="font-size:medium;color:black;">@ViewBag.Section  </a>}
+                            <hr />
+                            <div class="bootstrap-table">
+                                <div class="fixed-table-body">
+                                    <table border="0" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                        <thead>
+
+                                            <tr>
+                                                @*<th style=""><div class="th-inner sortable">BatchName</div><div class="fht-cell"></div></th>
+                            <th style="">
+                                <div class="th-inner sortable">
+                                    Degree Program
+                                </div><div class="fht-cell"></div>
+                            </th>*@
+                                                <th style=""><div class="th-inner sortable">No.#</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">SubjectName</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Part</div><div class="fht-cell"></div></th>
+                                                @*<th style=""><div class="th-inner sortable">Section</div><div class="fht-cell"></div></th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                int i = 1;
+                                            }
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    @*<td>@Html.DisplayFor(modelItem => item.BatchName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Batch.Degree_Program.Degree_ProgramName)</td>*@
+                                                    <td>
+                                                        @item.Subject.SubjectName
+                                                    </td>
+                                                    <td>
+                                                        @item.Part
+                                                    </td>
+                                                    @*<td>
+                                    @Html.DisplayFor(modelItem => item.Batch.Section.SectionName)
+                                </td>*@
+
+                                                </tr>
+                                                i++;
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                    @Html.ActionLink("Back", "ViewBatches", "Batches", new { @class = "btn btn-warning", @style = "margin-left:10px" })
+                                </div>
+                            </div>
+
+
+
+
+
+                                </div>
+                            </div><!--/.panel-->
+                        </div><!--/.col-->
+            </div>
+        </div>
+    </div>
+
+
+    
+</body>
+</html>

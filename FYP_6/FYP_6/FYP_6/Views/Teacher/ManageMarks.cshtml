@@ -1,0 +1,287 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FYP_6.Student_Marks>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+@Html.Partial("TeacherView")
+
+<body>
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+        <br><br><br><br><br>
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert bg-danger" role="alert">
+                <svg class="glyph stroked cancel">
+                    <use xlink:href="#stroked-cancel"></use>
+                </svg> @ViewBag.Message
+                <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+
+        }
+        
+
+        
+        <div class="row">
+
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">Student Marks</div>
+                                            <div class="panel-body">
+
+                                                        @using (Html.BeginForm("ManageMarks", "Teacher", FormMethod.Post))
+                                                        {
+                                                            @Html.AntiForgeryToken()
+                                                            @Html.ValidationSummary(true)
+    <div>
+        <b>Select Month</b>
+
+        @Html.DropDownList("Month", new List<SelectListItem>
+                              {
+                                  new SelectListItem{Text="January",Value="January",Selected=true},
+                                  new SelectListItem{Text="February",Value="February"},
+                                  new SelectListItem{Text="March",Value="March"},
+                                  new SelectListItem{Text="April",Value="April"},
+                                  new SelectListItem{Text="May",Value="May"},
+                                  new SelectListItem{Text="June",Value="June"},
+                                  new SelectListItem{Text="July",Value="July"},
+                                  new SelectListItem{Text="August",Value="August"},
+                                  new SelectListItem{Text="September",Value="September"},
+                                  new SelectListItem{Text="October",Value="October"},
+                                  new SelectListItem{Text="November",Value="November"},
+                                  new SelectListItem{Text="December",Value="December"},
+
+                              }, new { @id = "month", @class = "form-control", @style = "width:150px; display:inline;margin-left:1%;margin-right:3%;" })
+
+
+        @if (ViewBag.ListofDegreePrograms != null)
+        {
+            <span class="categoryDiv">
+                <span class="alignStdprofileFName">
+                    <b style="">
+                        Select Degree:
+                    </b>
+                </span>
+                <select name="degree" class="form-control" style="width:150px; display:inline" id="degree">
+                    <option value="Please select" selected="selected">Please select</option>
+                    @foreach (var item in ViewBag.ListofDegreePrograms)
+                    {
+                        <option value="@item.ProgramID">@item.Degree_ProgramName</option>
+                    }
+                </select>
+            </span>
+        }
+        <span class="categoryDiv">
+            <span class="alignMargins">
+                <label style="padding-right:1.6%;padding-left:3%;">Select Batch</label>
+            </span>
+            <select name="batch" class="form-control" style="width:150px; display:inline" id="batch"></select>
+        </span>
+    </div>
+                                                            <br />
+
+    <span class="categoryDiv">
+        <b style="display:inline">Select Section:</b>
+
+        <select name="section" class="form-control" style="width:150px;display:inline" id="section"></select></span>
+
+
+    <span class="categoryDiv">
+        <span class="alignStdprofileNat">
+            <label style="margin-left:4%">Enter Rollno</label>
+        </span> @Html.TextBox("search", "", new { @class = "form-control", @style = "margin-left:0px; display:inline; width:150px" })</span>
+
+<span class="categoryDiv">
+    <span class="specialForTeacher">
+        <label style="margin-left:6%">Enter Year</label>
+    </span>
+        @Html.TextBox("year", "", new { @class = "form-control", @style = "margin-left:0px; display:inline; width:150px" })
+    </span>
+        <br />
+        <br />
+    <span class="specialForTeacher2">
+        <input type="submit" value="Show Results" class="btn btn-warning" />
+    </span>
+                                                        }
+        <br />
+        @if (ViewBag.CompleteMessage!=null)
+                                                        {
+            <h3 style="display:inline; text-align:justify;">@ViewBag.CompleteMessage </h3>
+            <hr />
+            @*<h5 style="text-align:justify; display:inline; "><text style="font-size:medium">Section:</text><text style="margin-right:10px">@Session["Section"]</text>,</h5>
+                <h5 style="text-align:justify;display:inline; "><text style="font-size:medium">Month:</text><text style="margin-right:10px">@Session["Monthname"]</text>,</h5>*@
+                                                        }
+
+        <br />
+        <br />
+        <div class="fixed-table-container table-responsive">
+            <div class="fixed-table-body">
+                <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover" id="records">
+                    <thead>
+                        <tr>
+                            <th style="">
+                                <div class="th-inner sortable">Rollno </div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th style="">
+                                <div class="th-inner sortable">
+                                    Batch
+                                </div><div class="fht-cell"></div>
+                            </th>
+                            <th style="">
+                                <div class="th-inner sortable">
+                                    Degree Program
+                                </div><div class="fht-cell"></div>
+                            </th>
+                            <th style="">
+                                <div class="th-inner sortable">
+                                    Section
+                                </div><div class="fht-cell"></div>
+                            </th>
+                            <th style="">
+                                <div class="th-inner sortable">
+                                    Part
+                                </div><div class="fht-cell"></div>
+                            </th>
+                            <th style=""><div class="th-inner sortable"> SubjectName</div><div class="fht-cell"></div></th>
+                            <th style="">
+                                <div class="th-inner sortable">
+                                    Total Marks
+                                </div><div class="fht-cell"></div>
+                            </th>
+                            <th style="">
+                                <div class="th-inner sortable">
+                                    Obtained Marks
+
+                                </div><div class="fht-cell"></div>
+                            </th>
+                            <th style="">
+                                <div class="th-inner sortable">
+                                    Marks Percentage
+
+                                </div><div class="fht-cell"></div>
+                            </th>
+                            <th style="">
+                                <div class="th-inner sortable">
+                                    Uploaded On
+                                </div><div class="fht-cell"></div>
+                            </th>
+                            <th style="">
+                                <div class="th-inner sortable">
+                                    Action
+
+                                </div><div class="fht-cell"></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.Message == null)
+                                                                {
+                                                                    foreach (var item in Model)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Rollno)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Batch_Subjects_Parts.BatchName)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Batch_Subjects_Parts.Batch.Degree_Program.Degree_ProgramName)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Batch_Subjects_Parts.Batch.Section.SectionName)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Batch_Subjects_Parts.Part)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Batch_Subjects_Parts.Subject.SubjectName)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Total_Marks)
+
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Obtained_Marks)
+
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Marks_Percentage)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Month)
+                                                                                @Html.DisplayFor(modelItem => item.Year)
+                                                                            </td>
+                                                                            <td>
+                                                                                
+                                                                                 @Html.ActionLink("Edit", "EditMarks", "Teacher", new { @id =item.ResultID }, null)
+                                                                                |
+                                                                                @Html.ActionLink("Details", "DetailMarks", "Teacher", new { @id = item.ResultID }, null)
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    }
+
+                                                                }
+
+
+                    </tbody>
+
+                </table>
+                @Html.ActionLink("Upload Marks", "AddAllMarks", "Teacher", null, new { @type = "submit", @class = "btn btn-success", @style = "margin-left:0px; margin-top:0px; style=display:inline;" })
+                @Html.ActionLink("Refresh", "ManageMarks", "Teacher", null, new { @type = "submit", @class = "btn btn-success", @style = " style=display:inline;" })
+            </div>
+        </div>
+        @*@Html.ActionLink("Refresh", "ManageMarks", "Teacher",
+                null, new
+                {
+                    @class = "btn btn-success",
+                    @style = "margin-left:0px; margin-top:0px; display:inline; width:200px"
+                })
+            @Html.ActionLink("Upload Marks", "AddAllMarks", "Teacher",
+                null, new
+                {
+                    @class = "btn btn-success",
+                    @style = "margin-left:900px; margin-top:260px; display:inline;"
+                })*@
+
+        <div style="display:inline">
+            @if (Model != null)
+                                                            {
+                @Html.PagedListPager(Model, page => Url.Action("ManageMarks",
+            new
+            {
+                page,
+                searchBy = Request.QueryString["searchBy"],
+                search = Request.QueryString["search"],
+
+            })
+            , new PagedListRenderOptions()
+                {
+                    Display = PagedListDisplayMode.IfNeeded,
+                    DisplayPageCountAndCurrentLocation = true
+                })
+
+                                                            }
+
+
+
+        </div>
+        <div class="clearfix"></div>
+</div>
+                                        </div>
+                                    </div>
+                                
+
+
+            
+        </div>
+
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<FYP_6.Degree_Subject>
+
+@Html.Partial("EmployeeView")
+<html>
+<body>
+    
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li class="active">Icons</li>
+            </ol>
+        </div><!--/.row-->
+
+
+        <br />
+        <br />
+
+        @if (Session["S"] != null)
+        {
+            <div class="alert bg-success" role="alert">
+                <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> @Session["S"]<a href="#" class="pull-right">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </div>
+        }
+        <div class="row">
+            
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading" style="text-align:center">Subject Removal</div>
+                        <div class="panel-body">
+                            <div class="bootstrap-table">
+                                <div class="fixed-table-header"><table></table></div><div class="fixed-table-body">
+                                    @if (ViewBag.DegreeName != null)
+                                    {
+                                        if (ViewBag.Message == null)
+                                        {
+                                            using (Html.BeginForm("RemoveSubjectsForSelectedDegree", "Courses", FormMethod.Post))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                @Html.ValidationSummary(true)
+
+                                                <b style="font:100">Degree Name</b>
+                                                <b style="font:100">@ViewBag.DegreeSelected.Degree_ProgramName</b>
+                                                <br /><br />
+                                                foreach (var item in Model)
+                                                {
+                                                    <label>
+                                                        <input type="checkbox" checked="checked" value="@item.Subject.SubjectID" name="subjects" id="subjects">
+                                                        @item.Subject.SubjectName
+                                                    </label>
+                                                    <br />
+                                                }
+                                                <input type="hidden" id="hiddenInput" name="hiddenInput" />
+                                                <input type="hidden" value="@ViewBag.DegreeSelected.ProgramID" name="selectedDegID" />
+                                                <input type="submit" value="Remove Subjects" class="btn btn-primary" style="display:inline;" onclick="return FormSubmitted();"/>
+                                                @Html.ActionLink("Back", "RemoveSubjectsToDegreeProgram", "Courses", new { @class = "btn btn-warning", @style = "margin-left:10px" })
+
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            <div class="alert bg-danger" role="alert">
+                                                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                                                @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                            </div>
+                                            @Html.ActionLink("Click Here To Go Back", "RemoveSubjectsToDegreeProgram", "Courses", new { @class = "btn btn-warning", @style = "margin-left:10px" })
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (ViewBag.Message != null)
+                                        {
+                                            if (ViewBag.Message == "Succesfully Subjects Removed")
+                                            {
+                                                <div class="alert bg-success" role="alert">
+                                                    <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg>
+                                                    @ViewBag.Message<a href="#" class="pull-right">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </a>
+                                                </div>
+                                                @Html.ActionLink("Click Here To Go Back", "RemoveSubjectsToDegreeProgram", "Courses", new { @class = "btn btn-warning", @style = "margin-left:10px" })
+                                            }
+                                            else
+                                            {
+                                                <div class="alert bg-danger" role="alert">
+                                                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                                                    @ViewBag.Message<a href="#" class="pull-right">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </a>
+                                                </div>
+                                                @Html.ActionLink("Click Here To Go Back", "RemoveSubjectsToDegreeProgram", "Courses", new { @class = "btn btn-warning", @style = "margin-left:10px" })
+                                            }
+
+                                        }
+                                    }
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div><!--/.panel-->
+                </div><!--/.col-->
+            </div>
+        </div>
+    </div>
+
+    
+
+</body>
+</html>

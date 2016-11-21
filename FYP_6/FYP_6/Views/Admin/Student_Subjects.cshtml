@@ -1,0 +1,224 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FYP_6.Assign_Subject>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<head>
+    <title>Students</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("AdminView")
+@Html.Partial("JsEnableCheckerAdmin")
+ 
+<body>
+    
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <br>
+        <br>
+
+        <br /><br /><br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Records Deleted!")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg> @ViewBag.Message<a href="#" class="pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Student Subjects</div>
+                    <div class="panel-body">
+
+
+
+                        @using (Html.BeginForm("Student_Subjects", "Admin", FormMethod.Get))
+                        {
+                            @*@Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)*@
+
+                            <label>Search By Rollno</label>
+                            <span class="categoryDiv">
+                                @Html.TextBox("search2", "", new { @class = "form-control", @style = "width:200px;display:inline; " })
+                            </span>
+                            <span class="categoryDiv">
+                                <b>Select Category:</b>
+                            </span>
+                            <span class="categoryDivDropdown" style="display:inline">
+                                @Html.DropDownList("StudentType", new List<SelectListItem>
+                              {
+                                  new SelectListItem{Text="Current Students",Value="1",Selected=true},
+
+                                  new SelectListItem{Text="Past Students",Value="0"},
+
+                              }, new { @class = "form-control", @style = "width:150px; display:inline" })
+                            </span>
+                            <span class="categoryDivDropdown">
+                                <input type="submit" value="Search" class="btn btn-primary" name="ifButtonPressed" />
+                            </span>
+
+
+                        }
+                        <br />
+                        <br />
+                        <div class="fixed-table-container table-responsive">
+                            <div class="fixed-table-body">
+
+                                <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                    <thead>
+                                        <tr>
+
+                                            <th style=""><div class="th-inner sortable">RollNo</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Name</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">DegreeName</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Batch</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Section</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Part</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">SubjectName</div><div class="fht-cell"></div></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (ViewBag.SearchQuery == "True")
+                                        {
+
+                                            foreach (var item in Model)
+                                            {
+                                                <tr>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Rollno)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Registeration.Student_Profile.FirstName)  @Html.DisplayFor(modelItem => item.Registeration.Student_Profile.LastName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch_Subjects_Parts.Batch.Degree_Program.Degree_ProgramName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch_Subjects_Parts.Batch.BatchName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch_Subjects_Parts.Batch.Section.SectionName)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch_Subjects_Parts.Part)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch_Subjects_Parts.Subject.SubjectName)
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        }
+                                        else if (ViewBag.SearchQuery == "Roll no Doesnot Exists")
+                                        {
+                                            <tr>
+
+                                                <div class="alert bg-danger" role="alert">
+                                                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                                                    @ViewBag.SearchQuery<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                                </div>
+
+                                            </tr>
+                                        }
+                                        else if (ViewBag.SearchQuery == "Nothing")
+                                        {
+                                            <div class="alert bg-danger" role="alert">
+                                                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                                                No Records Found<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                <tr>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Rollno)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Registeration.Student_Profile.FirstName)  @Html.DisplayFor(modelItem => item.Registeration.Student_Profile.LastName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch_Subjects_Parts.Batch.Degree_Program.Degree_ProgramName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch_Subjects_Parts.Batch.BatchName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch_Subjects_Parts.Batch.Section.SectionName)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch_Subjects_Parts.Part)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch_Subjects_Parts.Subject.SubjectName)
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                                <span class="delRef">
+
+                                    @Html.ActionLink("Refresh", "Student_Subjects", "Admin",
+    null, new { @class = "btn btn-success", @style = " style=display:inline;margin-left:0%" })
+                                </span>
+                                @if (Model != null)
+                                {
+                                    @Html.PagedListPager(Model, page => Url.Action("Student_Subjects",
+            new
+            {
+                page,
+                search2 = Request.QueryString["search2"],
+                StudentType = Request.QueryString["StudentType"],
+
+            })
+            , new PagedListRenderOptions()
+                {
+                    Display = PagedListDisplayMode.IfNeeded,
+                    DisplayPageCountAndCurrentLocation = true
+                })
+
+                                }
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+           
+        </div>
+
+
+</body>
+</html>

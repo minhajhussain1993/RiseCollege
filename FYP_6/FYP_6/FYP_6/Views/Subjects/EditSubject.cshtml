@@ -1,0 +1,124 @@
+﻿@model FYP_6.Subject
+
+@{
+    Layout = null;
+}
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+        <br>
+        <br>
+        <br />
+        <br>
+        <br>
+        
+        @if (ViewBag.Message == "Successfully Record Updated")
+        {
+        <br />
+        <div class="alert bg-success" role="alert">
+            <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+        </div>
+        }
+        else if (ViewBag.Message != "")
+        {
+        <br />
+        <div class="alert bg-danger" role="alert">
+            <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+            @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+        </div>
+        }
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Edit Subject</div>
+                    <div class="panel-body">
+
+                        <div class="bootstrap-table">
+                            <div class="fixed-table-body">
+                                @using (Html.BeginForm("EditSubject", "Subjects", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+
+
+
+                                    @Html.LabelFor(model => model.SubjectName, new { @style = "padding-right:70px" })
+                                    @Html.TextBoxFor(model => model.SubjectName, new { @class = "form-control", @style = "width:170px; display:inline", @pattern = "^[a-zA-Z\\s]+$", @required = true })
+
+                                    <span style="color:red; " class="categoryDiv">*@Html.ValidationMessageFor(model => model.SubjectName)</span>
+                                    <br /><br />
+
+                                    if (ViewBag.RelatedDegrees != null)
+                                    {
+                                        <label style="padding-right:20px">Degree Programs:</label>
+                                        @*foreach (var item in ViewBag.RelatedDegrees)
+                                        {
+                                            <b>@item, </b>
+                                        }*@
+                                     <b>@ViewBag.RelatedDegrees </b>
+                                    }
+                                    else
+                                    {
+                                        <b>No Degree Program Enrolled</b>
+                                    }
+
+                                    @*if (ViewBag.Degrees != null)
+                            {
+                                <label style="padding-right:20px">Select Degree Level</label>
+                                <select name="degrees" onchange="FillCity()" id="level" class="form-control" style="width:170px; display:inline;">
+                                    <option value="Select">Select</option>
+                                    @foreach (var item in ViewBag.Degrees)
+                                    {
+                                        <option value="@item.ProgramID"> @item.Degree_ProgramName</option>
+                                    }
+                                </select>
+
+                            }*@
+
+                                    @*<b style="padding-right:60px">Select Month</b>
+                                  @Html.DropDownList("month2", new List<SelectListItem>
+                            {
+                                new SelectListItem{Text="January",Value="January",Selected=true},
+                                new SelectListItem{Text="February",Value="February"},
+                                new SelectListItem{Text="March",Value="March"},
+                                new SelectListItem{Text="April",Value="April"},
+                                new SelectListItem{Text="May",Value="May"},
+                                new SelectListItem{Text="June",Value="June"},
+                                new SelectListItem{Text="July",Value="July"},
+                                new SelectListItem{Text="August",Value="August"},
+                                new SelectListItem{Text="September",Value="September"},
+                                new SelectListItem{Text="October",Value="October"},
+                                new SelectListItem{Text="November",Value="November"},
+                                new SelectListItem{Text="December",Value="December"},
+
+                            }, new { @id = "month2", @class = "form-control", @style = "width:170px; display:inline" })
+                                  <br />
+                                  <br />*@
+                                    <br />
+                                    <br />
+                                    <input type="hidden" value="@Html.DisplayFor(model=>model.SubjectID)" name="SubjectID" />
+                                    <input type="submit" value="Update Record" class="btn btn-primary" style="margin-left:15%" />
+                                    @Html.ActionLink("Back", "ManageSubjects", "Subjects", null, new { @class = "btn btn-primary" })
+
+                                }
+
+                            </div>
+
+
+
+                        </div><div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+
+</body>
+</html>

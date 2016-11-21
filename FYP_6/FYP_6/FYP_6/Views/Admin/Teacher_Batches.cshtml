@@ -1,0 +1,174 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FYP_6.Teachers_Batches>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+@Html.Partial("AdminView")
+@Html.Partial("JsEnableCheckerAdmin")
+
+<body>
+    
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br /><br /><br /><br /><br />
+        @if (ViewBag.Message2 != null)
+        {
+            if (ViewBag.Message2 == "Successfully Records Deleted")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg> @ViewBag.Message<a href="#" class="pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    Unable To Delete Records<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Teacher Batches</div>
+                    <div class="panel-body">
+
+
+                        @using (Html.BeginForm("Teacher_Batches", "Admin", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <b>
+                                Enter TeacherID:
+                            </b>
+                            <span class="categoryDiv">
+                                <input type="text" name="teacherID" class="form-control" style="width:150px;margin-bottom:20px; display:inline" id="search" autocomplete="off" />
+                            </span>
+    <span class="loadingImageWhileTyping" style="display: none;">
+        <img src="~/MyProjectImages/Loading Circle.gif" style="width:3.5%" />
+    </span>
+                            <span class="categoryDiv">
+                                <input type="submit" value="Show Results" class="btn btn-warning" />
+                            </span>
+                        }
+                        <br />
+                        @if (@*TempData["Degree"] != null && TempData["Batch"] != null && TempData["Section"] != null ||*@ TempData["TeacherID"] != null)
+                        {
+                            <h3 style="text-align:justify; display:inline; ">TeacherID: </h3><h4 style="margin-right:10px;display:inline;">@TempData["TeacherID"]</h4>
+                            <hr />
+                        }
+
+                        <br />
+                        <br />
+                        <div class="fixed-table-container table-responsive">
+                            <div class="fixed-table-body">
+                                
+                                    <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover" id="records">
+                                        <thead>
+                                            <tr>
+                                                
+                                                <th style=""><div class="th-inner sortable">TeacherID </div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Degree Program </div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable"> Section</div><div class="fht-cell"></div></th>
+
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        Batch
+
+                                                    </div><div class="fht-cell"></div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        Action
+
+                                                    </div><div class="fht-cell"></div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (ViewBag.Message == null)
+                                            {
+                                                foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                    
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.TeacherID)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Batch.Degree_Program.Degree_ProgramName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Batch.Section.SectionName)
+                                                        </td>
+                                    
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Batch.BatchName)
+
+                                                        </td>
+                                                        <td>
+                                                            <article style="display:inline;" id="@item.ID" data-toggle="tooltip" data-placement="top">
+    @Html.ActionLink("Subjects Details", "DetailBatchSubjectsTeacher", "Admin", new { @id = item.ID }, null)
+
+</article>
+                                                        </td>
+                                                    </tr>
+
+                                                }
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                    
+                                    @Html.ActionLink("Refresh", "Teacher_Batches", "Admin", null, new { @type = "submit", @class = "btn btn-success", @style = " style=display:inline;" })
+
+                                
+                            </div>
+                        </div>
+
+
+                        <div style="display:inline">
+                            @if (Model != null)
+                            {
+                                @Html.PagedListPager(Model, page => Url.Action("Teacher_Batches",
+            new
+            {
+                page,
+                searchBy = Request.QueryString["searchBy"],
+                search = Request.QueryString["search"],
+
+            })
+            , new PagedListRenderOptions()
+                {
+                    Display = PagedListDisplayMode.IfNeeded,
+                    DisplayPageCountAndCurrentLocation = true
+                })
+
+                            }
+
+
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</body>
+
+</html>

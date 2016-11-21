@@ -1,0 +1,170 @@
+﻿@model IEnumerable< FYP_6.Subject>
+<!DOCTYPE html>
+<html>
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+
+<body>
+    
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+        <br/><br /><br /><br /><br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Subject Assigned")
+            {
+                <br />
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg> @ViewBag.Message<a href="#" class="pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            }
+            else if (ViewBag.Message == "")
+            {
+                @ViewBag.Message
+            }
+            else
+            {
+                <br />
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+        else if (ViewBag.Message == null)
+        {
+            @ViewBag.Message
+        }
+        
+        
+
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-body tabs">
+                        <ul class="nav nav-tabs"></ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab1">
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading" style="text-align:center">Assign Teacher Subjects</div>
+                                            <div class="panel-body">
+                                                <div class="bootstrap-table">
+                                                    
+                                                    <div class="fixed-table-body">
+                                                        
+                                                        @using (Html.BeginForm("AddTeacherSubjects", "Employees", FormMethod.Post))
+                                                        {
+                                                            @Html.AntiForgeryToken()
+                                                            @Html.ValidationSummary(true)
+                                                            <br />
+                                                            <br />
+    <div class="SubjectListForTeacherBatches">
+        @if (Model != null)
+        {
+            int i = 1;
+            <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="">
+                            <div class="th-inner sortable">Select</div>
+                            <div class="fht-cell"><input type="checkbox" name="checkUncheckAll" id="checkUncheckAll" class="checkUncheckAll" /></div>
+                        </th>
+                        <th style=""><div class="th-inner sortable">SubjectName</div><div class="fht-cell"></div></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="roo_@i">
+                            <td>
+                                <input type="checkbox" name="subjSelect" id="subjSelect" value="@Html.DisplayFor(modelItem => item.SubjectID)" class="roo_@i"/>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SubjectName)
+                            </td>
+
+                        </tr>
+                        i++;
+                    }
+
+                </tbody>
+            </table>
+    //<input type="button" onclick="ShowNextStep();" value="Next"/>
+        }
+        else
+        {
+            <h2>Plz Enter Subjects First in Subject Records</h2>
+        }
+        
+    </div>
+
+    <div class="teacherIDAndBatches">
+        <label style="padding-right:20px">Enter TeacherID:</label>
+        <input type="text" name="teacherID"
+               class="tidSearch form-control" id="search1" style="width:150px; display:inline" />
+        <span class="loadingImageWhileTyping" style="display: none;">
+            <img src="~/MyProjectImages/Loading Circle.gif" style="width:3.5%" />
+        </span>
+        <br />
+        <br />
+        
+        <div class="fixed-table-container table-responsive">
+            <div class="fixed-table-body">
+                <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th style="">
+                                <div class="th-inner sortable">Select</div>
+                                <div class="fht-cell"><input type="checkbox" name="checkUncheckAll2" id="checkUncheckAll2" class="checkUncheckAll2" /></div>
+                            </th>
+                            <th style=""><div class="th-inner sortable">BatchName</div><div class="fht-cell"></div></th>
+                            <th style=""><div class="th-inner sortable">Degree Program</div><div class="fht-cell"></div></th>
+                            <th style=""><div class="th-inner sortable">Section</div><div class="fht-cell"></div></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbodyInsideForBatchesOfTeacher"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+                                                            <br /><br />
+    <input type="submit" value="Assign Subjects" class="btn btn-success" style="margin-left:0px;" />
+            @Html.ActionLink("Back", "Teacher_Subjects", "Employees", new { @class = "btn btn-warning", @style = "margin-left:0px" })
+            }
+        </div>
+
+    </div>
+
+
+
+                                                </div><div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                </div><!--/.panel-->
+            </div><!--/.col-->
+        
+        </div>
+
+</body>
+
+</html>

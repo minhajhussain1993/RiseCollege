@@ -1,0 +1,176 @@
+﻿
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rise College</title>
+    @Scripts.Render("~/Scripts/TeacherScript")
+    @Styles.Render("~/css/TeacherStyles")
+    @Scripts.Render("~/bundles/modernizr")
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div style="position:absolute;width:100%;height:200%;z-index:9999;
+    background-color:rgba(1,1,1,0.5);display:none;" id="screenblur">
+        <div class="col-md-4" style="margin:20%;margin-left:35%;margin-top:15%">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="margin:0%">Plz Wait While Uploading</div>
+                <div class="panel-body">
+                    <img src="~/MyProjectImages/16.gif" style="width:100%;height:2%" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><span>Rise College</span>Information System</a>
+                <ul class="user-menu">
+                    <li class="dropdown pull-right">
+                        <a style="cursor:pointer" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> @Session["UserName"] <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li>
+                                <a href="@Url.Action("ChangePassword", "Teacher")" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                    Change Password
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Logout","Home")">
+                                    <svg class="glyph stroked cancel" style="display:inline">
+                                        <use xlink:href="#stroked-cancel" />
+                                    </svg>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <form role="search">
+            <div class="abc form-group">
+                @if (Session["Picture"] != null)
+                {
+                    var base64 = Convert.ToBase64String((byte[])Session["Picture"]);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    <div style="position:relative;left: 0; top: 0;">
+                        <img src='@imgSrc' style="width:200px; height:200px; padding: 0px; position:relative;top: 0; left: 0;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;}" class="myimage" />
+                        
+                    </div>
+                }
+                else
+                {
+                    <div style="position:relative;left: 0; top: 0;">
+                        <img src="~/MyProjectImages/user icon.png" class="myimage" style="width:200px; height:200px; padding: 0px; position:relative;top: 0; left: 0;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;}" />
+                        @*<span class="clickgenerateEvent questionMarkId imagecamera" style="">
+
+                            <img src="~/MyProjectImages/nexusae0_cc.png" style="position:absolute; display:inline;top: 70%; left: 15%;background-color:rgba(1,1,1,0.5);
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;
+}" />
+                        </span>*@
+                    </div>
+                    @*<div style="position:relative;left: 0; top: 0;">
+                        <svg class="glyph stroked male user myimage" style="width:200px; height:200px; padding: 0px; position:relative;top: 0; left: 0;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;}"><use xlink:href="#stroked-male-user" /></svg>
+                        
+                    </div>*@
+
+                }
+                @*<input type="file" style="display:none" id="changePic" accept="image/*" />*@
+            </div>
+        </form>
+        <ul class="nav menu" id="menubar">
+            <li class="active">@Html.ActionLink("Dashboard", "WelcomeTeacher", "Home")</li>
+
+            <li>
+                <a href="@Url.Action("Index", "Teacher")" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-user"></span>
+                    Basic Profile
+                </a>
+                @*@Html.ActionLink(linkText: "Basic Profile", actionName: "Index", controllerName: "Teacher",
+                            routeValues: new { id = Session["ID"].ToString() }, htmlAttributes: null)*@
+                
+            </li>
+
+            <li class="parent ">
+                <a style="cursor:pointer">
+                    <span data-toggle="collapse" href="#sub-item-2"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg> Manage Results</span>
+                </a>
+                <ul class="children collapse" id="sub-item-2">
+                    <li>
+                        <a href="@Url.Action("ManageMarks", "Teacher")" aria-label="Left Align">
+                            <svg class="glyph stroked arrow right"><use xlink:href="#stroked-arrow-right" /></svg>
+                        Manage Marks
+                        </a>
+                        @*@Html.ActionLink(linkText: "Manage Marks", actionName: "ManageMarks", controllerName: "Teacher",
+                                 routeValues: new { id = Session["ID"].ToString() }, htmlAttributes: null)*@
+                        
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ManageAttendance", "Teacher")" aria-label="Left Align">
+                            <svg class="glyph stroked arrow right"><use xlink:href="#stroked-arrow-right" /></svg>
+                            Manage Attendance
+                        </a>
+                            @*@Html.ActionLink(linkText: "Manage Attendance", actionName: "ManageAttendance", controllerName: "Teacher",
+                            routeValues: new { id = Session["ID"].ToString() }, htmlAttributes: null)*@
+
+
+</li>
+
+                </ul>
+                @*<a href="~/MainStudentInfoTheme/charts.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Results</a>*@
+            </li>
+            <li>
+                <a href="@Url.Action("ViewAttendance", "Teacher")" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-check"></span>
+                    View Attendance
+                </a>
+                @*@Html.ActionLink(linkText: "View Attendance", actionName: "ViewAttendance", controllerName: "Teacher",
+                            routeValues: new { id = Session["ID"].ToString() }, htmlAttributes: null)*@
+                
+            </li>
+            <li>
+                <a href="@Url.Action("ViewStudents", "Teacher")" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-education"></span>
+                    View Students
+                </a>
+                @*@Html.ActionLink(linkText: "View Students", actionName: "ViewStudents", controllerName: "Teacher",
+                            routeValues: new { id = Session["ID"].ToString() }, htmlAttributes: null)*@
+                
+            </li>
+
+        </ul>
+
+    </div><!--/.sidebar-->
+</body>
+</html>

@@ -1,0 +1,164 @@
+﻿@model IEnumerable<FYP_6.Subject>
+<html>
+<head>
+    <title>Courses</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+
+
+        <br />
+        <br />
+        <br />
+        <br /><br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Records Updated")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+            else
+            {
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+         
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading" style="text-align:center">Edit Degree Subjects</div>
+                        <div class="panel-body">
+
+                            <div class="bootstrap-table">
+                                <div class="fixed-table-header"><table></table></div><div class="fixed-table-body">
+
+                                    @using (Html.BeginForm("EditCourse", "Courses", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                        <label style="font-size:large">Degree Program:</label> <a style="font-size:medium;color:black">@ViewBag.Degree.Degree_ProgramName</a>
+                                        <label style="margin-left:4%;font-size:large">Degree Level:</label> <a style="font-size:medium;color:black">@ViewBag.level</a>
+
+                                        <label style="font-size:large;padding-right:16px;padding-left:50px;">Select Part</label>
+                                        @Html.DropDownList("part", new List<SelectListItem>
+                                                                {
+                                                                    new SelectListItem{Text="1",Value="1",Selected=true},
+                                                                    new SelectListItem{Text="2",Value="2"},
+                                                                    new SelectListItem{Text="3",Value="3"},
+                                                                    new SelectListItem{Text="4",Value="4"},
+
+                                                                }, new { @id = "part", @class = "form-control", @style = "width:200px; display:inline" })
+                                        <hr />
+                                        <table border="0" data-toggle="table" data-url="tables/data1.json"
+                                               data-show-refresh="true" data-show-toggle="true" data-show-columns="true"
+                                               data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name"
+                                               data-sort-order="desc" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">
+                                                            Select
+                                                        </div><div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">
+                                                            No.#
+                                                        </div><div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style=""><div class="th-inner sortable">SubjectName</div><div class="fht-cell"></div></th>
+                                                    <th style=""><div class="th-inner sortable">Part</div><div class="fht-cell"></div></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                {
+                                         
+                                         
+                                         
+                                        var Arr = Model.ToList();
+                                        bool checker = false;
+
+                                        for (int i = 0, a = 1; i < Model.Count(); i++, a++)
+                                        {
+                                            <tr class="roo_@a">
+                                                <td>
+                                                    @foreach (var item in Arr[i].Degree_Subject)
+                                                    {
+
+                                                        if (item.DegreeID == ViewBag.Degree.ProgramID)
+                                                        {
+                                                            <input type="checkbox" checked="checked" value="@Arr[i].SubjectID" name="subjects" id="subjects" class="roo_@a">
+                                                            checker = true;
+                                                            break;
+                                                        }
+                                                    }
+
+                                                    @if (checker == false)
+                                                    {
+                                                        <input type="checkbox" value="@Arr[i].SubjectID" name="subjects" id="subjects" class="roo_@a">
+                                                    }
+                                                    else
+                                                    {
+                                                        checker = false;
+                                                    }
+                                                </td>
+                                                <td>@a</td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => Arr[i].SubjectName)
+                                                </td>
+                                                <td>
+                                                    @foreach (var item in Arr[i].Degree_Subject)
+                                                    {
+                                                        if (item.DegreeID == ViewBag.Degree.ProgramID)
+                                                        {
+                                                            <label>
+                                                                @item.Part
+                                                            </label>
+                                                            <label>
+                                                                ,
+                                                            </label>
+                                                        }
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+
+                                                }
+                                                }       
+                                            </tbody>
+                                        </table>
+                                        <input type="submit" value="Update Subjects" class="btn btn-primary" style="display:inline;" />
+                                        <input type="hidden" value="@ViewBag.Degree.ProgramID" name="degID" />
+                                        @Html.ActionLink("Back", "ManageCourses", "Courses", new { @class = "btn btn-warning", @style = "margin-left:10px" })
+                                     
+                                    }
+                                                                                          
+                                    <br />
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--/.panel-->
+                </div><!--/.col-->
+            </div>
+        </div>
+     
+</body>
+</html>

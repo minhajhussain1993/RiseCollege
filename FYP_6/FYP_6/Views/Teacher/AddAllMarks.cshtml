@@ -1,0 +1,230 @@
+﻿@model IEnumerable<FYP_6.Models.ViewModels.ViewModelMarks>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("TeacherView")
+ 
+<body>
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+        <br><br><br><br><br>
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Record Added")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                    <use xlink:href="#stroked-checkmark">
+                        </use></svg> 
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+            else if (ViewBag.Message == "")
+            {
+        @ViewBag.Message
+        }
+        else
+        {
+        <br />
+        <div class="alert bg-danger" role="alert">
+            <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+            @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+        </div>
+        }
+        
+        }
+        
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-body tabs">
+                        <ul class="nav nav-tabs"></ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab1">
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">Upload Student Marks</div>
+                                            <div class="panel-body">
+
+                                                @using (Html.BeginForm("AddAllMarks", "Teacher", FormMethod.Post))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.ValidationSummary(true)
+
+                                                    if (ViewBag.Batches != null)
+                                                    {
+                                                        <b>
+                                                            Select Batch:
+                                                        </b>
+                                                        <select name="batch" class="form-control" style="width:150px; display:inline" id="batch1">
+                                                            <option value="Please select" selected="selected">Please select</option>
+                                                            @foreach (var item in ViewBag.Batches)
+                                                            {
+                                                                <option value="@item.BatchName">@item.BatchName</option>
+                                                            }
+                                                        </select>
+
+                                                    }
+                                                    <span class="categoryDiv">
+                                                        <label style="padding-right:15px">Degree:</label>
+                                                        </span>
+                                                        <input type="text" name="degree"
+                                                               id="degree1" readonly="readonly" class="form-control" style="display:inline;width:170px " />
+
+                                                <span class="categoryDiv">
+                                                    <label style="padding-right:10px">Section:</label>
+                                                    </span>
+                                                    <input type="text" name="section" id="section1"
+                                                           readonly="readonly" class="form-control"
+                                                           style="display:inline;width:170px " />
+                                                    <span class="alignStdprofileAddress">
+                                                        <span class="categoryDiv">
+                                                            <label style="padding-right:10px">Part:</label>
+                                                            </span>
+                                                            <input type="text" name="part" id="part1"
+                                                                   readonly="readonly" class="form-control"
+                                                                   style="display:inline;width:170px " />
+                                                        </span>
+                                                    <br /><br />
+                                                    if (ViewBag.RelatedSubjects != null)
+                                                    {
+                                                    <label style="padding-right:10px">Subject Name</label>
+                                                    <select name="subjectID" class="form-control" style="width:170px; display:inline;">
+                                                        @foreach (var item in ViewBag.RelatedSubjects)
+                                                            {
+                                                            <option value="@item.SubjectID"> @item.SubjectName</option>
+                                                            }
+                                                    </select>
+                                                    }
+                                                    <br /><br />
+                                                    <input type="submit" value="Show Students" class="btn btn-warning" name="searchButton" />
+
+                                                    }
+                                                    <br />
+                                                    @if (TempData["TeacherUploadMarks"] != null)
+                                                {
+                                                        <h3 style="text-align:justify; display:inline; ">
+                                                            @TempData["TeacherUploadMarks"]
+                                                        </h3>
+                                                        <br />
+                                                        <br />
+                                                }
+                                                    <div class="fixed-table-container table-responsive">
+                                                        <div class="fixed-table-body">
+                                                            @using (Html.BeginForm("AddAllMarks", "Teacher", FormMethod.Post))
+                                                        {
+                                                                @Html.AntiForgeryToken()
+                                                                @Html.ValidationSummary(true)
+
+                                                            if (ViewBag.Message == null)
+                                                            {
+                                                                <br />
+    <span class="FloatChangeOfElementToRight">
+        <span style="float:none">
+            <span class="categoryDiv">
+                <label style="padding-right:10px;margin-left:2%">Total Marks:</label>
+            </span>
+            <span class="categoryDiv">
+                <input type="text" name="totalMarks" id="totalMarks" class="form-control"
+                       style="display:inline;width:170px " required pattern="^[0-9]*$" autocomplete="off"/>
+            </span>
+        </span>
+    </span>
+    <span class="FloatChangeOfElementToLeft">
+        <span style="float:right">
+            <span class="categoryDiv">
+                <label style="padding-right:10px;">Dated:</label>
+            </span>
+            <span class="categoryDiv">
+                <input type="text" name="date" class="form-control datepicker" style="width:170px; display:inline; " required data-date-format="dd/mm/yyyy" />
+            </span>
+        </span>
+    </span>
+
+                                                                <br /><br />
+                                                            }
+
+
+                                                            <table border="0" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover" id="records">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style=""><div class="th-inner sortable">Student Rollno</div><div class="fht-cell"></div></th>
+                                                                        <th style=""><div class="th-inner sortable">Name </div><div class="fht-cell"></div></th>
+                                                                        <th style=""><div class="th-inner sortable">Obtained Marks </div><div class="fht-cell"></div></th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    @if (ViewBag.Message == null)
+                                                                    {
+
+                                                                        {
+                                                                            var Arr = Model.ToList();
+                                                                            for (int t = 0; t < Arr.Count(); t++)
+                                                                            {
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @Html.DisplayFor(x => Arr[t].Rollno)
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @Html.DisplayFor(x => Arr[t].Assign_Subject.Registeration.Student_Profile.FirstName)  @Html.DisplayFor(x => Arr[t].Assign_Subject.Registeration.Student_Profile.LastName)
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @Html.TextBoxFor(x => Model.ToList()[t].Obtained_Marks, new { @class = "obtMarksAddAll" })
+                                                                                        <div style="color:red; display:inline">*</div>
+                                                                                        <br />
+                                                                                        <div style="color:red; display:inline">@Html.ValidationMessageFor(x => Model.ToList()[t].Obtained_Marks)</div>
+                                                                                    </td>
+                                                                                    <td hidden="hidden">
+                                                                                        @Html.HiddenFor(x => Model.ToList()[t].AssignID)
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                </tbody>
+
+                                                            </table>
+                                                                <input type="submit" value="Upload Marks"
+                                                                       class="btn btn-success" style="display:inline;" name="UploadButton" />
+                                                                @Html.ActionLink("Back", "ShowOptionsMarks", "Teacher",
+                                                            null, new
+                                                            {
+                                                                @type = "submit",
+                                                                @class = "btn btn-warning",
+                                                                @style = "margin-left:2%; display:inline; width:200px"
+                                                            })
+
+                                                            }
+
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+</div>
+                                                </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/.panel-->
+            </div><!--/.col-->
+    
+        </div>
+
+</body>
+
+</html>

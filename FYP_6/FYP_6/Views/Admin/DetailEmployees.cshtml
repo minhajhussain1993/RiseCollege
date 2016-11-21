@@ -1,0 +1,155 @@
+﻿@model FYP_6.Employee
+<html>
+<head>
+    <title>Manage Employees</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("AdminView")
+@Html.Partial("JsEnableCheckerAdmin")
+
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br /><br /><br /><br /><br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Record Added")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg>
+                    @ViewBag.Message
+                    <a href="#" class="pull-right">
+
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            }
+            else if (ViewBag.Message == "Unable to Add Records")
+            {
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+
+        <br /><br />
+         
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary" style="padding-left:2px">
+                        <div class="panel-heading" style="text-align:center">Employee Details</div>
+                        <div class="panel-body">
+                            <div class="bootstrap-table">
+                                <div class="fixed-table-body">
+
+                                    <div style="float:right; display:inline">
+                                        @if (Model.Picture != null)
+                                        {
+
+                                            var base64 = Convert.ToBase64String((byte[])Model.Picture);
+                                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                            <img src='@imgSrc' style="width:200px; height:200px; padding: 0px; display:inline;float:right;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;}" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/MyProjectImages/user icon.png" style="width:200px; height:200px; padding: 0px;float:right;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;}" />
+                                        }
+
+                                    </div>
+
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:95px;padding-left:30px; display:inline">Employee Name:</label>
+                                    @Html.DisplayFor(model => model.Name, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:155px;padding-left:30px; display:inline">Gender:</label>
+
+                                    @Html.DisplayFor(model => model.Gender, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:150px; display:inline;padding-left:30px">Religion:</label>
+                                    @Html.DisplayFor(model => model.Religion, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                    <br />
+                                    <br />
+
+                                    <label style="padding-right:150px;padding-left:30px; display:inline">Address:</label>
+                                    @Html.DisplayFor(model => model.Address, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:120px;padding-left:30px">Date of Birth:</label>
+                                    @Html.DisplayFor(model => model.Date_of_Birth, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:170px; display:inline;padding-left:30px">CNIC:</label>
+                                    @Html.DisplayFor(model => model.CNIC, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                    <br />
+                                    <br />
+
+
+                                    <label style="padding-right:135px;padding-left:30px">ContactNo</label>
+                                    @Html.DisplayFor(model => model.ContactNo, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                    <br />
+                                    <br />
+
+                                    <label style="padding-right:110px;padding-left:30px">Martial_Status:</label>
+                                    @Html.DisplayFor(model => model.Martial_Status, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:135px;display:inline;padding-left:30px">UserName:</label>
+                                    @Html.DisplayFor(model => model.UserName, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:135px;padding-left:30px">Password:</label>
+
+                                    @Html.DisplayFor(model => model.Password, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:163px;display:inline;padding-left:30px">Salary:</label>
+                                    @Html.DisplayFor(model => model.Salary, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                    <br />
+                                    <br />
+
+
+                                    @Html.ActionLink("Back", "ManageEmployees", "Admin", null,
+                                        new
+                                        {
+                                            @type = "submit",
+                                            @class = "btn btn-warning",
+                                            @style = " style=display:inline;"
+                                        })
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div><!--/.panel-->
+                </div><!--/.col-->
+            </div>
+        </div>
+     
+
+
+</body>
+</html>

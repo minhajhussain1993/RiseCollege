@@ -1,0 +1,259 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FYP_6.Degree_Program>
+
+<html>
+<head>
+    <title>Courses</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+
+@if (Session["AdminID"] != null)
+{
+    @Html.Partial("AdminView")
+    @Html.Partial("JsEnableCheckerAdmin")
+}
+else
+{
+    @Html.Partial("EmployeeView")
+    @Html.Partial("JsEnableChecker")
+}
+ <body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "S")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg> Successfully Records Deleted!<a href="#" class="pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Degree Programs</div>
+                    <div class="panel-body">
+
+                        @if (Session["AdminID"] == null)
+                        {
+
+                            <div class="fixed-table-container table-responsive">
+                                <div class="fixed-table-body">
+                                    @using (Html.BeginForm("DeleteCourseRecords", "Courses", FormMethod.Post))
+                                    {
+                                        int i = 1;
+                                        <table border="0" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">Select</div>
+                                                        <div class="fht-cell"><input type="checkbox" name="checkUncheckAll" id="checkUncheckAll" class="checkUncheckAll" /></div>
+                                                    </th>
+
+                                                    <th style="">
+                                                        <div class="th-inner sortable">
+                                                            Degree Program Name
+
+                                                        </div><div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">
+                                                            Degree Level
+                                                        </div><div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">
+                                                            Subjects
+                                                        </div><div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">
+                                                            Action
+                                                        </div><div class="fht-cell"></div>
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @if (Model != null)
+                                                {
+                                                    i = 1;
+                                                    foreach (var item in Model)
+                                                    {
+
+                                                        <tr class="roo_@i">
+                                                            <td>
+                                                                <input type="checkbox" name="deleteCourses" id="deleteCourses" value="@Html.DisplayFor(modelItem => item.ProgramID)" class="roo_@i" />
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Degree_ProgramName)
+
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Level.Level_Name)
+
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Degree_Subject.Count)
+
+                                                            </td>
+                                                            <td>
+                                                                @Html.ActionLink("Edit Subjects", "EditCourse", "Courses", new { @id = item.ProgramID }, null)|
+                                                                @Html.ActionLink("Subjects Details", "DetailCourse", "Courses", new { @id = item.ProgramID }, null)
+                                                            </td>
+                                                        </tr>
+                                                        i++;
+                                                    }
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                        @Html.ActionLink("Add New", "AddDegreeRecords", "Courses", null, new { @type = "submit", @class = "btn btn-success", @style = "display:inline;" })
+                                        <input type="hidden" id="hiddenInput" name="hiddenInput" />
+                                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return FormSubmitted();" style="display:inline; margin-right:10px;" />
+
+                                    }
+                                </div>
+                            </div>
+                            if (Model != null)
+                            {
+                                @Html.PagedListPager(Model, page => Url.Action("ManageCourses",
+                            new
+                            {
+                                page,
+                                searchBy = Request.QueryString["searchBy"],
+                                search = Request.QueryString["search"]
+
+                            }), new PagedListRenderOptions()
+                                     {
+                                         Display = PagedListDisplayMode.IfNeeded,
+                                         DisplayPageCountAndCurrentLocation = true
+                                     }
+                            )
+                            }
+
+                        }
+                        else
+                        {
+
+                            <div class="fixed-table-container table-responsive">
+                                <div class="fixed-table-body">
+
+                                    <table border="0" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                        <thead>
+                                            <tr>
+
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        Degree Program Name
+
+                                                    </div><div class="fht-cell"></div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        Degree Level
+                                                    </div><div class="fht-cell"></div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        Subjects
+                                                    </div><div class="fht-cell"></div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        Action
+                                                    </div><div class="fht-cell"></div>
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @if (Model != null)
+                                            {
+
+                                                foreach (var item in Model)
+                                                {
+                                                    <tr>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Degree_ProgramName)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Level.Level_Name)
+
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Degree_Subject.Count)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.ActionLink("Subjects Details", "DetailCourse", "Courses", new { @id = item.ProgramID }, null)
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            if (Model != null)
+                            {
+                                @Html.PagedListPager(Model, page => Url.Action("ManageCourses",
+                            new
+                            {
+                                page,
+                                searchBy = Request.QueryString["searchBy"],
+                                search = Request.QueryString["search"]
+
+                            }), new PagedListRenderOptions()
+                                     {
+                                         Display = PagedListDisplayMode.IfNeeded,
+                                         DisplayPageCountAndCurrentLocation = true
+                                     }
+                            )
+                            }
+
+                        }
+
+                    </div><div class="clearfix"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+</body>
+
+</html>

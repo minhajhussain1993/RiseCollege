@@ -1,0 +1,428 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FYP_6.Fee>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fees</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+
+@if (Session["AdminID"] != null)
+{
+    @Html.Partial("AdminView")
+    @Html.Partial("JsEnableCheckerAdmin")
+}
+else
+{
+    @Html.Partial("EmployeeView")
+    @Html.Partial("JsEnableChecker")
+}
+<body>
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <br>
+        <br>
+        
+        <br /><br /><br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Records Deleted!")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg> @ViewBag.Message<a href="#" class="pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> Fee Records</div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("FeeRecords", "Fee", FormMethod.Get))
+                        {
+                            @*@Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)*@
+                            <b>Search By Month</b>
+                            @Html.DropDownList("Month2", new List<SelectListItem>
+                              {
+                                  new SelectListItem{Text="None Selected",Value="None Selected",Selected=true},
+                                  new SelectListItem{Text="January",Value="January"},
+                                  new SelectListItem{Text="February",Value="February"},
+                                  new SelectListItem{Text="March",Value="March"},
+                                  new SelectListItem{Text="April",Value="April"},
+                                  new SelectListItem{Text="May",Value="May"},
+                                  new SelectListItem{Text="June",Value="June"},
+                                  new SelectListItem{Text="July",Value="July"},
+                                  new SelectListItem{Text="August",Value="August"},
+                                  new SelectListItem{Text="September",Value="September"},
+                                  new SelectListItem{Text="October",Value="October"},
+                                  new SelectListItem{Text="November",Value="November"},
+                                  new SelectListItem{Text="December",Value="December"},
+
+                              }, new { @style = "padding-right:50px; display:inline; width:180px", @class = "form-control" })
+    <span class="categoryDiv">
+        <b style="margin-left:30px;">Enter Year:</b>
+        <span class="categoryDiv">
+            @Html.TextBox("year", "", new { @class = "form-control", @style = "margin-left:0px; display:inline; width:150px" })
+            </span>
+        </span>
+                            
+    <span class="categoryDiv">
+
+        <b style="margin-left:30px;">Enter Rollno</b>
+        <span class="categoryDiv">
+            @Html.TextBox("search2", "", new { @class = "form-control", @style = "margin-left:0px; display:inline; width:150px" })
+            </span>
+        </span>
+                            <br />
+    <br />
+<span class="categoryDiv">
+    <b style="margin-left:10px;">Select Category:</b>
+    <span class="categoryDiv">
+        @Html.DropDownList("StudentType", new List<SelectListItem>
+                              {
+                                  new SelectListItem{Text="Current Students",Value="1",Selected=true},
+
+                                  new SelectListItem{Text="Past Students",Value="0"},
+
+                              }, new { @class = "form-control", @style = "width:170px; display:inline" })<selectlistitem>
+        </span>
+    </span>
+            <br /><br />
+    <input type="submit" value="Show Results" class="btn btn-primary" name="searchfee" />
+                            @*if (Session["AdminID"] == null)
+                            {
+                            <input type="submit" value="Generate PDF" class="btn btn-primary" name="generatepdf" />
+                        }*@
+                        }
+
+                        <br />
+                        @*@if (TempData["CompleteMessage"] != null)
+                        {
+                            <div class="alert bg-primary" role="alert">
+                                 
+                                <span class="closeclassOnCloseButtonClick">
+                                     
+                                    @TempData["CompleteMessage"]
+                                </span>
+                            </div>
+
+
+                        }*@
+                        @*@if (ViewBag.Month != null && ViewBag.Month != "None Selected")
+                        {
+                            <b>Month:</b>@ViewBag.Month <text>,</text>
+                        }
+                        @if (ViewBag.Year != null && ViewBag.Year != "")
+                        {
+                            <b>Year:</b>@ViewBag.Year <text>,</text>
+                        }
+                        @if (ViewBag.RollNo != null && ViewBag.RollNo != "")
+                        {
+                            <b>RollNo:</b>@ViewBag.RollNo
+                        }*@
+                        
+                        <hr />
+            <br />
+            <br />
+
+            @if (Session["AdminID"] == null)
+                        {
+                <div class="fixed-table-container table-responsive">
+                    <div class="fixed-table-body">
+                        @using (Html.BeginForm("DeleteFeeRecords", "Fee", FormMethod.Post))
+                                    {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                                        int i = 1;
+                            <table border="1"
+                                   data-toggle="table"
+                                   data-url="tables/data1.json"
+                                   data-show-refresh="true"
+                                   data-show-toggle="true"
+                                   data-show-columns="true"
+                                   data-search="true"
+                                   data-select-item-name="toolbar1"
+                                   data-pagination="true"
+                                   data-sort-name="name" data-sort-order="desc"
+                                   class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="">
+                                            <div class="th-inner sortable">Select</div>
+                                            <div class="fht-cell"><input type="checkbox" name="checkUncheckAll" id="checkUncheckAll" class="checkUncheckAll" /></div>
+                                        </th>
+                                        <th style=""><div class="th-inner sortable">@Html.DisplayNameFor(model => model.First().Overall_Fees.RollNo)</div><div class="fht-cell"></div></th>
+                                        <th style=""><div class="th-inner sortable">Registeration Fees</div><div class="fht-cell"></div></th>
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                Tution Fees
+                                                @*<span class="order"><span class="caret" style="margin: 10px 5px;"></span></span>*@<span class="order"><span class="caret" style="margin: 10px 5px;"></span></span>
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                Admission Fees
+
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                @Html.DisplayNameFor(model => model.First().Exam_Fee)
+
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                         
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                Installment no
+
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                @Html.DisplayNameFor(model => model.First().Fine)
+
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                @Html.DisplayNameFor(model => model.First().Total_Fee)
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                @Html.DisplayNameFor(model => model.First().Dated)
+
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                Action
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if (Model != null)
+                                    {
+                                        i = 1;
+                                        foreach (var item in Model)
+                                        {
+                                            <tr class="roo_@i">
+                                                <td>
+                                                    <input type="checkbox" name="deletefee" id="deletefee" value="@Html.DisplayFor(modelItem => item.Bill_No)" class="roo_@i" />
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Overall_Fees.RollNo)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Registeration_Fee)
+
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Tution_Fee)
+
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Admission_Fee)
+
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Exam_Fee)
+
+                                                </td>
+                                                 
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Installment)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Fine)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Total_Fee)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Dated)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("Edit", "EditFee", "Fee", new { @id = item.Bill_No }, null)@*|
+                                                    @Html.ActionLink("Details", "DetailFee", "Fee", new { @id = item.Bill_No }, null)|*@
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+    <span class="delRef">
+        @*@Html.ActionLink("Add New", "AddFeeRecords", "Fee", null, new { @type = "submit", @class = "btn btn-success", @style = "margin-left:0%; style=display:inline;" })*@
+        <input type="hidden" id="hiddenInput" name="hiddenInput" />
+        <input type="submit" value="Delete" class="btn btn-danger" onclick="return FormSubmitted();" style="display:inline;" name="delFee" />
+        @Html.ActionLink("Refresh", "FeeRecords", "Fee", null, new { @type = "submit", @class = "btn btn-success", @style = "style=display:inline;" })
+        </span>
+
+        }
+</div>
+                </div>
+
+                        }
+
+                        else
+                        {
+                <div class="fixed-table-container table-responsive">
+                    <div class="fixed-table-body">
+                        
+                            
+                            <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style=""><div class="th-inner sortable">@Html.DisplayNameFor(model => model.First().Overall_Fees.RollNo)</div><div class="fht-cell"></div></th>
+                                        <th style=""><div class="th-inner sortable">Registeration Fees</div><div class="fht-cell"></div></th>
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                Tution Fees
+                                                @*<span class="order"><span class="caret" style="margin: 10px 5px;"></span></span>*@<span class="order"><span class="caret" style="margin: 10px 5px;"></span></span>
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                Admission Fees
+
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                @Html.DisplayNameFor(model => model.First().Exam_Fee)
+
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                         
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                Paid Installments
+
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                @Html.DisplayNameFor(model => model.First().Fine)
+
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                @Html.DisplayNameFor(model => model.First().Total_Fee)
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                        <th style="">
+                                            <div class="th-inner sortable">
+                                                @Html.DisplayNameFor(model => model.First().Dated)
+
+                                            </div><div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if (Model != null)
+                                                {
+                                                    foreach (var item in Model)
+                                                    {
+                                                        <tr>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Overall_Fees.RollNo)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Registeration_Fee)
+
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Tution_Fee)
+
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Admission_Fee)
+
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Exam_Fee)
+
+                                                            </td>
+                                                             
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Installment)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Fine)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Total_Fee)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Dated)
+                                                            </td>
+                                                        </tr>
+
+                                                    }
+                                                }
+                                    
+                                </tbody>
+                            </table>
+    @Html.ActionLink("Refresh", "FeeRecords", "Fee", null, new { @type = "submit", @class = "btn btn-success", @style = "style=display:inline;" })
+                                    
+                    </div>x
+                </div>
+
+                        }
+
+            @if (Model != null)
+                        {
+                @Html.PagedListPager(Model, page => Url.Action("FeeRecords",
+                            new
+                            {
+                                page,
+                                search2 = Request.QueryString["search2"],
+                                Month2 = Request.QueryString["Month2"],
+                                year = Request.QueryString["year"],
+                                StudentType = Request.QueryString["StudentType"],
+
+                            }), new PagedListRenderOptions()
+                                     {
+                                         Display = PagedListDisplayMode.IfNeeded,
+                                         DisplayPageCountAndCurrentLocation = true
+                                     }
+                            )
+                        }
+                        
+            <div class="clearfix"></div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+</body>
+
+</html>

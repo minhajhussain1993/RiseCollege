@@ -1,0 +1,153 @@
+﻿@model FYP_6.Teacher
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+@Html.Partial("TeacherView")
+@*<head>
+
+        <!--Icons-->
+
+
+        <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+
+    </head>*@
+
+<body>
+
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li class="active"></li>
+            </ol>
+        </div><!--/.row-->
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Welcome @Session["UserName"]</h1>
+            </div>
+        </div><!--/.row-->
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-blue panel-widget ">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil" /></svg>
+                        </div>
+                        @if (ViewBag.Graduation != null)
+                        {
+                            <div class="col-sm-8 col-lg-7 widget-right">
+                                <div style="font-size:inherit"><b>@ViewBag.Graduation</b></div>
+                                <div class="text-muted">Graduation</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-8 col-lg-7 widget-right">
+                                <div class="large">None</div>
+                                <div class="text-muted">Graduation Details</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-orange panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked star"><use xlink:href="#stroked-star" /></svg>
+
+
+                        </div>
+                        @if (ViewBag.Major != null)
+                        {
+                            <div class="col-sm-8 col-lg-7 widget-right">
+                                <div style="font-size:inherit"><b>@ViewBag.Major</b></div>
+                                <div class="text-muted">Major Subject</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-8 col-lg-7 widget-right">
+                                <div class="large">None</div>
+                                <div class="text-muted">Major Subject</div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-teal panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper" /></svg>
+
+                        </div>
+                        @if (ViewBag.Subjects != null)
+                        {
+                            <div class="col-sm-8 col-lg-7 widget-right">
+                                <div class="large">@ViewBag.Subjects</div>
+                                <div class="text-muted">Subjects</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-8 col-lg-7 widget-right">
+                                <div class="large">0</div>
+                                <div class="text-muted">Subjects</div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-red panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left btn btn-info btn-lg">
+                            @if (ViewBag.Status != null && ViewBag.Status == "Active")
+                            {
+                                <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark" /></svg>
+                            }
+                            else
+                            {
+                                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel" /></svg>
+                            }
+                        </div>
+                        @if (ViewBag.Status != null)
+                        {
+                            <div class="col-sm-8 col-lg-7 widget-right">
+                                <div class="large">@ViewBag.Status</div>
+                                <div class="text-muted">Status</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-8 col-lg-7 widget-right">
+                                <div class="large">UnActive</div>
+                                <div class="text-muted">Status</div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div><!--/.row-->
+
+        
+        
+</body>
+
+</html>
+

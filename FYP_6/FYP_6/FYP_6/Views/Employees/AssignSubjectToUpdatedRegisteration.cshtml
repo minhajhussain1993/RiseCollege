@@ -1,0 +1,122 @@
+﻿@model IEnumerable<FYP_6.Batch_Subjects_Parts>
+
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+<html>
+<body>
+    
+
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li class="active">Icons</li>
+            </ol>
+        </div><!--/.row-->
+
+
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Registeration Updated!</h2>
+            </div>
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading" style="text-align:center">New Subject Assignment</div>
+                        <div class="panel-body">
+                            <div class="bootstrap-table">
+                                <div class="fixed-table-header"><table></table></div><div class="fixed-table-body">
+                                    @if (ViewBag.Student!= null)
+                                    {
+                                        if (ViewBag.Message == null)
+                                        {
+                                            using (Html.BeginForm("AssignSubjectToUpdatedRegisteration", "Employees", FormMethod.Post))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                @Html.ValidationSummary(true)
+
+                                                <b style="font:200">Student Roll no:</b>
+                                                <b style="font:200">@ViewBag.Student.Rollno</b>
+                                                <br />
+                                                <b style="font:200">Batch Name:</b>
+                                                <b style="font:200">@ViewBag.Student.BatchID</b>
+                                                <br />
+                                                <b style="font:200">Degree Name:</b>
+                                                <b style="font:200">@ViewBag.Student.Batch.Degree_Program.Degree_ProgramName</b>
+                                                <br />
+                                                <b style="font:200">Section Name:</b>
+                                                <b style="font:200">@ViewBag.Student.Batch.Section.SectionName</b>
+                                                <br />
+                                                <b style="font:200">Part:</b>
+                                                <b style="font:200">@ViewBag.Student.Part</b>
+                                                <br />
+                                                foreach (var item in Model)
+                                                {
+                                                    <label>
+                                                        <input type="checkbox" checked="checked" value="@item.Subject.SubjectID" name="subjects" id="subjects">
+                                                        @item.Subject.SubjectName
+                                                    </label>
+                                                    <br />
+                                                }
+                                                <input type="hidden" value="@ViewBag.Student.Rollno" name="rollno" />
+                                                <input type="submit" value="Assign Subjects" class="btn btn-primary" style="display:inline;" onclick="return FormSubmitted();" />
+                                                @Html.ActionLink("Back", "StudentRecords", "Employees", new { @class = "btn btn-warning", @style = "margin-left:10px" })
+
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            <div class="alert bg-danger" role="alert">
+                                                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                                                @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                            </div>
+                                            @Html.ActionLink("Click Here To Go Back", "StudentRecords", "Courses", new { @class = "btn btn-warning", @style = "margin-left:10px" })
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (ViewBag.Message != null)
+                                        {
+                                            if (ViewBag.Message == "Succesfully Subjects Added")
+                                            {
+                                                <div class="alert bg-success" role="alert">
+                                                    <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg>
+                                                    @ViewBag.Message<a href="#" class="pull-right">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </a>
+                                                </div>
+                                                @Html.ActionLink("Click Here To Go Back", "StudentRecords", "Employees", new { @class = "btn btn-warning", @style = "margin-left:10px" })
+                                            }
+                                            else
+                                            {
+                                                <div class="alert bg-danger" role="alert">
+                                                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                                                    @ViewBag.Message<a href="#" class="pull-right">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </a>
+                                                </div>
+                                                @Html.ActionLink("Click Here To Go Back", "StudentRecords", "Employees", new { @class = "btn btn-warning", @style = "margin-left:10px" })
+                                            }
+
+                                        }
+                                    }
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div><!--/.panel-->
+                </div><!--/.col-->
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>

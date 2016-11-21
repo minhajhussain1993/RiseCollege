@@ -1,0 +1,153 @@
+﻿@model FYP_6.Registeration
+<html>
+<head>
+    <title>Student Admission</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert bg-danger" role="alert">
+                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+         
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading" style="text-align:center">Step3: Student Registeration</div>
+                        <div class="panel-body">
+                            <div class="bootstrap-table">
+
+                                @if (Session["Success"] != "Successfully Record Added")
+                                {
+                                    using (Html.BeginForm("RegisterationForNewAdmission", "Employees", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                        <br />
+                                        <br />
+
+                                        <label style="padding-right:72px;padding-left:30px; display:inline">Student Name:</label>
+                                        <b>@TempData["StudentName"]</b>
+
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:45px;padding-left:30px;">Registeration No:</label>
+                                        @Html.TextBoxFor(model => model.RegisterationNo, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        <span style="color:red;" class="categoryDiv">@Html.ValidationMessageFor(model => model.RegisterationNo)</span>
+                                        <br />
+                                        <br />
+
+                                        <label style="padding-right:10px;padding-left:30px; display:inline">Select Degree Program</label>
+                                        <select name="degree" class="form-control" style="width:200px; display:inline" id="degree">
+                                            <option value="Please select" selected="selected">Please select</option>
+                                            @if (ViewBag.Degrees != null)
+                                            {
+                                                foreach (var item in ViewBag.Degrees)
+                                                {
+                                                    <option value="@item.ProgramID">@item.Degree_ProgramName</option>
+                                                }
+                                            }
+
+                                        </select>
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:76px;padding-left:30px;">Select Batch</label>
+                                        <select name="batch" class="form-control batchChangeGenNewRoll" style="width:200px; display:inline" id="batch">
+
+                                        </select>
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:80px;padding-left:30px; display:inline">Select Part:</label>
+
+                                        @Html.DropDownList("part", new List<SelectListItem>
+        {
+            new SelectListItem{Text="Part-1",Value="1",Selected=true},
+            new SelectListItem{Text="Part-2",Value="2"},
+            new SelectListItem{Text="Part-3",Value="3"},
+            new SelectListItem{Text="Part-4",Value="4"},
+
+        }, new { @id = "part", @class = "form-control", @style = "width:200px; display:inline" })
+
+                                        @*<select name="part" class="form-control" style="width:200px; display:inline">
+                                                <option value="Select" selected="selected">Select Part</option>
+                                                <option value=""></option>
+                                            </select>*@
+                                        <br />
+                                        <br />
+
+                                        <label style="padding-right:55px;padding-left:30px; display:inline">Select Section:</label>
+                                        <select name="section" class="form-control" style="width:200px; display:inline" id="section">
+                                            @*<option value="Please select" selected="selected">Please select</option>*@
+                                            @*@if (ViewBag.Sections != null)
+                                                {
+                                                    foreach (var item in ViewBag.Sections)
+                                                    {
+                                                        <option value="@item.SectionID">@item.SectionName</option>
+                                                    }
+                                                }*@
+                                        </select>
+
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:120px;padding-left:30px;">RollNo</label>
+                                        @Html.TextBoxFor(model => model.Rollno, new { @class = "form-control GenNewRoll", @style = "width:200px; display:inline;", @readonly = "readonly" })
+                                        <span style="color:red;" class="categoryDiv">
+                                            @Html.ValidationMessageFor(model => model.Rollno)
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:88px;padding-left:30px;display:inline">Password:</label>
+                                        @Html.TextBoxFor(model => model.Password, new
+                                       {
+                                           @class = "form-control",
+                                           @style = "width:200px; display:inline; "
+                                       })
+                                        <span style="color:red;" class="categoryDiv">@Html.ValidationMessageFor(model => model.Password)</span>
+                                        <br />
+                                        <br />
+
+                                        @*@Html.ActionLink("Back", "NewAdmission", "Employees", new { @class = "btn btn-warning", @style = "margin-left:200px" })*@
+                                        <input type="submit" value="Next"
+                                               class="btn btn-primary" style="margin-left:20%;width:100px" />
+                                    }
+
+                                }
+                                else
+                                {
+                                    using (Html.BeginForm("RegisterationForNewAdmission", "Employees", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                        <h2>No Records Found</h2>
+                                        <input type="submit" value="Next" class="btn btn-primary" style="margin-left:200px;width:200px;" name="newAdmission" />
+                                    }
+                                }
+                    </div>
+
+                </div>
+            </div>
+        </div><!--/.panel-->
+    </div><!--/.col-->
+    </div>
+     
+     
+
+
+
+</body>
+</html>

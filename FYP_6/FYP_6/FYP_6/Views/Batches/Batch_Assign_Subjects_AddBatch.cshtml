@@ -1,0 +1,123 @@
+﻿@model IEnumerable<FYP_6.Batch_Subjects_Parts>
+
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+<html>
+<body>
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li class="active">Icons</li>
+            </ol>
+        </div><!--/.row-->
+
+
+        <br />
+        <br />
+
+        @if (Session["S"] != null)
+        {
+            <div class="alert bg-success" role="alert">
+                <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> @Session["S"]<a href="#" class="pull-right">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </div>
+        }
+        <div class="row">
+            <div class="col-lg-12">
+                <h2></h2>
+            </div>
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading" style="text-align:center">Subject Registeration</div>
+                        <div class="panel-body">
+                            <div class="bootstrap-table">
+                                <div class="fixed-table-header"><table></table></div><div class="fixed-table-body">
+                                    @if (Session["S"] != null)
+                                    {
+                                        using (Html.BeginForm("Batch_Assign_Subjects_AddBatch", "Batches", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true)
+
+                                            foreach (var item in Model)
+                                            {
+                                                <label>
+                                                    <input type="checkbox" checked="checked" value="@item.Subject.SubjectID" name="subj" id="subj">
+                                                    @item.Subject.SubjectName
+                                                </label>
+                                                <br />
+                                            }
+                                            <input type="submit" value="Assign Subjects" class="btn btn-primary" style="display:inline;" />
+                                            @Html.ActionLink("Back", "ViewBatches", "Batches", new { @class = "btn btn-warning", @style = "margin-left:10px" })
+
+                                        }
+                                        <br />
+                                        <br />
+                                        if (ViewBag.Message != null)
+                                        {
+                                            <div class="alert bg-danger" role="alert">
+                                                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                                                @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                            </div>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        using (Html.BeginForm("Batch_Assign_Subjects_AddBatch", "Batches", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true)
+                                            <h2>Unable To Change Part of Batches</h2>
+                                           <input type="submit" value="Click Here To Try Again" class="btn btn-primary" style="margin-left:155px" name="newBatch" />
+                                    }
+                                    }
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div><!--/.panel-->
+                </div><!--/.col-->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        !function ($) {
+            $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
+                $(this).find('em:first').toggleClass("glyphicon-minus");
+            });
+            $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+        }(window.jQuery);
+
+        $(window).on('resize', function () {
+            if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+        })
+        $(window).on('resize', function () {
+            if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+        })
+    </script>
+
+
+
+    
+    <script src="~/MainStudentInfoTheme/js/bootstrap.min.js"></script>
+
+    <script src="~/MainStudentInfoTheme/js/chart.min.js"></script>
+
+    <script src="~/MainStudentInfoTheme/js/chart-data.js"></script>
+
+    <script src="~/MainStudentInfoTheme/js/easypiechart-data.js"></script>
+    <script src="~/MainStudentInfoTheme/js/easypiechart.js"></script>
+    
+    <script src="~/MainStudentInfoTheme/js/bootstrap-datepicker.js"></script>
+</body>
+</html>

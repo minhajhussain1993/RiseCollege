@@ -1,0 +1,104 @@
+﻿@model IEnumerable<FYP_6.Batch_Subjects_Parts>
+<html>
+<head>
+    <title>Student Admission</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+         
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading" style="text-align:center">Step 4:Subject Registeration</div>
+                        <div class="panel-body">
+
+                            <label style="font-size:large">Batch:</label> <b style="font-size:large;">
+                            @if (TempData["BatchSAV"] != null)
+                            { @TempData["BatchSAV"]}</b>
+                            <span class="categoryDiv"><label style="font-size:large;margin-left:1%"> Degree Program:</label> <b style="font-size:large"> @if (TempData["degreeProgramSAV"] != null)
+                            { @TempData["degreeProgramSAV"]}</b></span>
+                            <span class="categoryDiv">
+                                <label style="margin-left:1%;font-size:large; display:inline"> Section:</label> <b style="font-size:large; display:inline">
+                                @if (TempData["SectionSAV"] != null) { @TempData["SectionSAV"]}</b>
+                            </span>
+                            <hr />
+                            <div class="bootstrap-table table-responsive">
+                                <div class="fixed-table-body">
+                                    @if (Session["Success"] != "Successfully Record Added")
+                                    {
+                                        using (Html.BeginForm("SubjectAssignView", "Employees", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true)
+
+
+    <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+        <thead>
+            <tr> 
+                <th style=""><div class="th-inner sortable">Select</div><div class="fht-cell"></div></th>
+                <th style=""><div class="th-inner sortable">Subject Name</div><div class="fht-cell"></div></th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null)
+            {
+                int i = 1;
+                foreach (var item in Model)
+                {
+                    <tr class="roo_@i">
+
+                        <td><input type="checkbox" checked="checked" value="@item.Subject.SubjectID" name="subj" id="subj" class="roo_@i"></td>
+                        <td>@item.Subject.SubjectName</td>
+                    </tr>
+                    i++;
+                }
+            }
+        </tbody>
+             
+        </table>
+    <input type="submit" value="Finish" class="btn btn-primary" style="display:inline;" />
+                                        }
+                                                    <br />
+                                                    <br />
+                                        }
+                                                    @if (ViewBag.Message != null)
+                                                    {
+                                                    <div class="alert bg-danger" role="alert">
+                                                        <svg class="glyph stroked cancel">
+                                                            <use xlink:href="#stroked-cancel"></use>
+                                                        </svg>
+                                                        @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                                    </div>
+                                                    }
+                                                     
+
+</div>
+
+                            </div>
+                        </div>
+                    </div><!--/.panel-->
+                </div><!--/.col-->
+            </div>
+        </div>
+     
+
+
+
+</body>
+</html>

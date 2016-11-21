@@ -1,0 +1,200 @@
+﻿@model IEnumerable< FYP_6.Batch>
+<!DOCTYPE html>
+<html>
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+
+    <div style="position:absolute;width:100%;height:200%;z-index:9999;
+    background-color:rgba(1,1,1,0.5);display:none;" id="screenblur2InTeacherBatchAssigning">
+        <div class="col-md-4" style="margin:20%;margin-left:35%;margin-top:15%">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="margin:0%">Plz Wait!</div>
+                <div class="panel-body">
+                    <img src="~/MyProjectImages/16.gif" style="width:100%;height:2%" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+<body>
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="alert bg-success" id="FinalResultSuccessTBAdd" role="alert" style="display:none">
+            <svg class="glyph stroked checkmark">
+                <use xlink:href="#stroked-checkmark"></use>
+            </svg> 
+        </div>
+        <div class="alert bg-danger" id="FinalResultFailTBAdd" role="alert" style="display:none">
+            <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+            <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+        </div>
+        
+        @*@if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Record Updated")
+            {
+                <br />
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg> @ViewBag.Message<a href="#" class="pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <br />
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+
+        }*@
+        <div id="FinalMessageteacherBatchesAssign" style="display:none" title="Batch Assignment Completed!">
+
+        </div>
+        <div class="row">
+
+
+            <div class="row pehliwaliTeacherBatchRegMe">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" style="text-align:center">Step1: Select Batches</div>
+                        <div class="panel-body">
+                            <div class="bootstrap-table">
+
+                                <div class="fixed-table-body">
+                                    <div class="fixed-table-container table-responsive">
+
+                                        @*<div class="fixed-table-loading" style="top: 37px; display: none;">Loading, please wait…</div>*@
+
+                                        <br /><br />
+
+                                        <label style="padding-right:15px;padding-left:10px;">Enter TeacherID:</label>
+                                        <input name="teacherID" id="search1" class="form-control tidSearch" style="width:170px; display:inline" autocomplete="off" />
+                                        <label id="teachIDvalidator" style="color:red;">*</label>
+                                        <span class="loadingImageWhileTyping" style="display: none;">
+                                            <img src="~/MyProjectImages/Loading Circle.gif" style="width:3.5%" />
+                                        </span>
+                                        @*<input type="button" id="ShowTeacherBatches"
+                                               class="form-control btn btn-primary" style="width:170px; display:inline" value="Show Assigned Batches" onclick="ShowBatches();" />*@
+                                        <br />
+                                        <br />
+                                        <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">Select</div>
+                                                        <div class="fht-cell"><input type="checkbox" name="checkUncheckAll" id="checkUncheckAll" class="checkUncheckAll" /></div>
+                                                    </th>
+                                                    <th style=""><div class="th-inner sortable">Batch</div><div class="fht-cell"></div></th>
+                                                    <th style=""><div class="th-inner sortable">Degree Program</div><div class="fht-cell"></div></th>
+                                                    <th style=""><div class="th-inner sortable">Section</div><div class="fht-cell"></div></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody class="pehlaStepTeacherBatches">
+                                                @{
+                                                    if (Model != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var item in Model)
+                                                        {
+                                                            <tr class="roo_@i">
+                                                                <td>
+                                                                    <input type="checkbox" class="roo_@i" name="TeacherBatchesAssign" value="@item.BatchName" />
+                                                                </td>
+                                                                <td id="batchname_@i">
+                                                                    @item.BatchName
+                                                                </td>
+                                                                <td>
+                                                                    @item.Degree_Program.Degree_ProgramName
+                                                                </td>
+                                                                <td>
+                                                                    @item.Section.SectionName
+                                                                </td>
+
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+
+                                                }
+                                            </tbody>
+                                        </table>
+                                        <label id="BatchSelecterValidator" style="color:red;"></label>
+                                        <br />
+                                        <br />
+                                        <input type="submit" value="Next" class="btn btn-success" style="margin-left:0%" onclick="pehlaFun();"/>
+                                        @Html.ActionLink("Back", "Teacher_Batches", "Employees", new { @class = "btn btn-warning", @style = "margin-left:5px" })
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div><div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row DusriwaliTeacherBatchRegMe" style="display:none;">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" style="text-align:center">Step2: Select Subjects</div>
+                        <div class="panel-body">
+                            <div class="bootstrap-table">
+
+                                <div class="fixed-table-body">
+                                    <div class="fixed-table-container table-responsive">
+                                        <br /><br />
+
+                                        
+                                        <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">Select</div>
+                                                        <div class="fht-cell"><input type="checkbox" name="checkUncheckAll" id="checkUncheckAll" class="checkUncheckAll" /></div>
+                                                    </th>
+                                                    <th style=""><div class="th-inner sortable">Subject Name</div><div class="fht-cell"></div></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="DusraStepTeacherBatches">
+                                                
+                                            </tbody>
+                                        </table>
+                                        <label id="SubjectSelecterValidator" style="color:red;"></label>
+                                        <br />
+                                        <input type="submit" value="Finish" class="btn btn-success" style="margin-left:0%" onclick="DusraFunEndWala();" />
+                                        <input type="submit" value="Back" class="btn btn-warning" style="margin-left:1%" onclick="TeesraFunctionBacktoBatches();" />
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div><div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--/.col-->
+
+        
+    </div>
+
+</body>
+
+</html>

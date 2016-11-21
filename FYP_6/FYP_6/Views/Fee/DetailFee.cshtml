@@ -1,0 +1,153 @@
+﻿@model FYP_6.Fee
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fees</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Fee Details</div>
+                    <div class="panel-body">
+                        <div class="fixed-table-container table-responsive">
+                            <div class="fixed-table-body">
+                                <table border="1" data-toggle="table" data-show-toggle="true" data-show-columns="true" data-sort-order="desc" class="table table-hover">
+                                    <thead>
+
+                                        <tr>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Bill_No
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    RollNo
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Student Name
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Admission_Fee
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Registeration Fee
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Tution Fee
+                                                </div><div class="fht-cell"></div>
+                                            </th>>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Exam Fee
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Total Installments
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Paid Installments
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Fine
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Total Fee
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Dated
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>   @Html.DisplayFor(model => model.Bill_No)</td>
+
+                                            <td>
+                                                @Html.DisplayFor(model => model.Rollno)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.StudentName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Admission_Fee)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Registeration_Fee)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Tution_Fee)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Exam_Fee)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Total_Installments)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Installment)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Fine)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Total_Fee)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Dated)
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                @Html.ActionLink("Back", "FeeRecords", "Fee", new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

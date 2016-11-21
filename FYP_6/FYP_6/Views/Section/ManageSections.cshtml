@@ -1,0 +1,222 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FYP_6.Section>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html> 
+<head>
+    <title>Section</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@if (Session["AdminID"] != null)
+{
+    @Html.Partial("AdminView")
+    @Html.Partial("JsEnableCheckerAdmin")
+}
+else
+{
+    @Html.Partial("EmployeeView")
+    @Html.Partial("JsEnableChecker")
+}
+ 
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "S")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg> Successfully Records Deleted!<a href="#" class="pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Sections</div>
+                    <div class="panel-body">
+    @if (Session["AdminID"] == null)
+    {
+        <div class="fixed-table-container table-responsive">
+            <div class="fixed-table-body">
+                @using (Html.BeginForm("DeleteSectionRecords", "Section", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    int i = 1;
+                    <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th style="">
+                                    <div class="th-inner sortable">Select</div>
+                                    <div class="fht-cell"><input type="checkbox" name="checkUncheckAll" id="checkUncheckAll" class="checkUncheckAll" /></div>
+                                </th>
+                                <th style=""><div class="th-inner sortable">Section Name</div><div class="fht-cell"></div></th>
+                                <th style=""><div class="th-inner sortable">No Of Batches</div><div class="fht-cell"></div></th>
+                                <th style="">
+                                    <div class="th-inner sortable">
+                                        Action
+                                    </div><div class="fht-cell"></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Model != null)
+                            {
+                                i = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr class="roo_@i">
+                                        <td>
+                                            <input type="checkbox" name="deletesec" id="deletesec" value="@Html.DisplayFor(modelItem => item.SectionID)" class="roo_@i" />
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SectionName)
+
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Batches.Count)
+
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "EditSection", "Section", new { @id = item.SectionID }, null)
+                                            @*<input type="text" value="@item.Bill_No" name="bill" style="display:none" />
+                                                                                                      <input type="submit" value="Delete" onclick="return FormSubmitted();" style="background-color: transparent;
+
+                                                border: none;
+                                                color:rgb(48,173,255);
+                                                cursor: pointer;"/>*@
+                                            @*@Html.ActionLink("Delete", "DeleteFee", "Employees", new { @Billno = item.Bill_No }, null)*@
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+
+
+                            }
+
+                        </tbody>
+                    </table>
+    @Html.ActionLink("Add New", "AddSectionRecords", "Section",
+                    null, new
+                    {
+                        @type = "submit",
+                        @class = "btn btn-success",
+                        @style = " style=display:inline;"
+                    })
+    <input type="hidden" id="hiddenInput" name="hiddenInput" />
+                    <input type="submit" value="Delete" class="btn btn-danger" onclick="return FormSubmitted();" style="display:inline;" />
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="fixed-table-container table-responsive">
+            <div class="fixed-table-body">
+                @using (Html.BeginForm("DeleteSectionRecords", "Section", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                        <thead>
+                            <tr>
+
+                                <th style=""><div class="th-inner sortable">Section Name</div><div class="fht-cell"></div></th>
+                                <th style=""><div class="th-inner sortable">No Of Batches</div><div class="fht-cell"></div></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SectionName)
+
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Batches.Count)
+
+                                        </td>
+                                    </tr>
+
+                                }
+
+
+                            }
+
+                        </tbody>
+                    </table>
+
+
+
+
+
+                }
+            </div>
+        </div>
+    }
+
+                @if (Model!= null)
+                                {
+                    @Html.PagedListPager(Model, page => Url.Action("ManageSections",
+                            new
+                            {
+                                page,
+                                searchBy = Request.QueryString["searchBy"],
+                                search = Request.QueryString["search"]
+
+                            }), new PagedListRenderOptions()
+                                     {
+                                         Display = PagedListDisplayMode.IfNeeded,
+                                         DisplayPageCountAndCurrentLocation = true
+                                     }
+                            )
+                                }
+
+
+
+
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+                </div>
+        </div>
+        
+    </div>
+
+
+</body>
+
+</html>

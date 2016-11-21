@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a25ea716be1b4311a85c9e1f7ee97d62" Name="Diagram1">
+        <EntityTypeShape EntityType="RCIS3Model.Admin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Assign_Subject" Width="1.5" PointX="15" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Batch" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Batch_Subjects_Parts" Width="1.5" PointX="12.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.BoardResult" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Degree_Program" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Degree_Subject" Width="1.5" PointX="10.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Duration" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Employee" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Fee" Width="1.5" PointX="12" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Level" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Part" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Registeration" Width="1.5" PointX="9.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Section" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Student_Marks" Width="1.5" PointX="17.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Student_Profile" Width="1.5" PointX="7.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Students_Attendance" Width="1.5" PointX="17.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Subject" Width="1.5" PointX="10.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.sysdiagram" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Teacher" Width="1.5" PointX="12.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Teacher_Attendance" Width="1.5" PointX="15" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Teacher_Subject" Width="1.5" PointX="16.625" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Teachers_Batches" Width="1.5" PointX="9.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Time_Table" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCIS3Model.Year" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <AssociationConnector Association="RCIS3Model.FK_Assign_Subject_Batch_Subjects_Parts" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Assign_Subject_Registeration" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Student_Marks_Assign_Subject" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Students_Attendance_Assign_Subject" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Batch_Degree_Program" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Batch_Section" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Batch_Subjects_Parts_Batch" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Batch_Year" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Registeration_Batch" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Teachers_Batches_Batch" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Batch_Subjects_Parts_Part" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Batch_Subjects_Parts_Subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Degree_Program_Levels" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Degree_Subject_Degree_Program" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Degree_Subject_Subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Levels_Duration" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Fees_Registeration" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Registeration_Part" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Registeration_Student_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Teacher_Attendance_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Teachers_Batches_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="RCIS3Model.FK_Degree_Subject_Part" />
+        <AssociationConnector Association="RCIS3Model.FK_Teacher_Subject_Subjects" />
+        <AssociationConnector Association="RCIS3Model.FK_Teacher_Subject_Teachers_Batches" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

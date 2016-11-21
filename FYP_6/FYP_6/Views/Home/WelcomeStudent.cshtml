@@ -1,0 +1,162 @@
+﻿@model FYP_6.Student_Profile
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("StudentView")
+ 
+@*<head>
+
+        <!--Icons-->
+
+
+        <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+
+    </head>*@
+
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            
+        </div><!--/.row-->
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Welcome @Session["UserName"]</h1>
+            </div>
+        </div><!--/.row-->
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-blue panel-widget ">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil" /></svg>
+                        </div>
+                        @if (ViewBag.Degree != null)
+                        {
+                            <div class="col-sm-9 col-lg-9 widget-right">
+                                <div class="large">@ViewBag.Degree</div>
+                                <div class="text-muted">Degree Program</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-9 col-lg-9 widget-right">
+                                <div class="large">None</div>
+                                <div class="text-muted">Degree Program</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-orange panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked table"><use xlink:href="#stroked-table" /></svg>
+
+                        </div>
+                        @if (ViewBag.Section != null)
+                        {
+                            <div class="col-sm-9 col-lg-9 widget-right">
+                                <div class="large">@ViewBag.Section</div>
+                                <div class="text-muted">Section</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-9 col-lg-9 widget-right">
+                                <div class="large">None</div>
+                                <div class="text-muted">Section</div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-teal panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper" /></svg>
+
+                        </div>
+                        @if (ViewBag.Subjects != null)
+                        {
+                            <div class="col-sm-9 col-lg-9 widget-right">
+                                <div class="large">@ViewBag.Subjects</div>
+                                <div class="text-muted">Subjects</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-9 col-lg-9 widget-right">
+                                <div class="large">0</div>
+                                <div class="text-muted">Subjects</div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-red panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left ">
+                            @if ( ViewBag.DegreeStatus == "1")
+                            {
+                                <svg class="glyph stroked checkmark">
+                            <use xlink:href="#stroked-checkmark" /></svg>
+                            }
+                            else
+                            {
+                                <svg class="glyph stroked cancel">
+                            <use xlink:href="#stroked-cancel" /></svg>
+                            }
+                        </div>
+                        
+                            @if (ViewBag.DegreeStatus == "1")
+                            {
+                                <div class="col-sm-9 col-lg-9 widget-right">
+                                    <div class="large">Active</div>
+                                    <div class="text-muted">Degree Status</div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-sm-9 col-lg-9 widget-right">
+                                    <div class="large">UnActive</div>
+                                    <div class="text-muted">Degree Status</div>
+                                </div>
+                            }
+
+                    </div>
+                </div>
+            </div>
+        </div><!--/.row-->
+
+        
+            @*<div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <svg class="glyph stroked flag"><use xlink:href="#stroked-flag" /></svg>Events</div>
+                    <div class="panel-body">    
+                        
+                    </div>
+                </div>
+            </div>*@	<!--/.main-->
+            
+</body>
+
+</html>

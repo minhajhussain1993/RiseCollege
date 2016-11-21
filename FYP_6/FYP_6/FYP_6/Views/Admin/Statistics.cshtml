@@ -1,0 +1,151 @@
+﻿
+<!DOCTYPE html>
+@Html.Partial("AdminView")
+@Html.Partial("JsEnableChecker")
+<body>
+    <script type="text/javascript">
+    function FormSubmitted() {
+        //var rollno = document.getElementById("rollno").innerHTML;
+        if (confirm('Are You sure You want to Delete Records')) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    </script>
+
+
+    <script>
+        var temp1 = '@ViewBag.Data';
+        var data = JSON.parse('@ViewBag.Data');
+        console.log(data);
+    </script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        var data = JSON.parse('@ViewBag.Data');
+        google.charts.load('current', { 'packages': ['bar'] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var chartData = google.visualization.arrayToDataTable(data);
+
+            var options = {
+                chart: {
+                    title: 'Number of Students in A Year',
+                    subtitle: 'Years, Students',
+                    width: 900,
+                    legend: { position: 'none' },
+                    axes: {
+                        y: {
+                            all: {
+                                range: {
+                                    min: 0
+                                }
+                            }
+                        }
+                    },
+                    bar: { groupWidth: "90%" }
+                }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+            chart.draw(chartData, options);
+        }
+    </script>
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li class="active"></li>
+            </ol>
+        </div><!--/.row-->
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Students Statistics</h1>
+            </div>
+        </div><!--/.row-->
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="bootstrap-table">
+                            <div class="fixed-table-header"><table></table></div><div class="fixed-table-body">
+                                <div class="fixed-table-loading" style="top: 37px; display: none;">Loading, please wait…</div>
+                            <div id="columnchart_material" style="width: 900px; height: 500px;"></div>
+                            </div>
+                        </div><div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+                            $(function () {
+                                $('#hover, #striped, #condensed').click(function () {
+                                    var classes = 'table';
+
+                                    if ($('#hover').prop('checked')) {
+                                        classes += ' table-hover';
+                                    }
+                                    if ($('#condensed').prop('checked')) {
+                                        classes += ' table-condensed';
+                                    }
+                                    $('#table-style').bootstrapTable('destroy')
+						                .bootstrapTable({
+						                    classes: classes,
+						                    striped: $('#striped').prop('checked')
+						                });
+                                });
+                            });
+
+                            function rowStyle(row, index) {
+                                var classes = ['active', 'success', 'info', 'warning', 'danger'];
+
+                                if (index % 2 === 0 && index / 2 < classes.length) {
+                                    return {
+                                        classes: classes[index / 2]
+                                    };
+                                }
+                                return {};
+                            }
+        </script>
+    </div>
+
+
+    <script src="~/MainStudentInfoTheme/js/jquery-1.11.1.min.js"></script>
+
+    <script src="~/MainStudentInfoTheme/js/bootstrap.min.js"></script>
+
+    <script src="~/MainStudentInfoTheme/js/chart.min.js"></script>
+
+    <script src="~/MainStudentInfoTheme/js/chart-data.js"></script>
+
+    <script src="~/MainStudentInfoTheme/js/easypiechart-data.js"></script>
+    <script src="~/MainStudentInfoTheme/js/easypiechart.js"></script>
+    <script src="js/easypiechart.js"></script>
+    <script src="js/easypiechart-data.js"></script>
+    <script src="~/MainStudentInfoTheme/js/bootstrap-datepicker.js"></script>
+    <script>
+		!function ($) {
+			$(document).on("click","ul.nav li.parent > a > span.icon", function(){
+				$(this).find('em:first').toggleClass("glyphicon-minus");
+			});
+			$(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+    </script>
+</body>
+</html>

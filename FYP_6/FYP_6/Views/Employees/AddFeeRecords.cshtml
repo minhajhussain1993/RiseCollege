@@ -1,0 +1,207 @@
+﻿@model FYP_6.Models.ViewModels.ViewModel_FeeManagement 
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Admission</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+
+<body>
+
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br>
+        <br>
+        <br />
+        <br>
+
+        <br />
+@if (ViewBag.Message !=null) 
+{ 
+        <div class="alert bg-danger" role="alert">
+            <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+            @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+        </div> 
+}
+         
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" style="text-align:center">Step 4: Collect Fee</div>
+                    <div class="panel-body">
+@if (Session["Success"] != "Successfully Record Added")
+{  
+                        using (Html.BeginForm("AddFeeRecords", "Employees", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <br />
+    <fieldset>
+        <legend>Student Details</legend>
+        @Html.LabelFor(model => model.feeSummary.RollNo, new { @style = "padding-right:115px;padding-left:30px" })
+        @Html.TextBoxFor(model => model.feeSummary.RollNo, new { @class = "form-control rollnoForFeeAdd", @style = "width:170px; display:inline",@readonly="readonly" })
+        <span style="color:red;" class="categoryDiv">*@Html.ValidationMessageFor(model => model.feeSummary.RollNo)</span>
+
+        <br />
+        <br />
+        <label style="padding-right:65px;padding-left:30px">Student Name</label>
+        @*<input type="text" readonly style="width:170px; display:inline" class="form-control stdNameForFeeAdd" />*@
+        @Html.DisplayFor(model => model.Name, new { @class = "form-control", @style = "width:170px; display:inline" })
+          
+
+        <br />
+        <br />
+    </fieldset>
+                            <fieldset>
+                                <legend>Fee Summary</legend>
+                                <div style="padding-left:30px">
+                                    <label style="padding-right:35px">Total Degree Fees</label>
+                                    @Html.TextBoxFor(model => model.feeSummary.Total_Degree_Fee, new { @class = "form-control totaldegfee", @style = "width:170px; display:inline" })
+                                    @*<input type="text"  style="width: 170px; display: inline" class="form-control totaldegfee" name="totaldegfee" />*@
+                                    <span style="color:red;" class="categoryDiv">
+                                        *@Html.ValidationMessageFor(model => model.feeSummary.Total_Degree_Fee) </span>
+                                    @*<span style="color:red;display:none" class="categoryDiv " id="fillfortFee">
+
+                                    </span>*@
+                                           
+
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:60px">Submitted Fee</label>
+                                        @Html.TextBoxFor(model => model.feeSummary.SubmittedFee, new { @class = "form-control totalSubmitfee", @style = "width:170px; display:inline", @readonly = "readonly" })
+                                        @*<input type="text" readonly style="width: 170px; display: inline" class="form-control totalSubmitfee" name="totalSubmitfee" />*@
+                                        <span style="color:red;" class="categoryDiv">*@*@Html.ValidationMessageFor(model => model.feeSummary.SubmittedFee)*@</span>
+                                     
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:55px">Remaining Fee</label>
+                                        @Html.TextBoxFor(model => model.feeSummary.RemainingFee, new { @class = "form-control totalremfee", @style = "width:170px; display:inline", @readonly = "readonly" })
+                                        @*<input type="text" readonly style="width: 170px; display: inline" class="form-control totalremfee" name="totalremfee" />*@
+                                        <span style="color:red;" class="categoryDiv">*@*@Html.ValidationMessageFor(model => model.feeSummary.RemainingFee)*@</span>
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:35px">Total Installments</label>
+                                        @Html.TextBoxFor(model => model.feeSummary.Total_Installments, new { @class = "form-control totalinstall", @style = "width:170px; display:inline" })
+                                        @*<input type="text"  style="width: 170px; display: inline" class="form-control totalinstall" name="totalinstall" />*@
+                                        <span style="color:red;" class="categoryDiv">@Html.ValidationMessageFor(model => model.feeSummary.Total_Installments)</span>
+                                    <span style="color:red;" class="categoryDiv">*@*@Html.ValidationMessageFor(model => model.feeSummary.SubmittedFee)*@</span>
+                                    @*<span style="color:red;display:none" class="categoryDiv " id="fillfortInst">
+
+                                    </span>*@
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:40px">Paid Installments</label>
+                                        @*@Html.TextBoxFor(model => model.feeSummary.Paid_Installments, new { @class = "form-control paidInst", @style = "width:170px; display:inline", @readonly = "readonly", @value = TempData["abc"] })*@
+                                        <input type="text" readonly style="width: 170px; display: inline" class="form-control paidInst" name="paidInst" />
+                                        @*<span style="color:red;" class="categoryDiv">@Html.ValidationMessageFor(model => model.feeSummary.Paid_Installments)</span>*@
+</div>
+                            </fieldset>
+    <br />
+    <br />
+                            <fieldset>
+                                <legend>Fee Record</legend>
+                                <div style="padding-left:30px">
+                                    @Html.LabelFor(model => model.yearlyFee.Bill_No, new { @style = "padding-right:110px" })
+                                    @Html.TextBoxFor(model => model.yearlyFee.Bill_No, new { @class = "form-control", @style = "width:170px; display:inline" })
+
+                                    <span style="color:red;" class="categoryDiv">*@Html.ValidationMessageFor(model => model.yearlyFee.Bill_No)</span>
+                                    <br />
+                                    <br />
+                                    @Html.LabelFor(model => model.yearlyFee.Admission_Fee, new { @style = "padding-right:55px" })
+                                    @Html.TextBoxFor(model => model.yearlyFee.Admission_Fee, new { @class = "form-control totalFeeCalClass", @style = "width:170px; display:inline",@id="admissionfee" })
+
+
+                                    <span style="color:red;" class="categoryDiv">@Html.ValidationMessageFor(model => model.yearlyFee.Admission_Fee)</span>
+                                    <br />
+                                    <br />
+                                    @Html.LabelFor(model => model.yearlyFee.Registeration_Fee, new { @style = "padding-right:35px" })
+                                    @Html.TextBoxFor(model => model.yearlyFee.Registeration_Fee, new { @class = "form-control totalFeeCalClass", @style = "width:170px; display:inline", @id = "regFee" })
+
+                                    <span style="color:red;" class="categoryDiv">@Html.ValidationMessageFor(model => model.yearlyFee.Registeration_Fee)</span>
+                                    <br />
+                                    <br />
+
+                                    @Html.LabelFor(model => model.yearlyFee.Tution_Fee, new { @style = "padding-right:85px" })
+                                    @Html.TextBoxFor(model => model.yearlyFee.Tution_Fee, new { @class = "form-control totalFeeCalClass", @style = "width:170px; display:inline", @id = "tutionfee" })
+
+                                    <span style="color:red;" class="categoryDiv">*@Html.ValidationMessageFor(model => model.yearlyFee.Tution_Fee)</span>
+                                    <br />
+                                    <br />
+
+                                    @Html.LabelFor(model => model.yearlyFee.Exam_Fee, new { @style = "padding-right:90px" })
+                                    @Html.TextBoxFor(model => model.yearlyFee.Exam_Fee, new { @class = "form-control totalFeeCalClass", @style = "width:170px; display:inline",@id="examfee" })
+
+                                    <span style="color:red;" class="categoryDiv">*@Html.ValidationMessageFor(model => model.yearlyFee.Exam_Fee)</span>
+
+                                    <br />
+                                    <br />
+
+                                    <label style="padding-right:63px;">Installment No</label>
+                                    @Html.TextBoxFor(model => model.yearlyFee.Installment, new { @class = "form-control", @style = "width:170px; display:inline" })
+
+                                    <span style="color:red;" class="categoryDiv">@Html.ValidationMessageFor(model => model.yearlyFee.Installment)</span>
+                                    <br />
+                                    <br />
+
+                                    @Html.LabelFor(model => model.yearlyFee.Fine, new { @style = "padding-right:130px" })
+                                    @Html.TextBoxFor(model => model.yearlyFee.Fine, new { @class = "form-control totalFeeCalClass", @style = "width:170px; display:inline",@id="finefee" })
+
+                                    <span style="color:red;" class="categoryDiv">@Html.ValidationMessageFor(model => model.yearlyFee.Fine)</span>
+                                    <br />
+                                    <br />
+
+                                    @Html.LabelFor(model => model.yearlyFee.Total_Fee, new { @style = "padding-right:90px" })
+                                    @Html.TextBoxFor(model => model.yearlyFee.Total_Fee, new { @class = "form-control tFEE", @style = "width:170px; display:inline", @readonly = "readonly" })
+
+                                    <span style="color:red;" class="categoryDiv">*@Html.ValidationMessageFor(model => model.yearlyFee.Total_Fee)</span>
+                                    <br />
+                                    <br />
+
+                                    @Html.LabelFor(model => model.yearlyFee.Dated, new { @style = "padding-right:115px" })
+
+                                    @*@Html.TextBoxFor(model => model.Dated, "{0:dd/MM/yyyy}", new
+            {
+                @class = "form-control datepicker",
+                @style = "width:170px; display:inline"
+             })*@
+                                    @if (TempData["DateSaved"] != null)
+                                    {
+                                        <input type="text" name="date1" class="form-control datepicker" style="width: 170px; display: inline;" data-date-format="dd-mm-yyyy" required value="@TempData["DateSaved"]" />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" name="date1" class="form-control datepicker" style="width: 170px; display: inline;" data-date-format="dd-mm-yyyy" required />
+                                    }
+                                       
+                                    <br />
+                                    <br />
+
+                                </div>
+                            </fieldset>
+                              
+
+                            <input type="submit" value="Finish" class="btn btn-primary collectfeeBtn" style="margin-left:19%" />
+                            @*@Html.ActionLink("Back", "FeeRecords", "Fee", null, new { @class = "btn btn-primary" })*@
+
+                        }
+}
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

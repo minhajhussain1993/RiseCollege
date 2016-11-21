@@ -1,0 +1,239 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FYP_6.Teacher_Subject>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teachers</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+ 
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <br /><br /><br /><br /><br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Records Deleted")
+            {
+                <br />
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg> @ViewBag.Message<a href="#" class="pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Teacher Subjects</div>
+                    <div class="panel-body">
+
+                        @using (Html.BeginForm("Teacher_Subjects", "Employees", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <b>
+                                Enter TeacherID:
+                            </b>
+                            <input type="text" name="teacherID"
+                                    class="form-control" style="width:150px; display:inline;margin-bottom:2%" id="search" autocomplete="off"/>
+    <span class="loadingImageWhileTyping" style="display: none;">
+        <img src="~/MyProjectImages/Loading Circle.gif" style="width:3.5%" />
+    </span>
+                            <span class="categoryDiv">
+                                @if (ViewBag.ListofDegreePrograms != null)
+                                {
+                                    <b>
+                                        Select Degree:
+                                    </b>
+                                    <select name="degree" class="form-control" style="width:150px; display:inline;margin-left:3%" id="degree">
+                                        <option value="Please select" selected="selected">Please select</option>
+                                        @foreach (var item in ViewBag.ListofDegreePrograms)
+                                        {
+                                            <option value="@item.ProgramID">@item.Degree_ProgramName</option>
+                                        }
+                                    </select>
+
+                                }
+                            </span>
+                            <span class="categoryDiv">
+                                <label style="padding-right:6px; display:inline;margin-left:5%">Select Batch</label>
+                                <select name="batch" class="form-control" style="width:150px; display:inline;" id="batch"></select>
+                            </span>
+                            
+                            <div class="categoryDiv">
+                                <b style="display:inline;margin-right:2%">Select Section:</b>
+
+                                <select name="section" id="section" class="form-control" style="width:150px;display:inline">
+                                    @*@foreach (var item in ViewBag.ListofSections)
+                        {
+                            <option value="@item.SectionID">@item.SectionName</option>
+                        }*@
+                                </select>
+                            </div>
+                            <br />
+                            <br />
+                            <input type="submit" value="Show Results" class="btn btn-warning" />
+                            @*<input type="button" value="+ Add NewRecords" class="btn-success"/>*@
+
+                        }
+                        <br />
+                        @if (TempData["Degree"] != null && TempData["Batch"] != null && TempData["Section"] != null || TempData["TeacherID"] != null)
+                        {
+                            <span class="categoryDiv">
+                                <b style=" text-align:justify; font-size:x-large">Degree Program: </b>
+                                <b style="margin-right:10px; font-size:large">@TempData["Degree"]</b>
+                            </span>
+    <span class="categoryDiv">
+        <b style="text-align:justify;   font-size:x-large">Batch: </b>
+
+        <b style="margin-right:10px;font-size:large">@TempData["Batch"]</b>
+    </span>
+    <span class="categoryDiv">
+        <b style="text-align:justify; font-size:x-large ">
+            Section:
+        </b>
+
+        <b style="margin-right:10px;font-size:large">@TempData["Section"]</b>
+    </span>
+                        <span class="categoryDiv">
+                            <b style="text-align:justify;   font-size:x-large">TeacherID: </b>
+                                <b style="margin-right:10px; font-size:x-large">@TempData["TeacherID"]</b>
+                            </span>
+                            <hr />
+                            @*<h5 style="text-align:justify; display:inline; "><text style="font-size:medium">Section:</text><text style="margin-right:10px">@Session["Section"]</text>,</h5>
+            <h5 style="text-align:justify;display:inline; "><text style="font-size:medium">Month:</text><text style="margin-right:10px">@Session["Monthname"]</text>,</h5>*@
+                            }
+
+                            <br />
+                            <br />
+                            <div class="fixed-table-container table-responsive">
+                                <div class="fixed-table-body">
+                                @using (Html.BeginForm("DeleteTeacherSubjectRecords", "Employees", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+
+                                        <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover" id="records">
+                                            <thead>
+                                                <tr>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">Select</div>
+                                                        <div class="fht-cell"><input type="checkbox" name="checkUncheckAll" id="checkUncheckAll" class="checkUncheckAll" /></div>
+                                                    </th>
+                                                    <th style=""><div class="th-inner sortable">TeacherID </div><div class="fht-cell"></div></th>
+                                                    <th style=""><div class="th-inner sortable">Degree Program </div><div class="fht-cell"></div></th>
+                                                    <th style=""><div class="th-inner sortable"> Section</div><div class="fht-cell"></div></th>
+
+                                                    <th style="">
+                                                        <div class="th-inner sortable">
+                                                            Batch
+
+                                                        </div><div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">
+                                                            Subject
+
+                                                        </div><div class="fht-cell"></div>
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var item in Model)
+                                                    {
+                                                        <tr class="roo_@i">
+                                                            <td>
+                                                                <input type="checkbox" name="deleteTSub" id="deleteTSub" value="@Html.DisplayFor(modelItem => item.ID)" class="roo_@i" />
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Teachers_Batches.TeacherID)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Teachers_Batches.Batch.Degree_Program.Degree_ProgramName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Teachers_Batches.Batch.Section.SectionName)
+                                                            </td>
+                                                          
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Teachers_Batches.Batch.BatchName)
+
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Subject.SubjectName)
+
+                                                            </td>
+
+                                                        </tr>
+                                                        i++;
+                                                    }
+                                                }
+                                            </tbody>
+
+                                        </table>
+                                        @Html.ActionLink("Add New", "AddTeacherSubjects", "Employees", null, new { @type = "submit", @class = "btn btn-success", @style = " style=display:inline;" })
+    <input type="hidden" id="hiddenInput" name="hiddenInput" />
+                                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return FormSubmitted();" style="display:inline;" />
+                                        @Html.ActionLink("Refresh", "Teacher_Subjects", "Employees", null, new { @type = "submit", @class = "btn btn-success", @style = " style=display:inline;" })
+                                }
+                                </div>
+                            </div>
+
+
+                            <div style="display:inline">
+                                @if (Model != null)
+                                    {
+                                    @Html.PagedListPager(Model, page => Url.Action("Teacher_Subjects",
+            new
+            {
+                page,
+                searchBy = Request.QueryString["searchBy"],
+                search = Request.QueryString["search"],
+
+            })
+            , new PagedListRenderOptions()
+                {
+                    Display = PagedListDisplayMode.IfNeeded,
+                    DisplayPageCountAndCurrentLocation = true
+                })
+
+                                    }
+
+
+
+                            </div>
+                            
+                            <div class="clearfix"></div>
+</div>
+                        </div>
+                    </div>
+        </div>
+
+
+
+    </div>
+
+</body>
+
+</html>

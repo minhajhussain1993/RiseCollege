@@ -1,0 +1,170 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model FYP_6.Overall_Fees
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fee Details</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("StudentView")
+<body>
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            
+        </div><!--/.row-->
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary feePanel">
+                    <div class="panel-heading">Student Fees Record</div>
+                    <div class="panel-body">
+                        
+                         
+                        <br />
+                        <div class="fixed-table-container table-responsive">
+                            <div class="fixed-table-body">
+                                <table border="1"
+                                       data-toggle="table" data-url="tables/data1.json"
+                                       data-show-refresh="true" data-show-toggle="true"
+                                       data-show-columns="true" data-search="true"
+                                       data-select-item-name="toolbar1" data-pagination="true"
+                                       data-sort-name="name" data-sort-order="desc"
+                                       class="table table-hover">
+                                    <thead>
+                                  
+                                            <tr>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        @Html.DisplayNameFor(model => model.RollNo)
+                                                         
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        Name
+                                                        @*<span class="order"><span class="caret" style="margin: 10px 5px;"></span></span></div><div class="fht-cell"></div>*@
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        @Html.DisplayNameFor(model =>model.Total_Degree_Fee)
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        Submitted Fee
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        Remaining Fee
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        @Html.DisplayNameFor(model =>model.Total_Installments)
+                                                    </div>
+                                                </th>
+                                                <th style="">
+                                                    <div class="th-inner sortable">
+                                                        Paid Installments
+                                                    </div>
+                                                </th>
+                                                 
+                                            </tr>
+                                   
+                                    </thead>
+                                    <tbody>
+                                         
+                                            @if (Model != null)
+                                            {
+
+                                                    <tr>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => modelItem.RollNo) 
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => modelItem.Registeration.Student_Profile.FirstName) @Html.DisplayFor(modelItem => modelItem.Registeration.Student_Profile.LastName)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => modelItem.Total_Degree_Fee)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => modelItem.SubmittedFee)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => modelItem.RemainingFee)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => modelItem.Total_Installments)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => modelItem.Paid_Installments)
+                                                        </td>
+
+                                                    </tr>  
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                                 
+                                 
+                                @*@Html.ActionLink("Refresh", "SHowFee", "Student",
+                                                           null, new
+                                                           {
+                                                               @type = "submit",
+                                                               @class = "btn btn-success buttonRefresh",
+                                                               @style = "margin-left:0%; margin-top:0%; style=display:inline; width:150px"
+                                                           })*@
+                                @*@if (ViewBag.Message == null)
+                                {
+                                    if (Model!=null)
+                                    {
+                                        @Html.PagedListPager(Model, page => Url.Action("SHowFee",
+                            new
+                            {
+                                page,
+                                selectedYear = Request.QueryString["selectedYear"]
+
+                            }), new PagedListRenderOptions()
+                                     {
+                                         Display = PagedListDisplayMode.IfNeeded,
+                                         DisplayPageCountAndCurrentLocation = true
+                                     }
+                            )
+                                    }
+
+                                }*@
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+                    </div>
+        </div>
+        
+    </div>
+
+</body>
+
+</html>

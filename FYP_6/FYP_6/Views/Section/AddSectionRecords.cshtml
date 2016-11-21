@@ -1,0 +1,82 @@
+﻿@model FYP_6.Section
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Section</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br>
+        <br>
+        <br />
+        <br>
+        <br>
+        @if (ViewBag.Message == "Successfully Record Added")
+        {
+            <br />
+            <div class="alert bg-success" role="alert">
+                <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+        else if (ViewBag.Message != "")
+        {
+            <br />
+            <div class="alert bg-danger" role="alert">
+                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Add Section</div>
+                    <div class="panel-body">
+
+                        <div class="bootstrap-table">
+                            <div class="fixed-table-body">
+                                @using (Html.BeginForm("AddSectionRecords", "Section", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+
+
+
+                                    @Html.LabelFor(model => model.SectionName, new { @style = "padding-right:30px" })
+                                    @Html.TextBoxFor(model => model.SectionName, new { @class = "form-control", @style = "width:170px; display:inline" })
+
+                                    <span style="color:red; " class="categoryDiv">*@Html.ValidationMessageFor(model => model.SectionName)</span>
+
+                                    <br /><br />
+                                    <input type="submit" value="Add Record" class="btn btn-primary" style="margin-left:12%" />
+                                    @Html.ActionLink("Back", "ManageSections", "Section", null, new { @class = "btn btn-primary" })
+
+                                }
+
+                            </div>
+
+
+
+                        </div><div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

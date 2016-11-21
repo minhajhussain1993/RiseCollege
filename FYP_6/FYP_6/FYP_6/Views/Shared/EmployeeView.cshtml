@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rise College</title>
+    @Styles.Render("~/css/EmpStyles")
+    @Scripts.Render("~/Scripts/EmpScript")
+    
+
+</head>
+<body>
+    
+    <div style="position:absolute;width:100%;height:200%;z-index:9999;
+    background-color:rgba(1,1,1,0.5);display:none;" id="screenblur">
+        <div class="col-md-4" style="margin:20%;margin-left:35%;margin-top:15%">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="margin:0%">Plz Wait While Uploading</div>
+                <div class="panel-body">
+                    <img src="~/MyProjectImages/16.gif" style="width:100%;height:2%" />
+                </div>
+            </div>
+        </div>   
+    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><span>Rise College</span>Information System</a>
+                <ul class="user-menu">
+                    <li class="dropdown pull-right">
+
+                        <a style="cursor:pointer" class="dropdown-toggle" data-toggle="dropdown">
+                        <svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> @Session["UserName"] 
+                        <span class="caret"></span></a>
+
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li>
+                                <a href="@Url.Action("ChangePassword", "Employees")" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                    Change Password
+                                </a>
+                                @*@Html.ActionLink(linkText: "Change Password", actionName: "ChangePassword", controllerName: "Employees",
+                                    routeValues: new { id = Session["EmpID"].ToString() }, htmlAttributes: null)*@
+                                
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Logout","Home")">
+                                    <svg class="glyph stroked cancel" style="display:inline">
+                                        <use xlink:href="#stroked-cancel" />
+                                    </svg>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <form>
+            <div class="abc form-group">
+                @if (Session["Picture"] != null)
+                {
+                    var base64 = Convert.ToBase64String((byte[])Session["Picture"]);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    <div style="position:relative;left: 0; top: 0;">
+                        <img src='@imgSrc' style="width:200px; height:200px; padding: 0px; position:relative;top: 0; left: 0;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;}" class="myimage" />
+                        <span class="clickgenerateEvent questionMarkId  imagecamera">
+
+                            <img src="~/MyProjectImages/nexusae0_cc.png" style="position:absolute; display:inline;background-color:rgba(1,1,1,0.5);
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;
+}" class="cameraShownOnImage"/>
+                        </span>
+                    </div>
+                }
+                else
+                {
+                    <div style="position:relative;left: 0; top: 0;">
+                        <img src="~/MyProjectImages/user icon.png" class="myimage" style="width:200px; height:200px; padding: 0px; position:relative;top: 0; left: 0;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;}" />
+                        <span class="clickgenerateEvent questionMarkId imagecamera" style="">
+
+                            <img src="~/MyProjectImages/nexusae0_cc.png" style="position:absolute; display:inline;top: 70%; left: 15%;background-color:rgba(1,1,1,0.5);
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;
+}" class="cameraShownOnImage" />
+                        </span>
+                    </div>
+
+                }
+                <input type="file" style="display:none" id="changePic" accept="image/*" />
+            </div>
+        </form>
+        
+            
+        <ul class="nav menu" id="menubar">
+            
+            <li class="active">@Html.ActionLink("Dashboard", "WelcomeEmployee", "Home")</li>
+            
+            <li>
+                <a href="@Url.Action("Index", "Employees")" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-user"></span>
+                    View Profile
+                </a>
+            </li>
+
+            <li class="parent ">
+                <a style="cursor:pointer;">
+                    <span data-toggle="collapse" href="#sub-item-2">
+                        <svg class="glyph stroked chevron-down">
+                            <use xlink:href="#stroked-chevron-down"></use>
+                        </svg>Students
+                    </span>
+                </a>
+                <ul class="children collapse" id="sub-item-2">
+                    <li>
+                        <a href="@Url.Action("NewAdmission", "Employees")" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            New Admission
+                        </a>
+                        @*@Html.ActionLink(linkText: "New Admission", actionName: "NewAdmission", controllerName: "Employees",
+                            routeValues: new { id = Session["EmpID"].ToString() }, htmlAttributes: null)*@
+                        
+                    </li>
+                    <li>
+                        <a href="@Url.Action("StudentRecords", "Employees")" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-list"></span>
+                            Student Lists
+                        </a>
+                        @*@Html.ActionLink(linkText: "Student Lists", actionName: "StudentRecords", controllerName: "Employees",
+                                 routeValues: new { id = Session["EmpID"].ToString() }, htmlAttributes: null)*@
+                        
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Student_Subjects", "Employees")" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                            Student Subjects
+                        </a>
+                        @*@Html.ActionLink(linkText: "Student Subjects", actionName: "Student_Subjects", controllerName: "Employees",
+                                 routeValues: new { id = Session["EmpID"].ToString() }, htmlAttributes: null)*@
+                        
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("FeeRecords", "Fee")" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-usd"></span>
+                            Fee Records
+                        </a>
+                        
+                    </li>
+                </ul>
+            </li>
+
+            <li class="parent ">
+                <a style="cursor:pointer;">
+                    <span data-toggle="collapse" href="#sub-item-4"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg>Results</span>
+                </a>
+                <ul class="children collapse" id="sub-item-4">
+                    <li>
+                        <a href="@Url.Action("StudentMarksRecords", "Employees")" aria-label="Left Align">
+                            <svg class="glyph stroked arrow right"><use xlink:href="#stroked-arrow-right" /></svg>
+                            Student Marks
+                        </a>
+                        @*@Html.ActionLink(linkText: "Student Marks", actionName: "StudentMarksRecords", controllerName: "Employees",
+                                     routeValues: new { id = Session["EmpID"].ToString() }, htmlAttributes: null)*@
+                        
+                    </li>
+                    <li>
+                        <a href="@Url.Action("StudentAttendanceRecords", "Employees")" aria-label="Left Align">
+                            <svg class="glyph stroked arrow right"><use xlink:href="#stroked-arrow-right" /></svg>
+                            Student Attendance
+                        </a>
+                        @*@Html.ActionLink(linkText: "Student Attendance", actionName: "StudentAttendanceRecords", controllerName: "Employees",
+                                     routeValues: new { id = Session["EmpID"].ToString() }, htmlAttributes: null)*@
+                        
+
+                    </li>
+                    <li>
+                        <a href="@Url.Action("BoardResults", "Employees")" aria-label="Left Align">
+                            <svg class="glyph stroked arrow right"><use xlink:href="#stroked-arrow-right" /></svg>
+                            Board Results
+                        </a>
+                        @*@Html.ActionLink(linkText: "Board Results", actionName: "BoardResults", controllerName: "Employees",
+                                 routeValues: new { id = Session["EmpID"].ToString() }, htmlAttributes: null)*@
+                        @*<svg class="glyph stroked chevron-right">@*<use xlink:href="#stroked-chevron-right"></use></svg>*@
+                        
+                    </li>
+                </ul>
+            </li>
+
+            <li class="parent ">
+                <a style="cursor:pointer;">
+                    <span data-toggle="collapse" href="#sub-item-3"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg>Teachers</span>
+                </a>
+                <ul class="children collapse" id="sub-item-3">
+                    <li>
+                        <a href="@Url.Action("EnrollTeacher", "Employees")" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Enroll Teacher
+                        </a>
+                        
+                    </li>
+                    <li>
+                        <a href="@Url.Action("TeacherRecords", "Employees")" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-list"></span>
+                            Teachers Lists
+                        </a>
+                        
+                    </li>
+                    
+                    <li>
+                        <a href="@Url.Action("Teacher_Batches", "Employees")" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-bookmark"></span>
+                            Teacher Batches
+                        </a>
+                        
+                    </li>
+                    <li>
+                        <a href="@Url.Action("TeacherAttendance", "Employees")" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-check"></span>
+                            Teacher Attendance
+                        </a>
+                        @*@Html.ActionLink(linkText: "Teacher Attendance", actionName: "TeacherAttendance", controllerName: "Employees",
+                                 routeValues: new { id = Session["EmpID"].ToString() }, htmlAttributes: null)*@
+                        
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="parent ">
+                <a style="cursor:pointer;">
+                    <span data-toggle="collapse" href="#sub-item-5"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg>Others</span>
+                </a>
+                <ul class="children collapse" id="sub-item-5">
+                    <li>
+
+                        
+                            <a href="@Url.Action("ManageCourses", "Courses")">
+                                @*<svg class="glyph stroked arrow right"><use xlink:href="#stroked-arrow-right" /></svg>*@
+                                Manage Courses
+                            </a>
+                        
+
+                    </li>
+                    <li>
+                        
+                            <a href="@Url.Action("ViewBatches", "Batches")">
+                                @*<svg class="glyph stroked arrow right"><use xlink:href="#stroked-arrow-right" /></svg>*@
+                                Manage Batches
+                            </a>
+                        
+                    </li>
+                    <li>
+
+                        @*<svg class="glyph stroked chevron-right">@*<use xlink:href="#stroked-chevron-right"></use></svg>*@
+                        
+                            
+                            @Html.ActionLink(linkText: "Manage Subjects", actionName: "ManageSubjects", controllerName: "Subjects")
+                        
+                    </li>
+                    <li>
+
+                        @*<svg class="glyph stroked chevron-right">@*<use xlink:href="#stroked-chevron-right"></use></svg>*@
+                        
+                            
+                            @Html.ActionLink(linkText: "Manage Sections", actionName: "ManageSections", controllerName: "Section")
+                        
+                    </li>
+                    <li>
+
+                        @*<svg class="glyph stroked chevron-right">@*<use xlink:href="#stroked-chevron-right"></use></svg>*@
+                        
+                            @Html.ActionLink(linkText: "Manage Degree Durations", actionName: "ManageDegreeDurations", controllerName: "Years")
+                        
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </div><!--/.sidebar-->
+   
+    
+</body>
+</html>

@@ -1,0 +1,147 @@
+﻿@model IEnumerable<FYP_6.Teacher_Attendance>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+@Html.Partial("EmployeeView")
+
+<body>
+    
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+        <br><br><br><br><br>
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Attendance Uploaded")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark">
+                        </use>
+                    </svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+            
+            else
+            {
+                <br />
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+
+        }
+        
+
+
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading" style="text-align:center">Upload Teacher Attendance</div>
+                                            <div class="panel-body">
+
+                                                <div class="fixed-table-container table-responsive">
+                                                    <div class="fixed-table-body">
+                                                        @using (Html.BeginForm("AddTeacher_Attendance_Records", "Employees", FormMethod.Post))
+                                                        {
+                                                            @Html.AntiForgeryToken()
+                                                            @Html.ValidationSummary(true)
+
+                                                            <br />
+                                                            <label style="padding-right:10px;padding-left:10px">Dated:</label>
+                                                            <input type="text" name="date" class="form-control datepicker"
+                                                                   style="width:170px; display:inline;" required />
+
+                                                            <br /><br />
+                                                            <table border="0" data-toggle="table"
+                                                                   data-url="tables/data1.json" data-show-refresh="true"
+                                                                   data-show-toggle="true" data-show-columns="true"
+                                                                   data-search="true" data-select-item-name="toolbar1"
+                                                                   data-pagination="true" data-sort-name="name"
+                                                                   data-sort-order="desc" class="table table-hover" id="records">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style=""><div class="th-inner sortable">Teacher ID</div><div class="fht-cell"></div></th>
+                                                                        <th style=""><div class="th-inner sortable">Name </div><div class="fht-cell"></div></th>
+                                                                        <th style=""><div class="th-inner sortable">Select Status</div><div class="fht-cell"></div></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    @if (Model != null)
+                                                                    {
+
+                                                                        {
+                                                                            var Arr = Model.ToList();
+                                                                            for (int t = 0; t < Arr.Count(); t++)
+                                                                            {
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @Html.DisplayFor(x => Arr[t].TeacherID)
+                                                                                        <input type="hidden" value="@Html.DisplayFor(model=>Arr[t].TeacherID)" name="T_IDS" />
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @Html.DisplayFor(x => Arr[t].Teacher.Name)
+                                                                                    </td>
+                                                                                    <td>
+
+
+                                                                                        @Html.DropDownList("PresentStatus", new List<SelectListItem>
+                                                                    {
+                                                                        new SelectListItem{Text="Yes",Value="Yes",Selected=true},
+                                                                        new SelectListItem{Text="No",Value="No"}
+
+                                                                    }, new
+                                                                    {
+                                                                        @id = "PresentStatus",
+                                                                        @class = "form-control",
+                                                                        @style = "width:150px; display:inline"
+                                                                    })
+                                                                                    </td>
+                                                                                    
+                                                                                </tr>
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                </tbody>
+
+                                                            </table>
+                                                            <input type="submit" value="Upload Attendance"
+                                                                   class="btn btn-success" onclick="return UploadTeacherAtt();" style="display:inline;" name="UploadButton" />
+                                                            @Html.ActionLink("Back", "TeacherAttendance", "Employees",
+                                                            null, new
+                                                            {
+                                                                @type = "submit",
+                                                                @class = "btn btn-warning",
+                                                                @style = "margin-left:9px; display:inline; width:200px"
+                                                            })
+
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+
+                                            </div>
+                                        </div>
+                                            </div>
+
+                                </div>
+                            
+                </div><!--/.col-->
+    
+            </div>
+
+</body>
+
+</html>

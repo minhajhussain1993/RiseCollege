@@ -1,0 +1,151 @@
+﻿  
+@model FYP_6.Teacher_Attendance
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Attendance</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+
+
+<body>
+
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br>
+        <br>
+
+        <br /><br /><br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Attendance Uploaded")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark">
+                        </use>
+                    </svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+
+            else
+            {
+                <br />
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+
+        }
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Individual Teacher Attendance</div>
+                    <div class="panel-body">
+                        <br />
+                        @using (Html.BeginForm("IndividualAttendanceTeacher", "Employees", FormMethod.Post))
+                        {
+                            
+                         @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                @Html.LabelFor(s => s.TeacherID)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(s => s.TeacherID, new
+                                                                    {
+                                                                        @id = "search",
+                                                                        @class = "form-control",
+                                                                        @style = "width:150px; display:inline"
+                                                                    })
+                                <span style="color:red;" class="">*</span>
+                                <span style="color:red;" class="categoryDiv">@Html.ValidationMessageFor(model => model.TeacherID)</span>
+                                <span class="loadingImageWhileTyping" style="display: none;">
+                                    <img src="~/MyProjectImages/Loading Circle.gif" style="width:12.5% " />
+                                </span>
+                                </div>
+                            </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label>Dated:</label>
+                            </div>
+                            <div class="col-md-3">
+                                @if (TempData["datingNach"] != null)
+                                {
+                                    <input type="text" name="date123" class="form-control datepicker"
+                                           style="width:150px; display:inline;" required data-date-format="dd-mm-yyyy" value="@TempData["datingNach"]"/>
+    <span style="color:red;" class="">*</span>
+                                }
+                                else
+                                {
+                                    <input type="text" name="date123" class="form-control datepicker"
+                                           style="width:150px; display:inline;" required data-date-format="dd-mm-yyyy"/>
+    <span style="color:red;" class="">*</span>
+                                }
+                            </div>
+                            </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-1">
+                                @Html.LabelFor(s => s.Present)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.DropDownList("PresentStatusindi", new List<SelectListItem>
+                                                                    {
+                                                                        new SelectListItem{Text="Yes",Value="Yes",Selected=true},
+                                                                        new SelectListItem{Text="No",Value="No"}
+
+                                                                    }, new
+                                                                    {
+                                                                        @id = "PresentStatusindi",
+                                                                        @class = "form-control",
+                                                                        @style = "width:150px; display:inline"
+                                                                    })
+                                <span style="color:red;" class="">*</span>
+                            </div>
+                        </div>
+                        <br />
+    <div class="row">
+        <div class="col-md-offset-1 col-md-2">
+            <input type="submit" value="Upload"
+                   class="btn btn-success" style="display:inline;" name="UploadButton" />
+
+
+            @Html.ActionLink("Back", "ShowOptions", "Employees",
+                                                                null, new
+                                                                {
+                                                                    @type = "submit",
+                                                                    @class = "btn btn-warning",
+                                                                    @style = "style=display:inline;"
+                                                                })
+
+        </div>
+    </div>
+
+                        }
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

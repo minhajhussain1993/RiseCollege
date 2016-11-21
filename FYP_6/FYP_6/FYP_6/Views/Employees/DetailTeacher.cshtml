@@ -1,0 +1,177 @@
+﻿@model FYP_6.Teacher
+
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+<html>
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        
+
+        <div class="row">
+
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary" style="padding-left:2px">
+                        <div class="panel-heading" style="text-align:center">Teacher Profile</div>
+                        <div class="panel-body">
+                            <div class="bootstrap-table">
+                                <div class="fixed-table-body">
+
+                                    @using (Html.BeginForm("EditTeacher", "Employees", FormMethod.Post
+                                                , new { enctype = "multipart/form-data" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                        <div style="float:right; display:inline">
+                                            @if (Model.Picture != null)
+                                            {
+
+                                                var base64 = Convert.ToBase64String((byte[])Model.Picture);
+                                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                <img src='@imgSrc' style="width:200px; height:200px; padding: 0px; display:inline;float:right;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;}" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/MyProjectImages/user icon.png" style="width:200px; height:200px; padding: 0px;float:right;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;}" />
+                                            }
+
+                                        </div>
+                                        
+
+                                        <label style="padding-right:140px">TeacherID</label>
+                                        <span class="categoryDiv">
+                                            @Html.DisplayFor(model => model.TeacherID)
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:155px; display:inline">Name:</label>
+                                    <span class="categoryDiv">
+                                        @Html.DisplayFor(model => model.Name, new
+                                           {
+                                               @class = "form-control",
+                                               @style = "width:200px; display:inline;"
+                                           })
+                                        </span>
+                                        <br />
+                                        <br />
+                                    
+                                        <label style="padding-right:125px; display:inline">Password:</label>
+    <span class="categoryDiv">
+        @Html.DisplayFor(model => model.Password, new { @class = "form-control", @style = "width:200px; display:inline;" })
+    </span>
+
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:95px; display:inline">Date_of_Birth:</label>
+                                    <span class="categoryDiv">
+                                        @Html.DisplayFor(model => model.Date_of_Birth, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:135px">Address:</label>
+                                    <span class="categoryDiv">
+                                        @Html.DisplayFor(model => model.Address, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:145px; display:inline">Gender:</label>
+                                    <span class="categoryDiv">
+                                        @Html.DisplayFor(model => model.Gender, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:95px;display:inline">Martial_Status:</label>
+                                    <span class="categoryDiv">
+                                        @Html.DisplayFor(model => model.Martial_Status, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:115px">Contact No:</label>
+                                    <span class="categoryDiv">
+                                        @Html.DisplayFor(model => model.ContactNo, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:60px; display:inline">Graduation_Details:</label>
+                                    <span class="categoryDiv">
+                                        @Html.DisplayFor(model => model.Graduation_Details, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:55px;">Year_of_Graduation:</label>
+                                    <span class="categoryDiv">
+                                        @Html.DisplayFor(model => model.Year_of_Graduation, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:20px;display:inline">Post_Graduation_Details:</label>
+                                    <span class="categoryDiv">
+                                        @Html.DisplayFor(model => model.Post_Graduation_Details, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:45px;">Post Graduation Year:</label>
+                                    <span class="categoryDiv">
+                                        @Html.DisplayFor(model => model.Year_of_Post_Graduation, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:90px;display:inline">Major_Subject:</label>
+                                    <span class="categoryDiv">
+                                        @Html.DisplayFor(model => model.Major_Subject, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        </span>
+
+                                        <br />
+                                        <br />
+
+                                        <label style="padding-right:145px;display:inline">Salary:</label>
+                                    <span class="categoryDiv">
+                                        @Html.DisplayFor(model => model.Salary, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        </span>
+
+                                        <br />
+                                        <br />
+
+
+                                        @Html.ActionLink("Back", "TeacherRecords", "Employees", new { @class = "btn btn-primary" })
+                                        }
+
+</div>
+
+
+                            </div>
+                        </div>
+                    </div><!--/.panel-->
+                </div><!--/.col-->
+            </div><!-- /.row -->
+        </div><!--/.main-->
+    </div>
+
+
+</body>
+</html>

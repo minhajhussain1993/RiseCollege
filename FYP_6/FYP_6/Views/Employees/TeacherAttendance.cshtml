@@ -1,0 +1,264 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FYP_6.Teacher_Attendance>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teachers</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+
+ 
+<body>
+    
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+        <br>
+        <br>
+
+        <br /><br /><br />
+@if (ViewBag.Message != null)
+{
+    if (ViewBag.Message == "Successfully Records Deleted")
+    {
+        <div class="alert bg-success" role="alert">
+            <svg class="glyph stroked checkmark">
+                <use xlink:href="#stroked-checkmark"></use>
+            </svg> @ViewBag.Message<a href="#" class="pull-right">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="alert bg-danger" role="alert">
+            <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+            @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+        </div>
+    }
+}
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">Teacher Attendance</div>
+                                            <div class="panel-body">
+                                                @using (Html.BeginForm("TeacherAttendance", "Employees", FormMethod.Get))
+                                                {
+                                                    @*@Html.AntiForgeryToken()
+                                                    @Html.ValidationSummary(true)*@
+
+                                                    <br />
+                                                    <br />
+                                                    <label><b>Enter TeacherID</b></label>
+                                                    <span class="categoryDiv">
+                                                        @Html.TextBox("search", "", new { @class = "form-control", @style = "margin-left:0px; display:inline; width:150px;margin-bottom:10px;", @id = "search",@autocomplete="off" })
+                                                    </span>
+    <span class="loadingImageWhileTyping" style="display: none;">
+        <img src="~/MyProjectImages/Loading Circle.gif" style="width:3.5%" />
+    </span>
+    
+        <b>Select Month</b>
+    <span class="categoryDiv">
+        @Html.DropDownList("Month", new List<SelectListItem>
+                              {
+                                  new SelectListItem{Text="None Selected",Value="None Selected",Selected=true},
+                                  new SelectListItem{Text="January",Value="January"},
+                                  new SelectListItem{Text="February",Value="February"},
+                                  new SelectListItem{Text="March",Value="March"},
+                                  new SelectListItem{Text="April",Value="April"},
+                                  new SelectListItem{Text="May",Value="May"},
+                                  new SelectListItem{Text="June",Value="June"},
+                                  new SelectListItem{Text="July",Value="July"},
+                                  new SelectListItem{Text="August",Value="August"},
+                                  new SelectListItem{Text="September",Value="September"},
+                                  new SelectListItem{Text="October",Value="October"},
+                                  new SelectListItem{Text="November",Value="November"},
+                                  new SelectListItem{Text="December",Value="December"},
+
+                              }, new { @id = "month", @class = "form-control", @style = "width:150px; display:inline" })
+    </span>
+    <b style="display:inline">Enter Year: </b>
+    <span class="alignStdprofileNat">
+        <span class="categoryDiv">
+            @Html.TextBox("year", "",
+                                      new { @class = "form-control", @style = "width:150px;display:inline;margin-bottom:2%; " })
+        </span>
+    </span>
+                                                     
+    <input type="submit" value="Show Results" class="btn btn-warning" name="tattsearchsubmit"/>
+     
+    <input type="submit" value="Generate PDF" class="btn btn-warning" name="generatepdf" />
+    <hr />
+                                                    @*<input type="button" value="+ Add NewRecords" class="btn-success"/>*@
+
+                                                }
+                              
+                                                
+                                                <br />
+                                                @if (TempData["T_ID"] != null)
+                                                {
+                                                    <div class="alert bg-primary" role="alert">
+                                                         
+                                                        <span class="closeclassOnCloseButtonClick">
+                                                            <span class="glyphicon glyphicon-check"></span>
+                                                            @TempData["T_ID"]
+                                                        </span>
+                                                    </div>
+                                                    
+                                                    
+                                                }
+
+                                                <br />
+                                                
+                                                <div class="fixed-table-container table-responsive">
+                                                    <div class="fixed-table-body">
+                                                        @using (Html.BeginForm("DeleteTeacherAttendanceRecords", "Employees", FormMethod.Post))
+                                                        {
+                                                            @Html.AntiForgeryToken()
+                                                            @Html.ValidationSummary(true)
+                                                            int i = 1;
+                                                            <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover" id="datatableTATT">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="">
+                                                                            <div class="th-inner sortable">Select</div>
+                                                                                <div class="fht-cell"><input type="checkbox" name="checkUncheckAll" id="checkUncheckAll" class="checkUncheckAll" /></div>
+                                                                        </th>
+                                                                        <th style="">
+                                                                            <div class="th-inner sortable">
+                                                                                Teacher ID
+
+                                                                            </div><div class="fht-cell"></div>
+                                                                        </th>
+                                                                        <th style="">
+                                                                                <div class="th-inner sortable">
+                                                                                    Teacher Name
+                                                                                </div><div class="fht-cell"></div>
+                                                                            </th>
+                                                                        <th style="">
+                                                                            <div class="th-inner sortable">
+                                                                                Dated
+                                                                            </div><div class="fht-cell"></div>
+                                                                        </th>
+                                                                        <th style="">
+                                                                            <div class="th-inner sortable">
+                                                                                Present
+                                                                            </div><div class="fht-cell"></div>
+                                                                        </th>
+                                                                        <th style="">
+                                                                                <div class="th-inner sortable">
+                                                                                    Action
+
+                                                                                </div><div class="fht-cell"></div>
+                                                                            </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @if (Model != null)
+                                                                        {
+                                                                            i=1;
+                                                                            foreach (var item in Model)
+                                                                            {
+                                                                                <tr class="roo_@i">
+
+                                                                                    <td>
+                                                                                        <input type="checkbox" name="deleteTatt" id="deleteTatt" value="@Html.DisplayFor(modelItem=>item.ID)" class="roo_@i" />
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @Html.DisplayFor(modelItem => item.TeacherID)
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @Html.DisplayFor(modelItem => item.Teacher.Name)
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @Html.DisplayFor(modelItem => item.Date)
+
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @Html.DisplayFor(modelItem => item.Present)
+
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @Html.ActionLink("Edit", "EditTeacher_Attendance", "Employees", new { @id = item.TeacherID, @date = item.Date.Date }, null)
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                                i++;
+                                                                            }
+
+                                                                        }
+
+
+                                                                </tbody>
+
+                                                            </table>
+                                                            @Html.ActionLink("Upload", "ShowOptions", "Employees",
+                                                                null, new
+                                                                {
+                                                                    @type = "submit",
+                                                                    @class = "btn btn-success",
+                                                                    @style = "style=display:inline;"
+                                                                })
+                                                            <input type="hidden" id="hiddenInput" name="hiddenInput" />
+                                                            <input type="submit" value="Delete" class="btn btn-danger" onclick="return FormSubmitted();" style="display:inline;" />
+
+                                                            @Html.ActionLink("Refresh", "TeacherAttendance", "Employees",
+                                                                null, new
+                                                                {
+                                                                    @type = "submit",
+                                                                    @class = "btn btn-success",
+                                                                    @style = "style=display:inline;"
+                                                                })
+
+                                                        }
+                                                    </div>
+                                                </div>
+
+                                                <div style="display:inline">
+                                                    @if (Model != null)
+                                                    {
+                                                        @Html.PagedListPager(Model, page => Url.Action("TeacherAttendance",
+            new
+            {
+                page,
+                search = Request.QueryString["search"],
+                Month = Request.QueryString["Month"],
+                year = Request.QueryString["year"],
+
+            })
+            , new PagedListRenderOptions()
+                {
+                    Display = PagedListDisplayMode.IfNeeded,
+                    DisplayPageCountAndCurrentLocation = true
+                })
+
+                                                    }
+
+
+
+                                                </div>
+
+
+
+
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+
+                                            </div>
+
+                                </div>
+
+    
+        </div>
+        
+
+</body>
+
+</html>

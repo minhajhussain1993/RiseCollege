@@ -1,0 +1,130 @@
+﻿@model FYP_6.Employee
+
+@Html.Partial("AdminView")
+@Html.Partial("JsEnableCheckerAdmin")
+<html>
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+        <br /><br /><br /><br /><br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Record Added")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg>
+                    @ViewBag.Message
+                    <a href="#" class="pull-right">
+
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            }
+            else if (ViewBag.Message == "Unable to Add Records")
+            {
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+
+        <br /><br />
+        <div class="row">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary" style="padding-left:2px">
+                        <div class="panel-heading" style="text-align:center">Enroll Employee</div>
+                        <div class="panel-body">
+                            <div class="bootstrap-table">
+                                <div class="fixed-table-body">
+
+                                    @using (Html.BeginForm("AddNewEmp", "Admin", FormMethod.Post
+                                                               , new { enctype = "multipart/form-data" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                     <br />
+                                        <label style="padding-right:95px;padding-left:30px; display:inline">Employee Name:</label>
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @style = "width:200px; display:inline;"})
+    <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.Name)</span>
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:155px;padding-left:30px; display:inline">Gender:</label>
+                                        @Html.TextBoxFor(model => model.Gender, new { @class = "form-control", @style = "width:200px; display:inline;" })
+    <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.Gender)</span>
+                                        <br />
+                                        <br />
+
+
+                                        <label style="padding-right:150px;padding-left:30px; display:inline">Address:</label>
+                                        @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @style = "width:200px; display:inline;" })
+    <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.Address)</span>
+                                        <br />
+                                        <br />
+    <label style="padding-right:105px;padding-left:30px; display:inline" for="file">Upload Image:</label>
+    <input type="file" name="file" id="file" style="width: 100%;margin-left:20.5%; margin-bottom:2%; display:inline" />
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:120px;padding-left:30px">Date of Birth:</label>
+                                        <input type="text" style="width:200px; display:inline;" class="form-control datepicker" name="date1" />
+                                        
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:170px; display:inline;padding-left:30px">CNIC:</label>
+                                        @Html.TextBoxFor(model => model.CNIC, new { @class = "form-control", @style = "width:200px; display:inline;" })
+    <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.CNIC)</span>
+                                        <br />
+                                        <br />
+
+
+                                        <label style="padding-right:135px;padding-left:30px">ContactNo</label>
+                                        @Html.TextBoxFor(model => model.ContactNo, new { @class = "form-control", @style = "width:200px; display:inline;" })
+    <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.ContactNo)</span>
+                                        <br />
+                                        <br />
+
+                                        <label style="padding-right:105px; display:inline;padding-left:30px">Martial_Status:</label>
+                                        @Html.TextBoxFor(model => model.Martial_Status, new { @class = "form-control", @style = "width:200px; display:inline;" })
+    <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.Martial_Status)</span>
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:135px;display:inline;padding-left:30px">UserName:</label>
+                                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @style = "width:200px; display:inline;" })
+    <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.UserName)</span>
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:130px;padding-left:40px">Password:</label>
+                                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @style = "width:200px; display:inline;" })
+    <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.Password)</span>
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:155px;display:inline;padding-left:40px">Salary:</label>
+                                        @Html.TextBoxFor(model => model.Salary, new { @class = "form-control", @style = "width:200px; display:inline;" })
+    <span style="color:red; "class="categoryDiv">@Html.ValidationMessageFor(model => model.Salary)</span>
+                                        <br />
+                                        <br />
+                                        
+                                        <input type="submit" value="Add" class="btn btn-primary" style="margin-left:24.5%;" />
+                                        @Html.ActionLink("Back", "ManageEmployees", "Admin", null, 
+                                        new { @type = "submit", @class = "btn btn-warning",
+                                       @style = " style=display:inline;" })
+                                    }
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div><!--/.panel-->
+                </div><!--/.col-->
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>

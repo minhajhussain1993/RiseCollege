@@ -1,0 +1,220 @@
+﻿@model FYP_6.Models.ViewModels.ViewModelStudentProReg
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+@Html.Partial("StudentView")
+<head>
+    <title>Profile</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+<body>
+    
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Student Profile</h2>
+            </div>
+
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body tabs">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1" data-toggle="tab">Student Details</a></li>
+                            <li><a href="#tab2" data-toggle="tab">Degree Program Details</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab1">
+                                <div class="bootstrap-table">
+                                    <div class="fixed-table-body">
+                                        
+                                        <br /><br />
+                                        <fieldset>
+                                            <div style="margin-left:10%;display:inline">
+                                                <label style="margin-left:0%;margin-right:10px; font-size:medium;display:inline;">Registeration</label>
+                                                <span class="categoryDiv alignStdprofileFName2">
+                                                    <label><b>No:</b></label>
+
+                                                    <input type="text"
+                                                           value="@Html.DisplayFor(model=>model.stdRegisteration.RegisterationNo)" readonly
+                                                           style=" margin-left:1%; font-size:medium;display:inline;min-width:20%" class="" />
+                                                </span>
+                                                <span class="categoryDiv alignStdprofileName">
+                                                    
+                                                        <label style="font-size:medium;display:inline;margin-left:6%;">Name:</label>
+                                                        <input type="text" value="@Html.DisplayFor(model=>model.stdProfile.FirstName) @Html.DisplayFor(model => model.stdProfile.LastName)"
+                                                               readonly style="font-size: medium;min-width:20%;display:inline" class="" />
+                                                </span>
+                                            </div>
+                                            <br /><br />
+                                            <div style="margin-left:10%;display:inline;">
+
+                                                <label style="font-size:medium;margin-left:-2px;margin-right:1%;display:inline;">Registeration</label>
+                                                <span class="categoryDiv alignStdprofileFName2">
+                                                    <label><b>Year:</b></label>
+                                                    <input type="text" value="@Html.DisplayFor(model => model.stdRegisteration.Batch.Year.FromYear) "
+                                                           readonly style="margin-right: 4%;min-width:20%; font-size:medium;display:inline;" class="" />
+                                                    </span>
+                                                    <span class="categoryDiv alignStdprofileDomicile">
+                                                        <label style="font-size:medium;display:inline;">Domicile:</label>
+                                                        <input type="text"
+                                                               value="@Html.DisplayFor(model => model.stdProfile.Domicile)"
+                                                               readonly style="font-size: medium; min-width:20%;display:inline;" class="" />
+                                                    </span>
+</div>
+                                            <br /><br />
+                                            <hr />
+                                        </fieldset>
+                                        <div style="margin-left:4%;">
+                                            <div style="display:inline;">
+                                                <span class="alignStdprofileFName">
+                                                    <label style="margin-left:5%">Father/Guardian's</label>
+                                                    <span class="categoryDiv alignStdprofileFName2">
+                                                        <label>Name</label>
+                                                    <input type="text" value="@Html.DisplayFor(model => model.stdProfile.FatherName_Guardian_Name)" readonly style="min-width:20%;margin-bottom:10px;display:inline;" class="" /></span>
+                                                </span>
+                                                <span class="categoryDiv alignStdprofileCNIC">
+                                                    <label style="margin-left:8%;display:inline">CNIC #</label>
+                                                    <input type="text" value="@Html.DisplayFor(model => model.stdProfile.CNIC)" readonly style="min-width:20%;display:inline" class="" />
+                                                    </span>
+</div>
+                                            <br /><br />
+                                            <div style="display:inline">
+                                                <label style="display:inline;margin-left:1%">Father/Guardian's </label>
+                                                <span class="categoryDiv alignStdprofileOc"><label>Occupation</label>
+                                                <input type="text" value="@Html.DisplayFor(model => model.stdProfile.Father_Guardian_Occupation)" readonly style="min-width:20%;margin-bottom:10px;display:inline" class="" /></span>
+                                                <span class="categoryDiv alignStdprofileDOB">
+                                                    <label style="margin-left:4%;display:inline">Date of Birth</label>
+                                                    @Html.TextBoxFor(model => model.stdProfile.Date_of_Birth, "{0:d}", new { @class = "", @style = "min-width:20%; display:inline;", @readonly = "readonly" })
+                                                    @*<input type="text" value="@Html.DisplayFor(model => model.stdProfile.Date_of_Birth.Value.Date,"{0:d}")" readonly style="min-width:20%;display:inline" class="" />*@
+                                                </span>
+
+</div>
+                                            <br />
+                                            <span class="alignStdprofileAddress">
+                                                <label for="textarea" style="margin-right:7%;margin-left:8%;min-width:60%;display:inline">
+                                                    Address:
+                                                </label>
+                                            </span>
+
+                                            <span class="alignStdprofileAddressTextArea">
+                                                <textarea class="" style="vertical-align:top;min-width:20%;
+margin-right:7%;margin-bottom:10px;display:inline" name="textarea" readonly cols="29" rows="4"> @Html.DisplayFor(model => model.stdProfile.Address) </textarea>
+                                        </span>
+                                            <span class="categoryDiv alignStdprofileGender">
+                                                <label style="display:inline">Gender:</label>
+                                                <input type="text" value="@Html.DisplayFor(model => model.stdProfile.Gender)"
+                                                       readonly style="min-width:20%;display:inline" class="" />
+                                                </span>
+                                                <br />
+                                                <div style="display:inline">
+                                                    <span class="categoryDiv alignStdprofileNat">
+                                                        <span class="alignStdprofileNat3">
+                                                            <label style="display:inline; margin-left:8%">Province:</label>
+                                                        </span>
+                                                        <span class="alignStdprofileNat2">
+                                                            <input type="text"
+                                                                    value="@Html.DisplayFor(model => model.stdProfile.Province)" 
+                                                                   readonly style="min-width:20%;display:inline;margin-left:5.5%" 
+                                                                   class="" />
+                                                        </span>
+                                                    </span>
+                                                    <span class="categoryDiv alignStdprofileRel">
+                                                        <label style="display:inline; margin-left:6.5%;width:20%;">Religion:</label>
+                                                        <input type="text" value="@Html.DisplayFor(model => model.stdProfile.Religion)"
+                                                               readonly style="min-width:20%;margin-left:0px;display:inline" class="" />
+                                                    </span>
+</div>
+</div>
+                                        <br /><br />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab2">
+                                <br />
+                                <br />
+                                <span class="alignStdprofileBatchNo">
+                                    <label style="margin-left:5%;margin-right:5.5%; font-size:medium;display:inline">Batch No:</label>
+                                    
+                                        <input class="" type="text"
+                                               value="@Html.DisplayFor(model=>model.stdRegisteration.BatchID)"
+                                               readonly style=" margin-right:5%; font-size:medium;min-width:20%;display:inline" />
+                                    
+                                </span>
+                                <span class="alignStdprofileRoll">
+                                    <label style="font-size:medium;display:inline">Roll No:</label>
+                                    
+                                        <input class="" type="text" value="@Html.DisplayFor(model=>model.stdRegisteration.Rollno)" readonly style="font-size: medium;min-width:20%;display:inline" />
+                                    
+                                </span>
+                                
+                                <br /><br />
+                                <span class="alignStdprofileDegree">
+                                    <label style="font-size:medium;margin-left:5%;margin-right:0.5%;display:inline">Degree Program:</label>
+                                    <input class="" type="text" value="@Html.DisplayFor(model => model.stdRegisteration.Batch.Degree_Program.Degree_ProgramName) " readonly style="margin-right: 50px; font-size:medium;min-width:20%;display:inline" />
+                                </span>
+                                <span class="alignStdprofileSec">
+                                    <label style="font-size:medium">Section:</label>
+                                    
+                                        <input type="text" value="@Html.DisplayFor(model => model.stdRegisteration.Batch.Section.SectionName)" readonly style="font-size: medium;min-width:20%;display:inline" class="" />
+                                    
+                                </span>
+                                <br /><br />
+                                <hr />
+                                <div class="fixed-table-container table-responsive">
+                                    <div class="fixed-table-body">
+                                        <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style=""><div class="th-inner sortable">No.#</div></th>
+                                                    <th style=""><div class="th-inner sortable">Subject Name</div></th>
+                                                    <th style=""><div class="th-inner sortable">Part</div><div class="fht-cell"></div></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    if (Model.AssignedSubjects != null)
+                                                    {
+                                                        var Arr = Model.AssignedSubjects.OrderBy(s => s.Batch_Subjects_Parts.Part).ToList();
+                                                        for (int i = 0, a = 1; i < Arr.Count(); i++, a++)
+                                                        {
+                                                            <tr>
+                                                                <td>@a</td>
+                                                                <td>@Arr[i].Batch_Subjects_Parts.Subject.SubjectName</td>
+                                                                <td>@Arr[i].Batch_Subjects_Parts.Part</td>
+                                                            </tr>
+                                                        }
+                                                    }
+
+                                                    @*{
+                                <tr class="no-records-found">
+                                    <td>@item.Batch_Subjects_Parts.Subject.SubjectName</td>
+                                    <td>@item.Batch_Subjects_Parts.PartID</td>
+                                </tr>
+                            }*@
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                     
+                                    </div>
+                                </div>
+                            </div>
+                </div><!--/.panel-->
+            </div><!--/.col-->
+        </div>
+        
+    </div>
+
+</body>
+
+</html>

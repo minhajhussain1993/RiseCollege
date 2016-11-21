@@ -1,0 +1,312 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<FYP_6. Student_Marks>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+<body>
+
+    
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+        <br>
+        <br>
+
+        <br /><br /><br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "S")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg> Successfully Records Deleted!<a href="#" class="pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+        
+        
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Students Marks</div>
+                    <div class="panel-body">
+
+
+
+
+                        @using (Html.BeginForm("StudentMarksRecords", "Employees", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <label>Search By Rollno</label>
+                            <span class="categoryDiv">
+                                @Html.TextBox("search", "", new { @class = "form-control", @style = "width:150px;display:inline;margin-right:2%; " })
+                            </span>
+    <b>Select Month</b>
+    <span class="categoryDiv">
+        @Html.DropDownList("Month", new List<SelectListItem>
+                              {
+                                  new SelectListItem{Text="None Selected",Value="None Selected",Selected=true},
+                                  new SelectListItem{Text="January",Value="January"},
+                                  new SelectListItem{Text="February",Value="February"},
+                                  new SelectListItem{Text="March",Value="March"},
+                                  new SelectListItem{Text="April",Value="April"},
+                                  new SelectListItem{Text="May",Value="May"},
+                                  new SelectListItem{Text="June",Value="June"},
+                                  new SelectListItem{Text="July",Value="July"},
+                                  new SelectListItem{Text="August",Value="August"},
+                                  new SelectListItem{Text="September",Value="September"},
+                                  new SelectListItem{Text="October",Value="October"},
+                                  new SelectListItem{Text="November",Value="November"},
+                                  new SelectListItem{Text="December",Value="December"},
+
+                              }, new { @id = "month", @class = "form-control", @style = "width:150px;margin-right:2%; display:inline" })
+    </span>
+    <b style="display:inline">Enter Year: </b>
+    <span class="alignStdprofileNat">
+        <span class="categoryDiv">
+            @Html.TextBox("year", "",
+                                      new { @class = "form-control", @style = "width:150px;display:inline;margin-bottom:2%; " })
+        </span>
+    </span>
+                            <br>
+                            <span class="categoryDiv">
+                                <b>Select Category:</b>
+                            </span>
+
+                            @Html.DropDownList("StudentType", new List<SelectListItem>
+                              {
+                                  new SelectListItem{Text="Current Students",Value="1",Selected=true},
+
+                                  new SelectListItem{Text="Past Students",Value="0"},
+
+                              }, new { @class = "form-control", @style = "width:150px; display:inline" })
+
+                            <input type="submit" value="Search" class="btn btn-primary" name="ifButtonPressed" />
+
+
+                        }
+                        <br />
+                        <br />
+                        <div class="fixed-table-container table-responsive">
+                            <div class="fixed-table-body">
+                                @using (Html.BeginForm("StudentMarksRecords", "Employees", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    int i = 1;
+                                    <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="">
+                                                    <div class="th-inner sortable">Select</div>
+                                                    <div class="fht-cell"><input type="checkbox" name="checkUncheckAll" id="checkUncheckAll" class="checkUncheckAll" /></div>
+                                                </th>
+                                                <th style=""><div class="th-inner sortable">RollNo</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Name</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Gender</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">DegreeName</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Batch</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Part</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Section</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">SubjectName</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Total Marks</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Obtained Marks</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Percentage</div><div class="fht-cell"></div></th>
+                                                <th style=""><div class="th-inner sortable">Uploaded On</div><div class="fht-cell"></div></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (ViewBag.SearchQuery == "True")
+                                            {
+                                                if (Model != null)
+                                                { 
+                                                i=1;
+                                                foreach (var item in Model)
+                                                {
+                                                    <tr class="roo_@i">
+                                                        <td>
+                                                            <input type="checkbox" name="deleteRoll" id="deleteRoll" value="@Html.DisplayFor(modelItem => item.ResultID)" class="roo_@i" />
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Rollno)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Student_Profile.FirstName)  @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Student_Profile.LastName)
+                                                        </td>
+                                                        <td>
+                                                             @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Student_Profile.Gender)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Batch.Degree_Program.Degree_ProgramName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Batch.BatchName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Assign_Subject.Batch_Subjects_Parts.Part)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Batch.Section.SectionName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Assign_Subject.Batch_Subjects_Parts.Subject.SubjectName)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Total_Marks)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Obtained_Marks)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Marks_Percentage)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Month)--@Html.DisplayFor(modelItem => item.Year)
+
+                                                        </td>
+                                                    </tr>
+                                                    i++;
+                                                }
+                                                }
+
+                                            }
+                                            else if (ViewBag.SearchQuery == "Roll no Doesnot Exists")
+                                            {
+                                                <tr>
+
+                                                    <div class="alert bg-danger" role="alert">
+                                                        <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                                                        @ViewBag.SearchQuery<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                                    </div>
+
+                                                </tr>
+                                            }
+                                            else if (ViewBag.SearchQuery == "Nothing")
+                                            {
+                                                <div class="alert bg-danger" role="alert">
+                                                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                                                    No Records Found<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                if (Model != null)
+                                                {
+                                                    i = 1;
+                                                    foreach (var item in Model)
+                                                    {
+                                                        <tr class="roo_@i">
+                                                            <td>
+                                                                <input type="checkbox" name="deleteRoll" id="deleteRoll" value="@Html.DisplayFor(modelItem => item.ResultID)" class="roo_@i" />
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Rollno)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Student_Profile.FirstName)  @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Student_Profile.LastName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Student_Profile.Gender)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Batch.Degree_Program.Degree_ProgramName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Batch.BatchName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Batch_Subjects_Parts.Part)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Registeration.Batch.Section.SectionName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Assign_Subject.Batch_Subjects_Parts.Subject.SubjectName)
+
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Total_Marks)
+
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Obtained_Marks)
+
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Marks_Percentage)
+
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Month)--@Html.DisplayFor(modelItem => item.Year)
+
+                                                            </td>
+                                                        </tr>
+                                                        i++;
+                                                    }
+                                                }
+
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                    <input type="hidden" id="hiddenInput" name="hiddenInput" />
+                                    <input type="submit" value="Delete" class="btn btn-danger" onclick="return FormSubmitted();" style="display:inline;" />
+                                    @Html.ActionLink("Refresh", "StudentMarksRecords", "Employees", null, new { @class = "btn btn-success", @style = " style=display:inline;" })
+
+                                }
+                            </div>
+                        </div>
+                        @if (Model != null)
+                        {
+                            @Html.PagedListPager(Model, page => Url.Action("StudentMarksRecords",
+            new
+            {
+                page,
+                searchBy = Request.QueryString["searchBy"],
+                search = Request.QueryString["search"],
+
+            })
+            , new PagedListRenderOptions()
+                {
+                    Display = PagedListDisplayMode.IfNeeded,
+                    DisplayPageCountAndCurrentLocation = true
+                })
+
+                        }
+
+
+
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+                    </div>
+
+        </div>
+    
+    </div>
+
+
+</body>
+</html>

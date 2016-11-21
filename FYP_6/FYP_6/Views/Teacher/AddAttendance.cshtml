@@ -1,0 +1,234 @@
+﻿@model FYP_6.Students_Attendance
+
+@{
+    Layout = null;
+}
+@Html.Partial("TeacherView")
+<!DOCTYPE html>
+<html>
+<body>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li class="active">Icons</li>
+            </ol>
+        </div><!--/.row-->
+        <br>
+        <br>
+        <br />
+        @if (ViewBag.Message == "Successfully Record Added")
+        {
+            <br />
+            <div class="alert bg-success" role="alert">
+                <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+        else if (ViewBag.Message != "")
+        {
+            <br />
+            <div class="alert bg-danger" role="alert">
+                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Result Details</h1>
+            </div>
+        </div><!--/.row-->
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Add Subject Attendance</div>
+                    <div class="panel-body">
+
+                        <div class="bootstrap-table">
+                            <div class="fixed-table-header"><table></table></div><div class="fixed-table-body">
+                                @using (Html.BeginForm("AddAttendance", "Teacher", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+
+                                    if (ViewBag.StudentRollNos != null)
+                                    {
+                                        <label style="padding-right:110px">RollNo</label>
+                                        <select name="rollno" id="rollno" class="form-control" style="width:170px; display:inline;">
+                                            <option value="Please select">Please select</option>
+                                            @foreach (var item in ViewBag.StudentRollNos)
+                                            {
+                                                <option value="@item"> @item</option>
+                                            }
+                                        </select>
+                                    }
+
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:40px">Degree Program:</label>
+                                    <input type="text" name="degree" id="degree" readonly="readonly" class="form-control" style="display:inline;width:170px" />
+                                    @*if (ViewBag.ListofDegreePrograms != null)
+                                        {
+                                            <label style="padding-right:40px">Degree Program:</label>
+                                            <select name="degreeId">
+                                                @foreach (var item in ViewBag.ListofDegreePrograms)
+                                                {
+                                                    <option value="@item.Batch.DegreeProgram_ID">@item.Batch.Degree_Program.Degree_ProgramName</option>
+                                                }
+                                            </select>
+                                        }*@
+
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:115px">Batch:</label>
+                                    <input type="text" name="batch" id="batch" readonly="readonly" class="form-control" style="display:inline;width:170px " />
+                                    @*<label style="padding-right:105px;padding-left:0px;">Select Batch</label>
+                                        <select name="batch" class="form-control" style="width:200px; display:inline" id="batch"></select>
+                                        <br />
+                                        <br />*@
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:100px">Section:</label>
+                                    <input type="text" name="section" id="section" readonly="readonly" class="form-control" style="display:inline;width:170px " />
+                                    <br />
+                                    <br />
+                                    if (ViewBag.RelatedSubjects != null)
+                                    {
+                                        <label style="padding-right:70px">Subject Name</label>
+                                        <select name="subjectID" class="form-control" style="width:170px; display:inline;">
+                                            @foreach (var item in ViewBag.RelatedSubjects)
+                                            {
+                                                <option value="@item.SubjectID"> @item.SubjectName</option>
+                                            }
+                                        </select>
+                                    }
+
+                                    <br />
+                                    <br />
+                                    <b style="padding-right:75px">Select Month</b>
+                                    @Html.DropDownList("month2", new List<SelectListItem>
+                              {
+                                  new SelectListItem{Text="January",Value="January",Selected=true},
+                                  new SelectListItem{Text="February",Value="February"},
+                                  new SelectListItem{Text="March",Value="March"},
+                                  new SelectListItem{Text="April",Value="April"},
+                                  new SelectListItem{Text="May",Value="May"},
+                                  new SelectListItem{Text="June",Value="June"},
+                                  new SelectListItem{Text="July",Value="July"},
+                                  new SelectListItem{Text="August",Value="August"},
+                                  new SelectListItem{Text="September",Value="September"},
+                                  new SelectListItem{Text="October",Value="October"},
+                                  new SelectListItem{Text="November",Value="November"},
+                                  new SelectListItem{Text="December",Value="December"},
+
+                              }, new { @id = "month2", @class = "form-control", @style = "width:170px; display:inline" })
+                                    <br />
+                                    <br />
+
+                                    <label><b style="padding-right:95px">Enter Year</b></label> @Html.TextBox("year", "", new { @class = "form-control", @style = "margin-left:0px; display:inline; width:170px", @pattern = "^[0-9]*$" })
+                                    <br />
+                                    <br />
+                                    @Html.LabelFor(model => model.Total_lectures, new { @style = "padding-right:73px" })
+                                    @Html.TextBoxFor(model => model.Total_lectures, new { @class = "form-control", @style = "width:170px; display:inline" })
+
+                                    <div style="color:red; display:inline">*@Html.ValidationMessageFor(model => model.Total_lectures)</div>
+                                    <br />
+                                    <br />
+                                    @Html.LabelFor(model => model.Attended_Lectures, new { @style = "padding-right:43px" })
+                                    @Html.TextBoxFor(model => model.Attended_Lectures, new { @class = "form-control", @style = "width:170px; display:inline" })
+
+
+                                    <div style="color:red; display:inline">*@Html.ValidationMessageFor(model => model.Attended_Lectures)</div>
+                                    <br />
+                                    <br />
+                                    @Html.LabelFor(model => model.Attendance_Percentage, new { @style = "padding-right:10px" })
+                                    @Html.TextBoxFor(model => model.Attendance_Percentage, new { @class = "form-control", @style = "width:170px; display:inline" })
+
+                                    <div style="color:red; display:inline">*@Html.ValidationMessageFor(model => model.Attendance_Percentage)</div>
+                                    <br />
+                                    <br />
+
+                                    <input type="submit" value="Add Record" class="btn btn-primary" style="margin-left:155px" />
+                                    @Html.ActionLink("Back", "ManageAttendance", "Teacher", null, new { @class = "btn btn-primary" })
+
+                                }
+
+                            </div>
+
+
+
+                        </div><div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(function () {
+                $('#hover, #striped, #condensed').click(function () {
+                    var classes = 'table';
+
+                    if ($('#hover').prop('checked')) {
+                        classes += ' table-hover';
+                    }
+                    if ($('#condensed').prop('checked')) {
+                        classes += ' table-condensed';
+                    }
+                    $('#table-style').bootstrapTable('destroy')
+                        .bootstrapTable({
+                            classes: classes,
+                            striped: $('#striped').prop('checked')
+                        });
+                });
+            });
+
+            function rowStyle(row, index) {
+                var classes = ['active', 'success', 'info', 'warning', 'danger'];
+
+                if (index % 2 === 0 && index / 2 < classes.length) {
+                    return {
+                        classes: classes[index / 2]
+                    };
+                }
+                return {};
+            }
+        </script>
+    </div>
+
+
+    <script src="~/Scripts/RollNoBatchGet.js"></script>
+    <script src="~/MainStudentInfoTheme/js/jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/MainStudentInfoTheme/js/bootstrap.min.js"></script>
+
+    <script src="~/MainStudentInfoTheme/js/chart.min.js"></script>
+
+    <script src="~/MainStudentInfoTheme/js/chart-data.js"></script>
+
+    <script src="~/MainStudentInfoTheme/js/easypiechart-data.js"></script>
+    <script src="~/MainStudentInfoTheme/js/easypiechart.js"></script>
+    <script src="js/easypiechart.js"></script>
+    <script src="js/easypiechart-data.js"></script>
+    <script src="~/MainStudentInfoTheme/js/bootstrap-datepicker.js"></script>
+
+    
+    <script>
+        !function ($) {
+            $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
+                $(this).find('em:first').toggleClass("glyphicon-minus");
+            });
+            $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+        }(window.jQuery);
+
+        $(window).on('resize', function () {
+            if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+        })
+        $(window).on('resize', function () {
+            if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+        })
+    </script>
+</body>
+</html>

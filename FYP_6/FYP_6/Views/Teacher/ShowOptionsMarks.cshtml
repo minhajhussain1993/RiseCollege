@@ -1,0 +1,71 @@
+﻿ @{
+     Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Marks Upload</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("TeacherView") 
+
+
+<body>
+
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br>
+        <br>
+
+        <br /><br /><br />
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Select Upload Option:</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-1">
+                                <a href="@Url.Action("AddAllMarks", "Teacher")">
+                                    <img src="~/MyProjectImages/teamIconInUpload.png" style="position:relative; " width="35%" />
+                                    <span style="position:absolute;left:35%;top:50%">Group Upload</span>
+                                </a>
+
+                            </div>
+
+                            <div class="col-md-5">
+                                <a href="@Url.Action("AddMarksIndi", "Teacher")">
+                                    <img src="~/MyProjectImages/usericonIndi.png" width="35%" />
+                                    <span style="position:absolute;left:30%;top:50%">Individual Upload</span>
+                                </a>
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.ActionLink("Back", "ManageMarks", "Teacher",
+                                                                null, new
+                                                                {
+                                                                    @type = "submit",
+                                                                    @class = "btn btn-primary",
+                                                                    @style = "style=display:inline;"
+                                                                })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+﻿@model FYP_6.Students_Attendance
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+@Html.Partial("TeacherView")
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+        <br><br><br><br><br>
+        
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" style="text-align:center">Attendance Details</div>
+                    <div class="panel-body">
+                        <div class="fixed-table-container table-responsive">
+                            <div class="fixed-table-body">
+                                <table border="1" data-toggle="table" data-show-toggle="true" data-show-columns="true" data-sort-order="desc" class="table table-hover">
+                                    <thead>
+
+                                        <tr>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    RollNo
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Degree Program:
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Part:
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Section:
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Subject Name
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Month:
+                                                </div><div class="fht-cell"></div>
+                                            </th>>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Total Lectures
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Attended Lectures
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                            <th style="">
+                                                <div class="th-inner sortable">
+                                                    Attendance Percentage
+                                                </div><div class="fht-cell"></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>   @Html.DisplayFor(model => model.Assign_Subject.Rollno)</td>
+
+                                            <td>
+                                                @Html.DisplayFor(model => model.Assign_Subject.Registeration.Batch.Degree_Program.Degree_ProgramName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Assign_Subject.Batch_Subjects_Parts.Part)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Assign_Subject.Registeration.Batch.Section.SectionName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Assign_Subject.Batch_Subjects_Parts.Subject.SubjectName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Month)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Total_lectures)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Attended_Lectures)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Attendance_Percentage)
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                @Html.ActionLink("Back", "ManageAttendance", "Teacher", new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+        
+    </div>
+
+</body>
+
+</html>

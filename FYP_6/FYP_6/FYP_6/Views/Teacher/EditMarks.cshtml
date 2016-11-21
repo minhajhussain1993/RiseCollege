@@ -1,0 +1,116 @@
+﻿@model FYP_6.Student_Marks
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+@Html.Partial("TeacherView")
+<body>
+    
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+        <br>
+        <br />
+        <br />
+        <br>
+        <br />
+        @if (ViewBag.Message == "Successfully Updated Record")
+        {
+            <div class="alert bg-success" role="alert">
+                <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+        else if (ViewBag.Message != null)
+        {
+            <div class="alert bg-danger" role="alert">
+                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"style="text-align:center">Edit Marks</div>
+                    <div class="panel-body">
+                        <div class="bootstrap-table">
+                            <div class="fixed-table-body">
+                                <div class="fixed-table-loading" style="top: 37px; display: none;">Loading, please wait…</div>
+                                @using (Html.BeginForm("EditMarks", "Teacher", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    <label style="padding-right:110px">RollNo</label>
+                                    @Html.DisplayFor(model => model.Assign_Subject.Rollno)
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:40px">Degree Program:</label>
+                                    @Html.DisplayFor(model => model.Assign_Subject.Registeration.Batch.Degree_Program.Degree_ProgramName)
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:130px">Part:</label>
+                                    @Html.DisplayFor(model => model.Assign_Subject.Batch_Subjects_Parts.Part)
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:105px">Section:</label>
+                                    @Html.DisplayFor(model => model.Assign_Subject.Registeration.Batch.Section.SectionName)
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:60px">Subject Name</label>
+                                    @Html.DisplayFor(model => model.Assign_Subject.Batch_Subjects_Parts.Subject.SubjectName)
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:105px">Month:</label>
+                                    @Html.DisplayFor(model => model.Month)
+                                    <br />
+                                    <br />
+                                    <label style="padding-right:105px">Year:</label>
+                                    @Html.DisplayFor(model => model.Year)
+                                    <br />
+                                    <br />
+
+
+                                    @Html.LabelFor(model => model.Total_Marks, new { @style = "padding-right:73px" })
+                                    @Html.TextBoxFor(model => model.Total_Marks, new { @class = "form-control", @style = "width:170px; display:inline"
+                               ,@id="TotalMarks"})
+
+
+    <span style="color:red;" class="categoryDiv">@Html.ValidationMessageFor(model => model.Total_Marks)</span>
+                                    <br />
+                                    <br />
+                                    @Html.LabelFor(model => model.Obtained_Marks, new { @style = "padding-right:43px" })
+                                    @Html.TextBoxFor(model => model.Obtained_Marks, new { @class = "form-control", @style = "width:170px; display:inline"
+                               , @id = "ObtMarks"})
+
+
+    <span style="color:red;" class="categoryDiv">@Html.ValidationMessageFor(model => model.Obtained_Marks)</span>
+                                    <br />
+                                    <br />
+                                    @Html.LabelFor(model => model.Marks_Percentage, new { @style = "padding-right:30px" })
+                                    @Html.TextBoxFor(model => model.Marks_Percentage, new { @class = "form-control", @style = "width:170px; display:inline"
+                                   , @id = "PerMarks",@readonly="readonly"})
+
+                                    <span style="color:red;"class="categoryDiv">@Html.ValidationMessageFor(model => model.Marks_Percentage)</span>
+                                    <br />
+                                    <br />
+                                    <input type="hidden" value="@Html.DisplayFor(model => model.Assign_Subject.Rollno)" name="rollno" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => model.Assign_Subject.Batch_Subjects_Parts.SubjectID)" name="SubjectID" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => model.Month)" name="Month" />
+                                    <input type="submit" value="Save" class="btn btn-primary" style="margin-left:15%" />
+                                    @Html.ActionLink("Back", "ManageMarks", "Teacher", new { @class = "btn btn-primary" })
+                                }
+
+                            </div>
+                        </div><div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,245 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FYP_6.Registeration>
+@using FYP_6.Models;
+
+<!DOCTYPE html>
+@Html.Partial("AdminView")
+@Html.Partial("JsEnableCheckerAdmin")
+<body>
+
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br>
+        <br>
+
+        <br /><br /><br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Records Deleted!")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg> @ViewBag.Message<a href="#" class="pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Student Records</div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("StudentRecords", "Admin", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+
+                            <label>Search By Rollno</label>
+                            <span class="categoryDiv">
+                                @Html.TextBox("search", "", new { @class = "form-control", @style = "width:200px;display:inline; " })
+                            </span>
+                            <span class="categoryDiv">
+                                <b style="display:inline">Select Category:</b>
+                            </span>
+                            <span class="categoryDivDropdown" style="display:inline">
+                                @Html.DropDownList("StudentType", new List<SelectListItem>
+                              {
+                                  new SelectListItem{Text="Current Students",Value="1",Selected=true},
+
+                                  new SelectListItem{Text="Past Students",Value="0"},
+
+                              }, new { @class = "form-control", @style = "width:150px; display:inline" })
+                            </span>
+                            <input type="submit" value="Search" class="btn btn-primary" name="ifButtonPressed" />
+
+                        }
+                        <br />
+                        <br />
+                        <div class="fixed-table-container table-responsive">
+                            <div class="fixed-table-body">
+
+                                <table border="1" data-toggle="table"
+                                       data-url="tables/data1.json" data-show-refresh="true"
+                                       data-show-toggle="true" data-show-columns="true"
+                                       data-search="true" data-select-item-name="toolbar1"
+                                       data-pagination="true" data-sort-name="name"
+                                       data-sort-order="desc" class="table table-hover ">
+
+                                    <thead>
+                                        <tr>
+
+                                            <th style=""><div class="th-inner sortable">RollNo</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">First Name</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Last Name</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Gender</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">DegreeName</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Part</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Section</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Status</div><div class="fht-cell"></div></th>
+                                            <th style=""><div class="th-inner sortable">Action</div><div class="fht-cell"></div></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @if (ViewBag.SearchQuery == "True")
+                                        {
+
+                                            foreach (var item in Model)
+                                            {
+                                                <tr class="no-records-found">
+
+                                                    <td>
+                                                        @Html.DisplayFor(modeItem => item.Rollno)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Student_Profile.FirstName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Student_Profile.LastName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Student_Profile.Gender)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch.Degree_Program.Degree_ProgramName)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Part)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch.Section.SectionName)
+                                                    </td>
+                                                    @if (Html.DisplayFor(modelItem => item.Status.Value).ToString() == "1")
+                                                    {
+                                                        <td>Active</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>UnActive</td>
+                                                    }
+
+                                                    <td>
+                                                        @Html.ActionLink("Details", "DetailStudent", "Admin", new { id = item.Rollno }, null)
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        }
+                                        else if (ViewBag.SearchQuery == "Roll no Doesnot Exists")
+                                        {
+                                            <tr>
+
+                                                <div class="alert bg-danger" role="alert">
+                                                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                                                    @ViewBag.SearchQuery<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                                </div>
+
+                                            </tr>
+                                        }
+                                        else if (ViewBag.SearchQuery == "Nothing")
+                                        {
+                                            <div class="alert bg-danger" role="alert">
+                                                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                                                No Records Found<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                <tr class="no-records-found">
+
+                                                    <td>
+                                                        @Html.DisplayFor(modeItem => item.Rollno)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Student_Profile.FirstName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Student_Profile.LastName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Student_Profile.Gender)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch.Degree_Program.Degree_ProgramName)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Part)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Batch.Section.SectionName)
+                                                    </td>
+                                                    @if (Html.DisplayFor(modelItem => item.Status.Value).ToString() == "1")
+                                                    {
+                                                        <td>Active</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>UnActive</td>
+                                                    }
+                                                    <td>
+
+                                                        @Html.ActionLink("Details", "DetailStudent", "Admin", new { id = item.Rollno }, null)
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                                <span class="delRef">
+                                    @Html.ActionLink("Refresh", "StudentRecords", "Admin", null, new { @class = "btn btn-success", @style = " style=display:inline;" })
+                                </span>
+
+
+
+                                @if (Model != null)
+                                {
+                                    @Html.PagedListPager(Model, page => Url.Action("StudentRecords",
+            new
+            {
+                page,
+                searchBy = Request.QueryString["searchBy"],
+                search = Request.QueryString["search"],
+
+            })
+            , new PagedListRenderOptions()
+                {
+                    Display = PagedListDisplayMode.IfNeeded,
+                    DisplayPageCountAndCurrentLocation = true
+                })
+
+                                }
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+
+</body>
+</html>

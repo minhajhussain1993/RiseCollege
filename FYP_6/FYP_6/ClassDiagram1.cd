@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FYP_6.Models.Models_Logic.BatchModel" Collapsed="true">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABgQACAQAAAABABAAACAAAABAACIAAAAAAAAACCACBA=</HashCode>
+      <FileName>Models\Models_Logic\BatchModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_6.Models.Models_Logic.CoursesModel" Collapsed="true">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAEAAAAAAAAAYAAAhAAAAAAEgAAAAQAAAAAACAA=</HashCode>
+      <FileName>Models\Models_Logic\CoursesModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_6.Models.Models_Logic.EmployeesModel" Collapsed="true">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AE4LhBiQRIshQoABwoYAC0kog8FRSAgACahAAKBQFkc=</HashCode>
+      <FileName>Models\Models_Logic\EmployeesModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_6.Models.Models_Logic.SectionModel" Collapsed="true">
+    <Position X="0.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAgAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Models_Logic\SectionModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_6.Models.Models_Logic.StudentModel" Collapsed="true">
+    <Position X="2.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwABECAAAAAAAAAIAAAAAAACAAAAAAAAAAAAIAACEA=</HashCode>
+      <FileName>Models\Models_Logic\StudentModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_6.Models.Models_Logic.SubjectsModel" Collapsed="true">
+    <Position X="4.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAkQAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Models_Logic\SubjectsModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_6.Models.Models_Logic.TeacherModel" Collapsed="true">
+    <Position X="0.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABwQAAAcRACBAAAAAAUAAgAAE0ABQAAABJAGgIAABpA=</HashCode>
+      <FileName>Models\Models_Logic\TeacherModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FYP_6.Models.Models_Logic.YearsModel" Collapsed="true">
+    <Position X="2.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAACAAAABAAABAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Models\Models_Logic\YearsModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,120 @@
+﻿@model FYP_6.Batch
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Batches</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br>
+        <br>
+        <br />
+        <br>
+        <br>
+        @if (ViewBag.Message == "Successfully Record Added")
+        {
+            <br />
+            <div class="alert bg-success" role="alert">
+                <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+        else if (ViewBag.Message != "")
+        {
+            <br />
+            <div class="alert bg-danger" role="alert">
+                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Add Batch Records</div>
+                    <div class="panel-body">
+                        <div class="bootstrap-table">
+                            <div class="fixed-table-header"><table></table></div><div class="fixed-table-body">
+
+
+                                @using (Html.BeginForm("AddBatchRecords", "Batches", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+
+                                    if (ViewBag.Degrees != null)
+                                    {
+                                        <label style="">Select Degree:</label>
+                                        <select name="degree" id="deg" class="form-control" style="width:170px;margin-left:70px; display:inline;">
+                                            @foreach (var item in ViewBag.Degrees)
+                                            {
+                                                <option value="@item.ProgramID"> @item.Degree_ProgramName</option>
+                                            }
+                                        </select>
+
+                                    }
+                                    <br />
+                                    <br />
+                                    @Html.LabelFor(model => model.BatchName, new { @style = "" })
+                                    @Html.TextBoxFor(model => model.BatchName, new { @class = "form-control", @style = "width:170px;margin-left:100px; display:inline" })
+
+                                    <div style="color:red; display:inline">*@Html.ValidationMessageFor(model => model.BatchName)</div>
+                                    <br />
+                                    <br />
+                                    if (ViewBag.Years != null)
+                                    {
+                                        <label style="">Select Year:</label>
+                                        <select name="year" id="year" class="form-control" style="width:170px;margin-left:90px; display:inline; ">
+                                            @foreach (var item in ViewBag.Years)
+                                            {
+                                                <option value="@item.YearID"> @item.FromYear - @item.ToYear</option>
+                                            }
+                                        </select>
+
+                                    }
+                                    <br />
+                                    <br />
+                                    if (ViewBag.Sections != null)
+                                    {
+                                        <label style="">Select Section:</label>
+                                        <select name="section" id="section" class="form-control" style="width:170px;margin-left:70px; display:inline;">
+                                            @foreach (var item in ViewBag.Sections)
+                                            {
+                                                <option value="@item.SectionID"> @item.SectionName</option>
+                                            }
+                                        </select>
+
+                                    }
+                                    <br />
+                                    <br />
+
+                                    <input type="submit" value="Add Batch" class="btn btn-primary" style="margin-left:17%" />
+                                    @Html.ActionLink("Back", "ViewBatches", "Batches", new { @class = "btn btn-warning", @style = "margin-left:1%" })
+                                }
+
+
+                            </div>
+
+
+
+                        </div><div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,925 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{12839AE3-28C3-419F-9BC6-EB7995D3A0B7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FYP_6</RootNamespace>
+    <AssemblyName>FYP_6</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=__MvcPagesVersion__, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.1.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Assign_Subject.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Batch.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BatchVal.cs" />
+    <Compile Include="Batch_Subjects_Parts.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BoardResult.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BatchesController.cs" />
+    <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\FeeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SectionController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\SubjectsController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\YearsController.cs" />
+    <Compile Include="DegreeProgramVal.cs" />
+    <Compile Include="Degree_Program.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Degree_Subject.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="District.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Duration.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeVal.cs" />
+    <Compile Include="Fee.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FeeVal.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GradPostDegree.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Level.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Models_Logic\BatchModel.cs" />
+    <Compile Include="Models\Models_Logic\CoursesModel.cs" />
+    <Compile Include="Models\Models_Logic\EmployeesModel.cs" />
+    <Compile Include="Models\Models_Logic\SectionModel.cs" />
+    <Compile Include="Models\Models_Logic\StudentModel.cs" />
+    <Compile Include="Models\Models_Logic\SubjectsModel.cs" />
+    <Compile Include="Models\Models_Logic\TeacherModel.cs" />
+    <Compile Include="Models\Report Models\RptFeeSummaryClass.cs" />
+    <Compile Include="Models\ViewModels\ViewModel_FeeManagement.cs" />
+    <Compile Include="Models\Models_Logic\YearsModel.cs" />
+    <Compile Include="Models\Report Models\AttendanceBYTeacherReportClass.cs" />
+    <Compile Include="Models\Report Models\FeeReportCLass.cs" />
+    <Compile Include="Models\Report Models\FeeReportModel.cs" />
+    <Compile Include="Models\Report Models\MarksBYTeacherReportClass.cs" />
+    <Compile Include="Models\Report Models\ReportClassForStudentsListByEmployee.cs" />
+    <Compile Include="OverAllFeeVal.cs" />
+    <Compile Include="Overall_Fees.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Part.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Province.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Registeration.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Religion.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\AttendanceRPTEmp.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttendanceRPTEmp.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\FeeReportOfStudent.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeeReportOfStudent.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\FeeSummaryReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeeSummaryReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\MarksRPTEmp.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarksRPTEmp.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\StudentsReportByEmployeeModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StudentsReportByEmployeeModel.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Models\Report Models\TeacherAttendanceReportClass.cs" />
+    <Compile Include="Models\Report Models\ViewStudentsBYTeacher.cs" />
+    <Compile Include="Models\SherlockHolmesEncryptDecrypt.cs" />
+    <Compile Include="Models\ViewModels\ViewModelAttendance.cs" />
+    <Compile Include="Models\ViewModels\ViewModelMarks.cs" />
+    <Compile Include="Models\ViewModels\ViewModelStudentProReg.cs" />
+    <Compile Include="Models\ViewModels\ViewModel_Registeration.cs" />
+    <Compile Include="Models\ViewModels\ViewModel_TeacherBatchSubjects.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterationVal.cs" />
+    <Compile Include="Reports\MarksRPT.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarksRPT.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\StudentListForTeacher.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StudentListForTeacher.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Student_Attendance_Reportrpt1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Student_Attendance_Reportrpt1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\TeacherATTrpt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TeacherATTrpt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptOverallFee.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RptStudentAttendence.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RPTStudentFee.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RptStudentList.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RptStudentMark.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RptteacherAttendence.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RptTotalstudentForEmploy.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Section.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SectionVal.cs" />
+    <Compile Include="SessionExpireChecker\EncryptedActionParameterAttribute.cs" />
+    <Compile Include="SessionExpireChecker\MyExtensions.cs" />
+    <Compile Include="SessionExpireChecker\SessionExpire.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="StudentAttendanceVal.cs" />
+    <Compile Include="StudentMarksVal.cs" />
+    <Compile Include="Students_Attendance.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Student_Marks.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Student_Profile.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Student_ProfileVal.cs" />
+    <Compile Include="Subject.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectValidation.cs" />
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Teacher.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Teachers_Batches.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TeacherVal.cs" />
+    <Compile Include="Teacher_Attendance.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Teacher_Attendance_Val.cs" />
+    <Compile Include="Teacher_Subject.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Time_Table.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Year.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="YearVal.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\css\animate.css" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\css\bootstrap.min.css" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\css\isotope.css" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\css\styles.css" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\css\font-awesome.css" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\css\font-awesome.min.css" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\fonts\fontawesome-webfont.svg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\1.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\2.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\3.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\4.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\5.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\about-img.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\aivi.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\arrows.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\asgdf.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\asjdh.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\banner-bg.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\banner-bg2.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\banner-bg3.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\banner..-bg3.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\gmacs.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\home.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\links-arrow.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\logo..png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\logo.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\message.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\photo-1.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\photo-2.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\photo-3....jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\photo-3.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\photo-4.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\photo.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\selected1.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\1.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\10.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\11.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\12.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\13.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\2.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\22416_10153188164593798_3612635335324563961_n.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\3.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\4.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\5.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\6..jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\6.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\7.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\8..jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\8.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\9.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\Chemistry Labs.jpg" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\logo2.ico" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\images\work\logo2.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\index.html" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\bootstrap.min.js" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\custom.js" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\fancybox\blank.gif" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\fancybox\fancybox_loading.gif" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\fancybox\fancybox_loading_402x.gif" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\fancybox\fancybox_overlay.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\fancybox\fancybox_sprite.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\fancybox\fancybox_sprite_402x.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\fancybox\jquery.fancybox.css" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\fancybox\jquery.fancybox.pack.js" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\jquery-1.8.2.min.js" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\jquery.fittext.js" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\jquery.isotope.js" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\jquery.isotope.min.js" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\jquery.nav.js" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\modernizr-latest.js" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\owl-carousel\AjaxLoader.gif" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\owl-carousel\grabbing.png" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\owl-carousel\owl.carousel.css" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\owl-carousel\owl.carousel.js" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\owl-carousel\owl.carousel.min.js" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\owl-carousel\owl.theme.css" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\owl-carousel\owl.transitions.css" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\waypoints.js" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\README.txt" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.dataTables.min.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="css\bootstrap-table.css" />
+    <Content Include="css\bootstrap-theme.css" />
+    <Content Include="css\bootstrap-theme.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\datepicker.css" />
+    <Content Include="css\datepicker3.css" />
+    <Content Include="css\jquery-ui.css" />
+    <Content Include="css\PictureResponsiveStyles.css" />
+    <Content Include="css\styles.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="images\demo\120x120.gif" />
+    <Content Include="images\demo\220x95.gif" />
+    <Content Include="images\demo\80x80.gif" />
+    <Content Include="images\demo\avatar.png" />
+    <Content Include="images\demo\gallery\1.png" />
+    <Content Include="images\demo\gallery\index.html" />
+    <Content Include="images\demo\index.html" />
+    <Content Include="images\demo\portfolio\1.png" />
+    <Content Include="images\demo\portfolio\index.html" />
+    <Content Include="images\demo\slider\1.png" />
+    <Content Include="images\demo\slider\2.png" />
+    <Content Include="images\demo\slider\3.png" />
+    <Content Include="images\demo\slider\4.png" />
+    <Content Include="images\demo\slider\5.png" />
+    <Content Include="images\demo\slider\index.html" />
+    <Content Include="images\demo\video.gif" />
+    <Content Include="images\demo\worldmap.png" />
+    <Content Include="images\others\default.svg" />
+    <Content Include="js\bootstrap-datepicker.js" />
+    <Content Include="js\bootstrap-table.js" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\chart-data.js" />
+    <Content Include="js\chart.min.js" />
+    <Content Include="js\DeletionConformance.js" />
+    <Content Include="js\easypiechart-data.js" />
+    <Content Include="js\easypiechart.js" />
+    <Content Include="js\html5shiv.min.js" />
+    <Content Include="js\jquery-1.11.1.min.js" />
+    <Content Include="js\lumino.glyphs.js" />
+    <Content Include="js\respond.min.js" />
+    <Content Include="MainStudentInfoTheme\css\bootstrap-table.css" />
+    <Content Include="MainStudentInfoTheme\css\bootstrap-theme.css" />
+    <Content Include="MainStudentInfoTheme\css\bootstrap-theme.min.css" />
+    <Content Include="MainStudentInfoTheme\css\bootstrap.css" />
+    <Content Include="MainStudentInfoTheme\css\bootstrap.min.css" />
+    <Content Include="MainStudentInfoTheme\css\datepicker.css" />
+    <Content Include="MainStudentInfoTheme\css\datepicker3.css" />
+    <Content Include="MainStudentInfoTheme\css\styles.css" />
+    <Content Include="MainStudentInfoTheme\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="MainStudentInfoTheme\js\bootstrap-datepicker.js" />
+    <Content Include="MainStudentInfoTheme\js\bootstrap-table.js" />
+    <Content Include="MainStudentInfoTheme\js\bootstrap.js" />
+    <Content Include="MainStudentInfoTheme\js\bootstrap.min.js" />
+    <Content Include="MainStudentInfoTheme\js\chart-data.js" />
+    <Content Include="MainStudentInfoTheme\js\chart.min.js" />
+    <Content Include="MainStudentInfoTheme\js\easypiechart-data.js" />
+    <Content Include="MainStudentInfoTheme\js\easypiechart.js" />
+    <Content Include="MainStudentInfoTheme\js\html5shiv.min.js" />
+    <Content Include="MainStudentInfoTheme\js\jquery-1.11.1.min.js" />
+    <Content Include="MainStudentInfoTheme\js\lumino.glyphs.js" />
+    <Content Include="MainStudentInfoTheme\js\respond.min.js" />
+    <Content Include="MainStudentInfoTheme\js\RunDatePicker.js" />
+    <Content Include="MyProjectImages\16.gif" />
+    <Content Include="MyProjectImages\abc.png" />
+    <Content Include="MyProjectImages\birthday-icon-5.png" />
+    <Content Include="MyProjectImages\icon-team-blue-big-150x150.png" />
+    <Content Include="MyProjectImages\Loading Circle.gif" />
+    <Content Include="MyProjectImages\lock.png" />
+    <Content Include="MyProjectImages\manageEmp.png" />
+    <Content Include="MyProjectImages\nexusae0_cc.png" />
+    <Content Include="MyProjectImages\student-xxl.png" />
+    <Content Include="MyProjectImages\teamIconInUpload.png" />
+    <Content Include="MyProjectImages\user icon.png" />
+    <Content Include="MyProjectImages\usericonIndi.png" />
+    <Content Include="MyProjectImages\Zk3GS.png" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="css\bootstrap-theme.css.map" />
+    <Content Include="css\bootstrap.css.map" />
+    <Content Include="MainStudentInfoTheme\css\bootstrap-theme.css.map" />
+    <Content Include="MainStudentInfoTheme\css\bootstrap.css.map" />
+    <Content Include="MainStudentInfoTheme\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="MainStudentInfoTheme\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="MainStudentInfoTheme\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="MainStudentInfoTheme\tables\data1.json" />
+    <Content Include="MainStudentInfoTheme\tables\data2.json" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\fonts\fontawesome-webfont.eot" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\fonts\fontawesome-webfont.ttf" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\fonts\fontawesome-webfont.woff" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\fonts\FontAwesome.otf" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\less\bordered-pulled.less" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\less\core.less" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\less\fixed-width.less" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\less\font-awesome.less" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\less\icons.less" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\less\larger.less" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\less\list.less" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\less\mixins.less" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\less\path.less" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\less\rotated-flipped.less" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\less\spinning.less" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\less\stacked.less" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\less\variables.less" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\scss\font-awesome.scss" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\scss\_bordered-pulled.scss" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\scss\_core.scss" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\scss\_fixed-width.scss" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\scss\_icons.scss" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\scss\_larger.scss" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\scss\_list.scss" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\scss\_mixins.scss" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\scss\_path.scss" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\scss\_rotated-flipped.scss" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\scss\_spinning.scss" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\scss\_stacked.scss" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\font\scss\_variables.scss" />
+    <Content Include="B-School-Free-Education-HTML5-Website-Template\js\fancybox\Descr.WD3" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="ClassDiagram1.cd" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\CameraImageUpload.js" />
+    <Content Include="Scripts\CameraImageUploadAdmin.js" />
+    <Content Include="Scripts\CameraImageUploadStudent.js" />
+    <Content Include="Scripts\CameraImageUploadTeacher.js" />
+    <Content Include="Scripts\CollectFeeScript.js" />
+    <Content Include="Scripts\DegreeBatchAdmin.js" />
+    <Content Include="Scripts\DegreeBatchGetterFile.js" />
+    <Content Include="Scripts\DegreeBatchTeacherJS.js" />
+    <Content Include="Scripts\DeletionConformance.js" />
+    <Content Include="Scripts\DomicileCities.js" />
+    <Content Include="Scripts\dropdownValueSave.js" />
+    <Content Include="Scripts\EditAtt_ChangePercentage.js" />
+    <Content Include="Scripts\EditMarks_ChangePercentage.js" />
+    <Content Include="Scripts\EmpAdminGraph.js" />
+    <Content Include="Scripts\IntellisenseForTeacherID.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\loader.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\OnJSDisableDeleteDisable.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\RollNoBatchGet.js" />
+    <Content Include="Scripts\RowSelectCheckbox.js" />
+    <Content Include="Scripts\SHowPass.js" />
+    <Content Include="Scripts\SideBarScript.js" />
+    <Content Include="Scripts\TableScript.js" />
+    <Content Include="Scripts\TeacherAttendanceUpload.js" />
+    <Content Include="Scripts\TeacherGetBatchesWhenAssigningBatch.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\login.cshtml" />
+    <Content Include="Views\Home\WelcomeEmployee.cshtml" />
+    <Content Include="Views\Shared\EmployeeView.cshtml" />
+    <Content Include="Views\Shared\JsEnableChecker.cshtml" />
+    <Content Include="Views\Years\AddYearRecords.cshtml" />
+    <Content Include="Views\Years\EditDuration.cshtml" />
+    <Content Include="Views\Years\ManageDegreeDurations.cshtml" />
+    <Content Include="Views\Section\AddSectionRecords.cshtml" />
+    <Content Include="Views\Section\EditSection.cshtml" />
+    <Content Include="Views\Section\ManageSections.cshtml" />
+    <Content Include="Views\Subjects\AddSubjectRecords.cshtml" />
+    <Content Include="Views\Subjects\EditSubject.cshtml" />
+    <Content Include="Views\Subjects\ManageSubjects.cshtml" />
+    <Content Include="Views\Batches\AddBatchRecords.cshtml" />
+    <Content Include="Views\Batches\AssignSubjects.cshtml" />
+    <Content Include="Views\Batches\Batch_Assign_Subjects_AddBatch.cshtml" />
+    <Content Include="Views\Batches\DetailBatch.cshtml" />
+    <Content Include="Views\Batches\DetailSubjectsInBatch.cshtml" />
+    <Content Include="Views\Batches\EditBatch.cshtml" />
+    <Content Include="Views\Batches\EditBatchReg.cshtml" />
+    <Content Include="Views\Batches\EditBatchSubjects.cshtml" />
+    <Content Include="Views\Batches\ViewBatches.cshtml" />
+    <Content Include="Views\Courses\AddDegreeRecords.cshtml" />
+    <Content Include="Views\Courses\AddSubjectsForSelectedDegree.cshtml" />
+    <Content Include="Views\Courses\AddSubjectsToDegreeProgram.cshtml" />
+    <Content Include="Views\Courses\DetailCourse.cshtml" />
+    <Content Include="Views\Courses\EditCourse.cshtml" />
+    <Content Include="Views\Courses\ManageCourses.cshtml" />
+    <Content Include="Views\Courses\RemoveSubjectsForSelectedDegree.cshtml" />
+    <Content Include="Views\Courses\RemoveSubjectsToDegreeProgram.cshtml" />
+    <Content Include="Views\Employees\AddSubjectToParticularStudent.cshtml" />
+    <Content Include="Views\Employees\AddTeacherBatches.cshtml" />
+    <Content Include="Views\Employees\AddTeacherSubjects.cshtml" />
+    <Content Include="Views\Employees\AddTeacherSubjects2.cshtml" />
+    <Content Include="Views\Employees\AddTeacher_Attendance_Records.cshtml" />
+    <Content Include="Views\Employees\AssignSubjectToUpdatedRegisteration.cshtml" />
+    <Content Include="Views\Employees\ChangePassword.cshtml" />
+    <Content Include="Views\Employees\DetailStudent.cshtml" />
+    <Content Include="Views\Employees\DetailTeacher.cshtml" />
+    <Content Include="Views\Employees\EditStudent.cshtml" />
+    <Content Include="Views\Employees\EditTeacher.cshtml" />
+    <Content Include="Views\Employees\EditTeacher_Attendance.cshtml" />
+    <Content Include="Views\Employees\EnrollTeacher.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Employees\NewAdmission.cshtml" />
+    <Content Include="Views\Employees\NewAdmissionEducationDetails.cshtml" />
+    <Content Include="Views\Employees\RegisterationForNewAdmission.cshtml" />
+    <Content Include="Views\Employees\StudentAttendanceRecords.cshtml" />
+    <Content Include="Views\Employees\StudentMarksRecords.cshtml" />
+    <Content Include="Views\Employees\StudentRecords.cshtml" />
+    <Content Include="Views\Employees\Student_Subjects.cshtml" />
+    <Content Include="Views\Employees\SubjectAssignView.cshtml" />
+    <Content Include="Views\Employees\TeacherAttendance.cshtml" />
+    <Content Include="Views\Employees\TeacherRecords.cshtml" />
+    <Content Include="Views\Employees\Teacher_Batches.cshtml" />
+    <Content Include="Views\Employees\Teacher_Subjects.cshtml" />
+    <Content Include="Views\Fee\AddFeeRecords.cshtml" />
+    <Content Include="Views\Fee\DetailFee.cshtml" />
+    <Content Include="Views\Fee\EditFee.cshtml" />
+    <Content Include="Views\Fee\FeeRecords.cshtml" />
+    <Content Include="Views\Student\ChangePassword.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\SHowAttendance.cshtml" />
+    <Content Include="Views\Student\SHowFee.cshtml" />
+    <Content Include="Views\Student\SHowMarks.cshtml" />
+    <Content Include="Views\Student\Students_Subject_Details.cshtml" />
+    <Content Include="Views\Shared\StudentView.cshtml" />
+    <Content Include="Views\Home\WelcomeStudent.cshtml" />
+    <Content Include="Views\Admin\AddNewEmp.cshtml" />
+    <Content Include="Views\Admin\ChangePassword.cshtml" />
+    <Content Include="Views\Admin\DetailStudent.cshtml" />
+    <Content Include="Views\Admin\DetailTeacher.cshtml" />
+    <Content Include="Views\Admin\EditEmployees.cshtml" />
+    <Content Include="Views\Admin\ManageCourses.cshtml" />
+    <Content Include="Views\Admin\ManageEmployees.cshtml" />
+    <Content Include="Views\Admin\SalaryTeacher.cshtml" />
+    <Content Include="Views\Admin\Statistics.cshtml" />
+    <Content Include="Views\Admin\Statistics2.cshtml" />
+    <Content Include="Views\Admin\StudentAttendanceRecords.cshtml" />
+    <Content Include="Views\Admin\StudentMarksRecords.cshtml" />
+    <Content Include="Views\Admin\StudentRecords.cshtml" />
+    <Content Include="Views\Admin\Student_Subjects.cshtml" />
+    <Content Include="Views\Admin\TeacherAttendance.cshtml" />
+    <Content Include="Views\Admin\TeacherRecords.cshtml" />
+    <Content Include="Views\Admin\Teacher_Batches.cshtml" />
+    <Content Include="Views\Admin\Teacher_Subjects.cshtml" />
+    <Content Include="Views\Shared\AdminView.cshtml" />
+    <Content Include="Views\Home\WelcomeAdmin.cshtml" />
+    <Content Include="Views\Shared\JsEnableCheckerAdmin.cshtml" />
+    <Content Include="Views\Teacher\AddAllAttendance.cshtml" />
+    <Content Include="Views\Teacher\AddAllMarks.cshtml" />
+    <Content Include="Views\Teacher\AddAttendance.cshtml" />
+    <Content Include="Views\Teacher\AddMarks.cshtml" />
+    <Content Include="Views\Teacher\ChangePassword.cshtml" />
+    <Content Include="Views\Teacher\DetailAttendance.cshtml" />
+    <Content Include="Views\Teacher\DetailMarks.cshtml" />
+    <Content Include="Views\Teacher\EditAttendance.cshtml" />
+    <Content Include="Views\Teacher\EditMarks.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\ManageAttendance.cshtml" />
+    <Content Include="Views\Teacher\ManageMarks.cshtml" />
+    <Content Include="Views\Teacher\ViewAttendance.cshtml" />
+    <Content Include="Views\Teacher\ViewStudents.cshtml" />
+    <Content Include="Views\Home\WelcomeTeacher.cshtml" />
+    <Content Include="Views\Shared\TeacherView.cshtml" />
+    <Content Include="Views\Employees\EditBatchSubjectsTeacher.cshtml" />
+    <Content Include="Views\Employees\DetailBatchSubjectsTeacher.cshtml" />
+    <Content Include="Views\Admin\DetailBatchSubjectsTeacher.cshtml" />
+    <Content Include="Views\Teacher\ViewTeacherBatchesoFTeacher.cshtml" />
+    <Content Include="Views\Teacher\ViewSubjectsForSelectedBatchofTeacher.cshtml" />
+    <Content Include="Views\Home\loginAsStudent.cshtml" />
+    <Content Include="Views\Admin\DetailEmployees.cshtml" />
+    <Content Include="Views\Years\DetailDuration.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Fee\FeeSummary.cshtml" />
+    <Content Include="Views\Employees\AddFeeRecords.cshtml" />
+    <Content Include="Views\Employees\ShowOptions.cshtml" />
+    <Content Include="Views\Employees\IndividualAttendanceTeacher.cshtml" />
+    <Content Include="Views\Teacher\ShowOptionsMarks.cshtml" />
+    <Content Include="Views\Teacher\AddMarksIndi.cshtml" />
+    <Content Include="Views\Teacher\AddAttIndi.cshtml" />
+    <Content Include="Views\Teacher\ShowOptionsAttendance.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\AttendanceRPTEmp.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AttendanceRPTEmp.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\FeeReportOfStudent.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FeeReportOfStudent.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\FeeSummaryReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FeeSummaryReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\MarksRPTEmp.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MarksRPTEmp.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\StudentsReportByEmployeeModel.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StudentsReportByEmployeeModel.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\MarksRPT.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MarksRPT.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\StudentListForTeacher.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StudentListForTeacher.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Student_Attendance_Reportrpt1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Student_Attendance_Reportrpt1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\TeacherATTrpt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TeacherATTrpt.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1396</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1396/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

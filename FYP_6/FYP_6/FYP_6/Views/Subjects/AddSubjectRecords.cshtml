@@ -1,0 +1,75 @@
+﻿@model FYP_6.Subject
+
+@{
+    Layout = null;
+}
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        @if (ViewBag.Message == "Successfully Record Added")
+        {
+        <br />
+        <div class="alert bg-success" role="alert">
+            <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+        </div>
+        }
+        else if (ViewBag.Message != "")
+        {
+        <br />
+        <div class="alert bg-danger" role="alert">
+            <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+            @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+        </div>
+        }
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Add Subjects</div>
+                    <div class="panel-body">
+
+                        <div class="bootstrap-table">
+                            <div class="fixed-table-body">
+                                @using (Html.BeginForm("AddSubjectRecords", "Subjects", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+
+                                    <br />
+                                    <br />
+
+                                    @Html.LabelFor(model => model.SubjectName, new { @style = "padding-right:20px" })
+                                    @Html.TextBoxFor(model => model.SubjectName, new { @class = "form-control", @style = "width:170px; display:inline" })
+
+                                    <div style="color:red; display:inline">*@Html.ValidationMessageFor(model => model.SubjectName)</div>
+                                    <br />
+                                    <br />
+                                    <input type="submit" value="Add Subject" class="btn btn-primary" style="margin-left:11%" />
+                                    @Html.ActionLink("Back", "ManageSubjects", "Subjects", null, new { @class = "btn btn-primary" })
+                                    
+                                }
+
+                            </div>
+
+
+
+                        </div><div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+
+</body>
+</html>

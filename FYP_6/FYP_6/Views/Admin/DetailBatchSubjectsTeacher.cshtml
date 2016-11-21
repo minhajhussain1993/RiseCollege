@@ -1,0 +1,130 @@
+﻿@model IEnumerable<FYP_6.Teacher_Subject>
+<html>
+<head>
+    <title>Teachers</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("AdminView")
+@Html.Partial("JsEnableCheckerAdmin")
+
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+
+
+        <br />
+        <br />
+        <br />
+        <br /><br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Records Updated")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+            else
+            {
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+
+        <div class="row">
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading" style="text-align:center">Teacher Subjects Details</div>
+                        <div class="panel-body">
+                            <span class="categoryDiv">
+                                <label style="font-size:large;">Teacher ID:</label> <a style="font-size:medium;color:black;margin-right:3%;">@ViewBag.TeacherName</a>
+                            </span>
+                            <span class="categoryDiv">
+                                <label style="font-size:large">Batch:</label> <a style="text-decoration:none; color:black; font-size:medium">@ViewBag.BatchTeacher.BatchName</a>
+                            </span>
+                            <span class="categoryDiv">
+                                <span class="alignStdprofileNat3">
+                                    <label style="margin-left:3%;font-size:large">Degree Program:</label>
+                                </span> <a style="font-size:medium;color:black;">@ViewBag.BatchTeacher.Degree_Program.Degree_ProgramName</a>
+
+                            </span>
+                            <span class="categoryDiv">
+                                <span class="alignStdprofileNat3">
+                                    <label style="margin-left:3%;font-size:large">Section:</label>
+                                </span> <a style="font-size:medium;color:black">@ViewBag.BatchTeacher.Section.SectionName</a>
+
+                            </span>
+                            <hr />
+                            <div class="bootstrap-table">
+                                <div class="fixed-table-header"><table></table></div><div class="fixed-table-body">
+
+                                    @using (Html.BeginForm("", "Admin", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+
+                                        <table border="0" data-toggle="table" data-url="tables/data1.json"
+                                               data-show-refresh="true" data-show-toggle="true" data-show-columns="true"
+                                               data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name"
+                                               data-sort-order="desc" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">
+                                                            No.#
+                                                        </div><div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style=""><div class="th-inner sortable">SubjectName</div><div class="fht-cell"></div></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                        if (Model != null)
+                                        {
+                                            //bool checker = false;
+
+                                            for (int i = 0, a = 1; i < Model.Count(); i++, a++)
+                                            {
+                                                <tr class="roo_@a">
+
+                                                    <td>@a</td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => Model.ToList()[i].Subject.SubjectName)
+                                                    </td>
+
+                                                </tr>
+                                            }
+
+                                        }
+
+
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                        @Html.ActionLink("Back", "Teacher_Batches", "Admin", new { @class = "btn btn-warning", @style = "margin-left:0px" })
+                                    }
+                                    <br />
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--/.panel-->
+                </div><!--/.col-->
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

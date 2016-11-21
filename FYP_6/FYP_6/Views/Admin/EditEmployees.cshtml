@@ -1,0 +1,219 @@
+﻿@model FYP_6.Employee
+<html>
+<head>
+    <title>Manage Employees</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("AdminView")
+@Html.Partial("JsEnableCheckerAdmin")
+
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <br /><br /><br /><br /><br />
+        @if (ViewBag.Message == "Successfully Updated Record")
+        {
+            <div class="alert bg-success" role="alert">
+                <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+        else if (ViewBag.Message != null)
+        {
+            <div class="alert bg-danger" role="alert">
+                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+
+
+
+ 
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary" style="padding-left:2px">
+                        <div class="panel-heading" style="text-align:center">Edit Employee Profile</div>
+                        <div class="panel-body">
+                            <div class="bootstrap-table">
+                                <div class="fixed-table-body">
+
+                                    @using (Html.BeginForm("EditEmployees", "Admin", FormMethod.Post
+                                                , new { enctype = "multipart/form-data" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                        <div style="float:right; display:inline">
+                                            @if (Model.Picture != null)
+                                            {
+
+                                                var base64 = Convert.ToBase64String((byte[])Model.Picture);
+                                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                <img src='@imgSrc' style="width:200px; height:200px; padding: 0px; display:inline;float:right;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;}" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/MyProjectImages/user icon.png" style="width:200px; height:200px; padding: 0px;float:right;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;}" />
+                                            }
+
+                                        </div>
+                                        <div style="float:right;">
+                                            <span class="categoryDiv">
+                                                <label for="file" style="margin:5%">Upload Image:</label>
+                                            </span>
+                                            <span class="categoryDiv">
+                                                <input type="file" name="file" id="file" style="margin-top:5%" />
+                                            </span>
+                                        </div>
+
+                                        <label style="padding-right:155px; display:inline">Name:</label>
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        <span style="color:red; " class="">*</span>
+                                        <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.Name)</span>
+                                        <br />
+                                        <br />
+
+                                        <label style="padding-right:120px; display:inline">UserName:</label>
+                                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        <span style="color:red; " class="">*</span>
+                                        <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.UserName)</span>
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:125px; display:inline">Password:</label>
+                                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        <span style="color:red; " class="">*</span>
+                                        <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.Password)</span>
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:135px; display:inline">Gender:</label>
+                                        if (Model.Gender != null && Model.Gender != "")
+                                        {
+                                            if (Model.Gender == "Male")
+                                            {
+                                                <label><input type="radio" name="gender" value="Male" checked>Male</label>
+                                                <label><input type="radio" name="gender" value="Female">Female</label>
+                                            }
+                                            else
+                                            {
+                                                <label><input type="radio" name="gender" value="Male">Male</label>
+                                                <label><input type="radio" name="gender" value="Female" checked>Female</label>
+                                            }
+                                        }
+                                        @*@Html.TextBoxFor(model => model.Gender, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                            <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.Gender)</span>*@
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:135px; display:inline;padding-left:0px">Religion:</label>
+                                        @Html.DisplayFor(model => model.Religion, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        <br /><br />
+                                        <label style="padding-right:85px; display:inline;padding-left:0px">Select Religion:</label>
+                                        <select name="religion" class="form-control" style="width:200px; display:inline" id="religion">
+                                            <option value="Please select" selected="selected">Please select</option>
+                                            @if (ViewBag.Religions != null)
+                                            {
+                                                foreach (var item in ViewBag.Religions)
+                                                {
+                                                    <option value="@item.ReligionName">@item.ReligionName</option>
+                                                }
+                                            }
+                                        </select>
+                                        <br />
+                                        <br />
+                                        if (Model.Date_of_Birth.HasValue)
+                                        {
+                                            <label style="padding-right:95px; display:inline">Date_of_Birth:</label>
+                                            <input type="text" name="date1" value="@Model.Date_of_Birth.Value.ToShortDateString()" style="width:200px; display:inline" class="form-control datepicker" data-date-format="dd-mm-yyyy" required />
+                                            @*@Html.TextBoxFor(model => model.Date_of_Birth, "{0:d}", new { @class = "form-control datepicker", @style = "width:200px; display:inline;" })*@
+                                            <span style="color:red; " class="">*</span>
+                                            <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.Date_of_Birth)</span>
+                                            <br />
+                                            <br />
+                                        }
+                                        else
+                                        {
+                                            <label style="padding-right:95px; display:inline">Date_of_Birth:</label>
+                                            <input type="text" name="date1" value="" style="width:200px; display:inline" class="form-control datepicker" data-date-format="dd-mm-yyyy" required />
+                                            @*@Html.TextBoxFor(model => model.Date_of_Birth, "{0:d}", new { @class = "form-control datepicker", @style = "width:200px; display:inline;" })*@
+                                            <span style="color:red; " class="">*</span>
+                                            <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.Date_of_Birth)</span>
+                                            <br />
+                                            <br />
+                                        }
+
+                                        <label style="padding-right:130px">Address:</label>
+                                        @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.Address)</span>
+                                        <br />
+                                        <br />
+                                        if (Model.Martial_Status != null)
+                                        {
+                                            if (Model.Martial_Status == "Single")
+                                            {
+                                                <label style="padding-right:100px;padding-left:0px">Martial_Status:</label>
+                                                <label><input type="radio" name="Marriedstatus" value="Single" checked>Single</label>
+                                                <label><input type="radio" name="Marriedstatus" value="Married">Married</label>
+                                                <br />
+                                                <br />
+                                            }
+                                            else
+                                            {
+                                                <label style="padding-right:100px;padding-left:0px">Martial_Status:</label>
+                                                <label><input type="radio" name="Marriedstatus" value="Single">Single</label>
+                                                <label><input type="radio" name="Marriedstatus" value="Married" checked>Married</label>
+                                                <br />
+                                                <br />
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            <label style="padding-right:100px;padding-left:0px">Martial_Status:</label>
+                                            <label><input type="radio" name="Marriedstatus" value="Single" checked>Single</label>
+                                            <label><input type="radio" name="Marriedstatus" value="Married">Married</label>
+                                            <br />
+                                            <br />
+                                        }
+
+                                        <label style="padding-right:105px">Contact No:</label>
+                                        @Html.TextBoxFor(model => model.ContactNo, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.ContactNo)</span>
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:150px; display:inline">CNIC:</label>
+                                        @Html.TextBoxFor(model => model.CNIC, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        <span style="color:red; " class="">*</span>
+                                        <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.CNIC)</span>
+                                        <br />
+                                        <br />
+                                        <label style="padding-right:140px;">Salary:</label>
+                                        @Html.TextBoxFor(model => model.Salary, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        <span style="color:red; " class="categoryDiv">@Html.ValidationMessageFor(model => model.Salary)</span>
+                                        <br />
+                                        <br />
+
+                                        <input type="submit" value="Update" class="btn btn-primary" style="margin-left:20%" />
+                                        <input type="hidden" value="@Html.DisplayFor(model => model.EmpID)" name="EmpID" />
+                                        @*<input type="hidden" value="@Html.DisplayFor(model => model.Religion)" name="religionhidden" />*@
+                                        @Html.ActionLink("Back", "ManageEmployees", "Admin", new { @class = "btn btn-primary" })
+                                    }
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div><!--/.panel-->
+                </div><!--/.col-->
+            </div><!-- /.row -->
+        </div><!--/.main-->
+  
+
+
+</body>
+</html>

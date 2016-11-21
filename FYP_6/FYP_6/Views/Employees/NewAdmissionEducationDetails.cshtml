@@ -1,0 +1,169 @@
+﻿@model FYP_6.Student_Profile
+<html>
+<head>
+    <title>Student Admission</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        @if (Session["Success"] == "Successfully Record Added")
+        {
+            <div class="alert bg-success" role="alert">
+                <svg class="glyph stroked checkmark">
+                    <use xlink:href="#stroked-checkmark"></use>
+                </svg>
+                @Session["Success"]
+                <a href="#" class="pull-right">
+
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </div>
+        }
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert bg-danger" role="alert">
+                <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        }
+
+
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="panel panel-primary" style="padding-left:2px">
+                    <div class="panel-heading" style="text-align:center">Step2: Student Educational Details</div>
+                    <div class="panel-body">
+                        <div class="bootstrap-table">
+                            <div class="fixed-table-header"><table></table></div><span class="fixed-table-body">
+                                @if (Session["Success"] != "Successfully Record Added")
+                                {
+                                    using (Html.BeginForm("NewAdmissionEducationDetails", "Employees", FormMethod.Post
+                                        ))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                        @*<label style="padding-right:140px">RollNo</label>
+                                            @Html.DisplayFor(model => model.stdProfile.FirstName)
+                                            <br />
+                                            <br />*@
+                                        <br /><br />
+                                        <div class="col-md-2">
+                                            <label>School Name:</label>
+                                        </div>
+                                        <span style="margin-left:1.5%">
+                                            @Html.TextBoxFor(model => model.MatricFrom, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                        </span>
+
+                                        <span class="categoryDiv">
+                                            <span style="color:red; display:inline"> @Html.ValidationMessageFor(model => model.MatricFrom)</span>
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <div class="col-md-2">
+                                            <label>Total Matric Marks:</label>
+                                        </div>
+                                        <span style="margin-left:1.5%">
+                                            @Html.TextBoxFor(model => model.Total_Matric_Marks, new { @class = "form-control", @style = "width:200px; display:inline;" })
+                                        </span>
+                                        <span class="categoryDiv">
+                                            <span style="color:red; display:inline">@Html.ValidationMessageFor(model => model.Total_Matric_Marks)</span>
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <div class="col-md-2">
+                                            <label>Obtained Matric Marks:</label>
+                                        </div>
+                                        <span class="" style="margin-left:1.5%">
+                                            @Html.TextBoxFor(model => model.Matric_Marks, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                        </span>
+                                        <span class="categoryDiv">
+                                            <span style="color:red; display:inline;" class="">@Html.ValidationMessageFor(model => model.Matric_Marks)</span>
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <div class="col-md-2">
+                                            <label>College Name:</label>
+                                        </div>
+                                        <span style="margin-left:1.5%">
+                                            @Html.TextBoxFor(model => model.IntermediateFrom, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                        </span>
+                                        <span class="categoryDiv" style="margin-left:0%">
+                                            <span style="color:red; display:inline">@Html.ValidationMessageFor(model => model.IntermediateFrom)</span>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <div class="col-md-2">
+                                            <label>Total Intermediate Marks</label>
+                                        </div>
+                                        <span style="margin-left:1.5%">
+                                            @Html.TextBoxFor(model => model.Total_Inter_Marks, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                        </span>
+                                        <span class="categoryDiv">
+                                            <span style="color:red; display:inline">@Html.ValidationMessageFor(model => model.Total_Inter_Marks)</span>
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <div class="col-md-2">
+                                            <label>Obtained Intermediate Marks</label>
+                                        </div>
+                                        <span style="margin-left:1.5%">
+                                            @Html.TextBoxFor(model => model.Intermediate_Marks, new { @class = "form-control", @style = "width:200px; display:inline;" })
+
+                                        </span>
+                                        <span class="categoryDiv">
+                                            <span style="color:red; display:inline;">@Html.ValidationMessageFor(model => model.Intermediate_Marks)</span>
+                                        </span>
+
+                                        <br />
+                                        <br />
+                                        <input type="submit" value="Next" class="btn btn-primary"
+                                               style="margin-left:20%;width:100px;" />
+                                        <br />
+                                        <br />
+                                    }
+
+                                }
+                                else
+                                {
+                                    using (Html.BeginForm("NewAdmission", "Employees", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                        <h2>Registeration Successfull</h2>
+                                        <input type="submit" value="Next" class="btn btn-primary"
+                                               style="margin-left:200px;width:200px;" name="newAdmission" />
+                                    }
+                                }
+                        </div>
+
+
+                    </div>
+                </div>
+            </div><!--/.panel-->
+        </div><!--/.col-->
+    </div>
+    </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,1849 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RCIS3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="30" />
+          <Property Name="Picture" Type="image" />
+        </EntityType>
+        <EntityType Name="Assign_Subject">
+          <Key>
+            <PropertyRef Name="AssignID" />
+          </Key>
+          <Property Name="AssignID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Rollno" Type="varchar" MaxLength="30" />
+          <Property Name="Batch_Subject_ID" Type="uniqueidentifier" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="BatchName" />
+          </Key>
+          <Property Name="BatchID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BatchName" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="YearID" Type="uniqueidentifier" />
+          <Property Name="SectionID" Type="uniqueidentifier" />
+          <Property Name="DegreeProgram_ID" Type="uniqueidentifier" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="Batch_Subjects_Parts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BatchName" Type="varchar" MaxLength="15" />
+          <Property Name="SubjectID" Type="uniqueidentifier" />
+          <Property Name="Part" Type="int" />
+        </EntityType>
+        <EntityType Name="BoardResults">
+          <Key>
+            <PropertyRef Name="Rollno" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Rollno" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FirstYearMarkSheet" Type="image" />
+          <Property Name="SecondYearMarkSheet" Type="image" />
+          <Property Name="ThirdYearMarkSheet" Type="image" />
+          <Property Name="FourthYearMarkSheet" Type="image" />
+        </EntityType>
+        <EntityType Name="Degree_Program">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Degree_ProgramName" Type="varchar" MaxLength="100" />
+          <Property Name="LevelID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Degree_Subject">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DegreeID" Type="uniqueidentifier" />
+          <Property Name="SubjectID" Type="uniqueidentifier" />
+          <Property Name="Part" Type="int" />
+        </EntityType>
+        <EntityType Name="Duration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Duration" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="30" />
+          <Property Name="Password" Type="varchar" MaxLength="30" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+          <Property Name="Address" Type="varchar" MaxLength="30" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="12" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
+          <Property Name="Date of Birth" Type="date" />
+          <Property Name="Martial_Status" Type="varchar" MaxLength="15" />
+          <Property Name="Matric" Type="image" />
+          <Property Name="Intermediate" Type="image" />
+          <Property Name="Salary" Type="money" />
+          <Property Name="Status" Type="varchar" MaxLength="12" />
+          <Property Name="CNIC" Type="varchar" MaxLength="16" />
+          <Property Name="Picture" Type="image" />
+        </EntityType>
+        <EntityType Name="Fees">
+          <Key>
+            <PropertyRef Name="Bill_No" />
+          </Key>
+          <Property Name="Bill_No" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Rollno" Type="varchar" MaxLength="30" />
+          <Property Name="StudentName" Type="varchar" MaxLength="30" />
+          <Property Name="Dated" Type="date" />
+          <Property Name="Registeration_Fee" Type="money" />
+          <Property Name="Tution Fee" Type="money" />
+          <Property Name="Admission_Fee" Type="money" />
+          <Property Name="Exam_Fee" Type="money" />
+          <Property Name="Total_Installments" Type="int" />
+          <Property Name="Installment" Type="int" />
+          <Property Name="Month" Type="varchar" MaxLength="12" />
+          <Property Name="Fine" Type="money" />
+          <Property Name="Total_Fee" Type="money" />
+        </EntityType>
+        <EntityType Name="Levels">
+          <Key>
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="LevelID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level_Name" Type="varchar" MaxLength="10" />
+          <Property Name="DurationID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="PartID" />
+          </Key>
+          <Property Name="PartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Part" Type="int" />
+        </EntityType>
+        <EntityType Name="Registeration">
+          <Key>
+            <PropertyRef Name="Rollno" />
+          </Key>
+          <Property Name="Rollno" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="RegisterationNo" Type="varchar" MaxLength="25" />
+          <Property Name="BatchID" Type="varchar" MaxLength="15" />
+          <Property Name="DateOfRegisteration" Type="date" />
+          <Property Name="Password" Type="varchar" MaxLength="30" />
+          <Property Name="ProfileID" Type="uniqueidentifier" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Part" Type="int" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SectionName" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Student_Marks">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SubjectAssignID" Type="uniqueidentifier" />
+          <Property Name="Total_Marks" Type="int" />
+          <Property Name="Obtained_Marks" Type="float" />
+          <Property Name="Marks_Percentage" Type="varchar" MaxLength="10" />
+          <Property Name="Month" Type="varchar" MaxLength="13" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Student_Profile">
+          <Key>
+            <PropertyRef Name="ProfileID" />
+          </Key>
+          <Property Name="ProfileID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="15" />
+          <Property Name="LastName" Type="varchar" MaxLength="15" />
+          <Property Name="Date of Birth" Type="date" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
+          <Property Name="Religion" Type="varchar" MaxLength="15" />
+          <Property Name="CNIC" Type="varchar" MaxLength="16" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="12" />
+          <Property Name="Matric Marks" Type="int" />
+          <Property Name="Intermediate Marks" Type="int" />
+          <Property Name="Domicile" Type="varchar" MaxLength="15" />
+          <Property Name="Nationality" Type="varchar" MaxLength="20" />
+          <Property Name="Picture" Type="image" />
+          <Property Name="FatherName/Guardian Name" Type="varchar" MaxLength="30" />
+          <Property Name="Father/Guardian Contact" Type="varchar" MaxLength="12" />
+          <Property Name="Father/Guardian Occupation" Type="varchar" MaxLength="30" />
+          <Property Name="MatricFrom" Type="varchar" MaxLength="100" />
+          <Property Name="IntermediateFrom" Type="varchar" MaxLength="100" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="Students_Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SubjectAssignID" Type="uniqueidentifier" />
+          <Property Name="Total_lectures" Type="int" />
+          <Property Name="Attended_Lectures" Type="int" />
+          <Property Name="Attendance_Percentage" Type="varchar" MaxLength="10" />
+          <Property Name="Month" Type="varchar" MaxLength="13" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SubjectName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="TeacherID" />
+          </Key>
+          <Property Name="TeacherID" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+          <Property Name="Address" Type="varchar" MaxLength="30" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="12" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
+          <Property Name="Date of Birth" Type="date" />
+          <Property Name="Martial_Status" Type="varchar" MaxLength="15" />
+          <Property Name="Graduation Details" Type="varchar" MaxLength="50" />
+          <Property Name="Post Graduation Details" Type="varchar" MaxLength="50" />
+          <Property Name="Year of Graduation" Type="int" />
+          <Property Name="Year of Post Graduation" Type="int" />
+          <Property Name="Password" Type="varchar" MaxLength="15" />
+          <Property Name="Salary" Type="money" />
+          <Property Name="Status" Type="varchar" MaxLength="12" />
+          <Property Name="Major_Subject" Type="varchar" MaxLength="30" />
+          <Property Name="Picture" Type="image" />
+        </EntityType>
+        <EntityType Name="Teacher_Attendance">
+          <Key>
+            <PropertyRef Name="TeacherID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeacherID" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Present" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="Teacher_Subject">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SubjectID" Type="uniqueidentifier" />
+          <Property Name="Teacher_BatchID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Teachers_Batches">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeacherID" Type="varchar" MaxLength="25" />
+          <Property Name="BatchName" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Time_Table">
+          <Key>
+            <PropertyRef Name="BatchName" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BatchName" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="TimeTable" Type="image" />
+        </EntityType>
+        <EntityType Name="Year">
+          <Key>
+            <PropertyRef Name="YearID" />
+          </Key>
+          <Property Name="YearID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FromYear" Type="int" />
+          <Property Name="ToYear" Type="int" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <Association Name="FK_Assign_Subject_Batch_Subjects_Parts">
+          <End Role="Batch_Subjects_Parts" Type="Self.Batch_Subjects_Parts" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Assign_Subject" Type="Self.Assign_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch_Subjects_Parts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Assign_Subject">
+              <PropertyRef Name="Batch_Subject_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assign_Subject_Registeration">
+          <End Role="Registeration" Type="Self.Registeration" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Assign_Subject" Type="Self.Assign_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registeration">
+              <PropertyRef Name="Rollno" />
+            </Principal>
+            <Dependent Role="Assign_Subject">
+              <PropertyRef Name="Rollno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batch_Degree_Program">
+          <End Role="Degree_Program" Type="Self.Degree_Program" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degree_Program">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="DegreeProgram_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batch_Section">
+          <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+          <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batch_Subjects_Parts_Batch">
+          <End Role="Batch" Type="Self.Batch" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batch_Subjects_Parts" Type="Self.Batch_Subjects_Parts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchName" />
+            </Principal>
+            <Dependent Role="Batch_Subjects_Parts">
+              <PropertyRef Name="BatchName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batch_Subjects_Parts_Part">
+          <End Role="Part" Type="Self.Part" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batch_Subjects_Parts" Type="Self.Batch_Subjects_Parts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="Batch_Subjects_Parts">
+              <PropertyRef Name="Part" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batch_Subjects_Parts_Subjects">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batch_Subjects_Parts" Type="Self.Batch_Subjects_Parts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Batch_Subjects_Parts">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batch_Year">
+          <End Role="Year" Type="Self.Year" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Year">
+              <PropertyRef Name="YearID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="YearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Degree_Program_Levels">
+          <End Role="Levels" Type="Self.Levels" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Degree_Program" Type="Self.Degree_Program" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Levels">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="Degree_Program">
+              <PropertyRef Name="LevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Degree_Subject_Degree_Program">
+          <End Role="Degree_Program" Type="Self.Degree_Program" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Degree_Subject" Type="Self.Degree_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degree_Program">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="Degree_Subject">
+              <PropertyRef Name="DegreeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Degree_Subject_Part">
+          <End Role="Part" Type="Self.Part" Multiplicity="0..1" />
+          <End Role="Degree_Subject" Type="Self.Degree_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="Degree_Subject">
+              <PropertyRef Name="Part" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Degree_Subject_Subjects">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Degree_Subject" Type="Self.Degree_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Degree_Subject">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fees_Registeration">
+          <End Role="Registeration" Type="Self.Registeration" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Fees" Type="Self.Fees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registeration">
+              <PropertyRef Name="Rollno" />
+            </Principal>
+            <Dependent Role="Fees">
+              <PropertyRef Name="Rollno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Levels_Duration">
+          <End Role="Duration" Type="Self.Duration" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Levels" Type="Self.Levels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Duration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Levels">
+              <PropertyRef Name="DurationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registeration_Batch">
+          <End Role="Batch" Type="Self.Batch" Multiplicity="0..1" />
+          <End Role="Registeration" Type="Self.Registeration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchName" />
+            </Principal>
+            <Dependent Role="Registeration">
+              <PropertyRef Name="BatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registeration_Part">
+          <End Role="Part" Type="Self.Part" Multiplicity="0..1" />
+          <End Role="Registeration" Type="Self.Registeration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="Registeration">
+              <PropertyRef Name="Part" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registeration_Student_Profile">
+          <End Role="Student_Profile" Type="Self.Student_Profile" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Registeration" Type="Self.Registeration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student_Profile">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="Registeration">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Marks_Assign_Subject">
+          <End Role="Assign_Subject" Type="Self.Assign_Subject" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Student_Marks" Type="Self.Student_Marks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assign_Subject">
+              <PropertyRef Name="AssignID" />
+            </Principal>
+            <Dependent Role="Student_Marks">
+              <PropertyRef Name="SubjectAssignID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Attendance_Assign_Subject">
+          <End Role="Assign_Subject" Type="Self.Assign_Subject" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Students_Attendance" Type="Self.Students_Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assign_Subject">
+              <PropertyRef Name="AssignID" />
+            </Principal>
+            <Dependent Role="Students_Attendance">
+              <PropertyRef Name="SubjectAssignID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_Attendance_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Teacher_Attendance" Type="Self.Teacher_Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherID" />
+            </Principal>
+            <Dependent Role="Teacher_Attendance">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_Subject_Subjects">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Teacher_Subject" Type="Self.Teacher_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Teacher_Subject">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_Subject_Teachers_Batches">
+          <End Role="Teachers_Batches" Type="Self.Teachers_Batches" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Teacher_Subject" Type="Self.Teacher_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers_Batches">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Teacher_Subject">
+              <PropertyRef Name="Teacher_BatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_Batches_Batch">
+          <End Role="Batch" Type="Self.Batch" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Teachers_Batches" Type="Self.Teachers_Batches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchName" />
+            </Principal>
+            <Dependent Role="Teachers_Batches">
+              <PropertyRef Name="BatchName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_Batches_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Teachers_Batches" Type="Self.Teachers_Batches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherID" />
+            </Principal>
+            <Dependent Role="Teachers_Batches">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RCIS3ModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Assign_Subject" EntityType="Self.Assign_Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Batch" EntityType="Self.Batch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Batch_Subjects_Parts" EntityType="Self.Batch_Subjects_Parts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BoardResults" EntityType="Self.BoardResults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Degree_Program" EntityType="Self.Degree_Program" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Degree_Subject" EntityType="Self.Degree_Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Duration" EntityType="Self.Duration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fees" EntityType="Self.Fees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Levels" EntityType="Self.Levels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Part" EntityType="Self.Part" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registeration" EntityType="Self.Registeration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student_Marks" EntityType="Self.Student_Marks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student_Profile" EntityType="Self.Student_Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students_Attendance" EntityType="Self.Students_Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher_Attendance" EntityType="Self.Teacher_Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher_Subject" EntityType="Self.Teacher_Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teachers_Batches" EntityType="Self.Teachers_Batches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Time_Table" EntityType="Self.Time_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Year" EntityType="Self.Year" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Assign_Subject_Batch_Subjects_Parts" Association="Self.FK_Assign_Subject_Batch_Subjects_Parts">
+            <End Role="Batch_Subjects_Parts" EntitySet="Batch_Subjects_Parts" />
+            <End Role="Assign_Subject" EntitySet="Assign_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assign_Subject_Registeration" Association="Self.FK_Assign_Subject_Registeration">
+            <End Role="Registeration" EntitySet="Registeration" />
+            <End Role="Assign_Subject" EntitySet="Assign_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batch_Degree_Program" Association="Self.FK_Batch_Degree_Program">
+            <End Role="Degree_Program" EntitySet="Degree_Program" />
+            <End Role="Batch" EntitySet="Batch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batch_Section" Association="Self.FK_Batch_Section">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Batch" EntitySet="Batch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batch_Subjects_Parts_Batch" Association="Self.FK_Batch_Subjects_Parts_Batch">
+            <End Role="Batch" EntitySet="Batch" />
+            <End Role="Batch_Subjects_Parts" EntitySet="Batch_Subjects_Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batch_Subjects_Parts_Part" Association="Self.FK_Batch_Subjects_Parts_Part">
+            <End Role="Part" EntitySet="Part" />
+            <End Role="Batch_Subjects_Parts" EntitySet="Batch_Subjects_Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batch_Subjects_Parts_Subjects" Association="Self.FK_Batch_Subjects_Parts_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Batch_Subjects_Parts" EntitySet="Batch_Subjects_Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batch_Year" Association="Self.FK_Batch_Year">
+            <End Role="Year" EntitySet="Year" />
+            <End Role="Batch" EntitySet="Batch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Degree_Program_Levels" Association="Self.FK_Degree_Program_Levels">
+            <End Role="Levels" EntitySet="Levels" />
+            <End Role="Degree_Program" EntitySet="Degree_Program" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Degree_Subject_Degree_Program" Association="Self.FK_Degree_Subject_Degree_Program">
+            <End Role="Degree_Program" EntitySet="Degree_Program" />
+            <End Role="Degree_Subject" EntitySet="Degree_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Degree_Subject_Part" Association="Self.FK_Degree_Subject_Part">
+            <End Role="Part" EntitySet="Part" />
+            <End Role="Degree_Subject" EntitySet="Degree_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Degree_Subject_Subjects" Association="Self.FK_Degree_Subject_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Degree_Subject" EntitySet="Degree_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fees_Registeration" Association="Self.FK_Fees_Registeration">
+            <End Role="Registeration" EntitySet="Registeration" />
+            <End Role="Fees" EntitySet="Fees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Levels_Duration" Association="Self.FK_Levels_Duration">
+            <End Role="Duration" EntitySet="Duration" />
+            <End Role="Levels" EntitySet="Levels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registeration_Batch" Association="Self.FK_Registeration_Batch">
+            <End Role="Batch" EntitySet="Batch" />
+            <End Role="Registeration" EntitySet="Registeration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registeration_Part" Association="Self.FK_Registeration_Part">
+            <End Role="Part" EntitySet="Part" />
+            <End Role="Registeration" EntitySet="Registeration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registeration_Student_Profile" Association="Self.FK_Registeration_Student_Profile">
+            <End Role="Student_Profile" EntitySet="Student_Profile" />
+            <End Role="Registeration" EntitySet="Registeration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Marks_Assign_Subject" Association="Self.FK_Student_Marks_Assign_Subject">
+            <End Role="Assign_Subject" EntitySet="Assign_Subject" />
+            <End Role="Student_Marks" EntitySet="Student_Marks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Attendance_Assign_Subject" Association="Self.FK_Students_Attendance_Assign_Subject">
+            <End Role="Assign_Subject" EntitySet="Assign_Subject" />
+            <End Role="Students_Attendance" EntitySet="Students_Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Attendance_Teacher" Association="Self.FK_Teacher_Attendance_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Teacher_Attendance" EntitySet="Teacher_Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Subject_Subjects" Association="Self.FK_Teacher_Subject_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Teacher_Subject" EntitySet="Teacher_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Subject_Teachers_Batches" Association="Self.FK_Teacher_Subject_Teachers_Batches">
+            <End Role="Teachers_Batches" EntitySet="Teachers_Batches" />
+            <End Role="Teacher_Subject" EntitySet="Teacher_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_Batches_Batch" Association="Self.FK_Teachers_Batches_Batch">
+            <End Role="Batch" EntitySet="Batch" />
+            <End Role="Teachers_Batches" EntitySet="Teachers_Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_Batches_Teacher" Association="Self.FK_Teachers_Batches_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Teachers_Batches" EntitySet="Teachers_Batches" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RCIS3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Assign_Subject">
+          <Key>
+            <PropertyRef Name="AssignID" />
+          </Key>
+          <Property Name="AssignID" Type="Guid" Nullable="false" />
+          <Property Name="Rollno" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Batch_Subject_ID" Type="Guid" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Batch_Subjects_Parts" Relationship="Self.FK_Assign_Subject_Batch_Subjects_Parts" FromRole="Assign_Subject" ToRole="Batch_Subjects_Parts" />
+          <NavigationProperty Name="Registeration" Relationship="Self.FK_Assign_Subject_Registeration" FromRole="Assign_Subject" ToRole="Registeration" />
+          <NavigationProperty Name="Student_Marks" Relationship="Self.FK_Student_Marks_Assign_Subject" FromRole="Assign_Subject" ToRole="Student_Marks" />
+          <NavigationProperty Name="Students_Attendance" Relationship="Self.FK_Students_Attendance_Assign_Subject" FromRole="Assign_Subject" ToRole="Students_Attendance" />
+        </EntityType>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="BatchName" />
+          </Key>
+          <Property Name="BatchID" Type="Guid" Nullable="false" />
+          <Property Name="BatchName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="YearID" Type="Guid" />
+          <Property Name="SectionID" Type="Guid" />
+          <Property Name="DegreeProgram_ID" Type="Guid" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Degree_Program" Relationship="Self.FK_Batch_Degree_Program" FromRole="Batch" ToRole="Degree_Program" />
+          <NavigationProperty Name="Section" Relationship="Self.FK_Batch_Section" FromRole="Batch" ToRole="Section" />
+          <NavigationProperty Name="Batch_Subjects_Parts" Relationship="Self.FK_Batch_Subjects_Parts_Batch" FromRole="Batch" ToRole="Batch_Subjects_Parts" />
+          <NavigationProperty Name="Year" Relationship="Self.FK_Batch_Year" FromRole="Batch" ToRole="Year" />
+          <NavigationProperty Name="Registerations" Relationship="Self.FK_Registeration_Batch" FromRole="Batch" ToRole="Registeration" />
+          <NavigationProperty Name="Teachers_Batches" Relationship="Self.FK_Teachers_Batches_Batch" FromRole="Batch" ToRole="Teachers_Batches" />
+        </EntityType>
+        <EntityType Name="Batch_Subjects_Parts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="BatchName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="SubjectID" Type="Guid" />
+          <Property Name="Part" Type="Int32" />
+          <NavigationProperty Name="Assign_Subject" Relationship="Self.FK_Assign_Subject_Batch_Subjects_Parts" FromRole="Batch_Subjects_Parts" ToRole="Assign_Subject" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_Batch_Subjects_Parts_Batch" FromRole="Batch_Subjects_Parts" ToRole="Batch" />
+          <NavigationProperty Name="Part1" Relationship="Self.FK_Batch_Subjects_Parts_Part" FromRole="Batch_Subjects_Parts" ToRole="Part" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_Batch_Subjects_Parts_Subjects" FromRole="Batch_Subjects_Parts" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="BoardResult">
+          <Key>
+            <PropertyRef Name="Rollno" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Rollno" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstYearMarkSheet" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="SecondYearMarkSheet" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ThirdYearMarkSheet" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FourthYearMarkSheet" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Degree_Program">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="Guid" Nullable="false" />
+          <Property Name="Degree_ProgramName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LevelID" Type="Guid" />
+          <NavigationProperty Name="Batches" Relationship="Self.FK_Batch_Degree_Program" FromRole="Degree_Program" ToRole="Batch" />
+          <NavigationProperty Name="Level" Relationship="Self.FK_Degree_Program_Levels" FromRole="Degree_Program" ToRole="Levels" />
+          <NavigationProperty Name="Degree_Subject" Relationship="Self.FK_Degree_Subject_Degree_Program" FromRole="Degree_Program" ToRole="Degree_Subject" />
+        </EntityType>
+        <EntityType Name="Degree_Subject">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="DegreeID" Type="Guid" />
+          <Property Name="SubjectID" Type="Guid" />
+          <NavigationProperty Name="Degree_Program" Relationship="Self.FK_Degree_Subject_Degree_Program" FromRole="Degree_Subject" ToRole="Degree_Program" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_Degree_Subject_Subjects" FromRole="Degree_Subject" ToRole="Subjects" />
+          <Property Name="Part" Type="Int32" />
+          <NavigationProperty Name="Part1" Relationship="RCIS3Model.FK_Degree_Subject_Part" FromRole="Degree_Subject" ToRole="Part" />
+        </EntityType>
+        <EntityType Name="Duration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Duration1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Levels" Relationship="Self.FK_Levels_Duration" FromRole="Duration" ToRole="Levels" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Date_of_Birth" Type="DateTime" Precision="0" />
+          <Property Name="Martial_Status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Matric" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Intermediate" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Status" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CNIC" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Fee">
+          <Key>
+            <PropertyRef Name="Bill_No" />
+          </Key>
+          <Property Name="Bill_No" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rollno" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="StudentName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Dated" Type="DateTime" Precision="0" />
+          <Property Name="Registeration_Fee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Tution_Fee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Admission_Fee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Exam_Fee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Total_Installments" Type="Int32" />
+          <Property Name="Installment" Type="Int32" />
+          <Property Name="Month" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Fine" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Total_Fee" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Registeration" Relationship="Self.FK_Fees_Registeration" FromRole="Fees" ToRole="Registeration" />
+        </EntityType>
+        <EntityType Name="Level">
+          <Key>
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="LevelID" Type="Guid" Nullable="false" />
+          <Property Name="Level_Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DurationID" Type="Guid" />
+          <NavigationProperty Name="Degree_Program" Relationship="Self.FK_Degree_Program_Levels" FromRole="Levels" ToRole="Degree_Program" />
+          <NavigationProperty Name="Duration" Relationship="Self.FK_Levels_Duration" FromRole="Levels" ToRole="Duration" />
+        </EntityType>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="PartID" />
+          </Key>
+          <Property Name="PartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Part1" Type="Int32" />
+          <NavigationProperty Name="Batch_Subjects_Parts" Relationship="Self.FK_Batch_Subjects_Parts_Part" FromRole="Part" ToRole="Batch_Subjects_Parts" />
+          <NavigationProperty Name="Registerations" Relationship="Self.FK_Registeration_Part" FromRole="Part" ToRole="Registeration" />
+          <NavigationProperty Name="Degree_Subject" Relationship="RCIS3Model.FK_Degree_Subject_Part" FromRole="Part" ToRole="Degree_Subject" />
+        </EntityType>
+        <EntityType Name="Registeration">
+          <Key>
+            <PropertyRef Name="Rollno" />
+          </Key>
+          <Property Name="Rollno" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RegisterationNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="BatchID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfRegisteration" Type="DateTime" Precision="0" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ProfileID" Type="Guid" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Part" Type="Int32" />
+          <NavigationProperty Name="Assign_Subject" Relationship="Self.FK_Assign_Subject_Registeration" FromRole="Registeration" ToRole="Assign_Subject" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_Registeration_Batch" FromRole="Registeration" ToRole="Batch" />
+          <NavigationProperty Name="Fees" Relationship="Self.FK_Fees_Registeration" FromRole="Registeration" ToRole="Fees" />
+          <NavigationProperty Name="Part1" Relationship="Self.FK_Registeration_Part" FromRole="Registeration" ToRole="Part" />
+          <NavigationProperty Name="Student_Profile" Relationship="Self.FK_Registeration_Student_Profile" FromRole="Registeration" ToRole="Student_Profile" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="Guid" Nullable="false" />
+          <Property Name="SectionName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Batches" Relationship="Self.FK_Batch_Section" FromRole="Section" ToRole="Batch" />
+        </EntityType>
+        <EntityType Name="Student_Marks">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="Guid" Nullable="false" />
+          <Property Name="SubjectAssignID" Type="Guid" />
+          <Property Name="Total_Marks" Type="Int32" />
+          <Property Name="Obtained_Marks" Type="Double" />
+          <Property Name="Marks_Percentage" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Month" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Assign_Subject" Relationship="Self.FK_Student_Marks_Assign_Subject" FromRole="Student_Marks" ToRole="Assign_Subject" />
+        </EntityType>
+        <EntityType Name="Student_Profile">
+          <Key>
+            <PropertyRef Name="ProfileID" />
+          </Key>
+          <Property Name="ProfileID" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Date_of_Birth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Religion" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CNIC" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Matric_Marks" Type="Int32" />
+          <Property Name="Intermediate_Marks" Type="Int32" />
+          <Property Name="Domicile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FatherName_Guardian_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Father_Guardian_Contact" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Father_Guardian_Occupation" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MatricFrom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IntermediateFrom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Registerations" Relationship="Self.FK_Registeration_Student_Profile" FromRole="Student_Profile" ToRole="Registeration" />
+        </EntityType>
+        <EntityType Name="Students_Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="Guid" Nullable="false" />
+          <Property Name="SubjectAssignID" Type="Guid" />
+          <Property Name="Total_lectures" Type="Int32" />
+          <Property Name="Attended_Lectures" Type="Int32" />
+          <Property Name="Attendance_Percentage" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Month" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Assign_Subject" Relationship="Self.FK_Students_Attendance_Assign_Subject" FromRole="Students_Attendance" ToRole="Assign_Subject" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="Guid" Nullable="false" />
+          <Property Name="SubjectName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Batch_Subjects_Parts" Relationship="Self.FK_Batch_Subjects_Parts_Subjects" FromRole="Subjects" ToRole="Batch_Subjects_Parts" />
+          <NavigationProperty Name="Degree_Subject" Relationship="Self.FK_Degree_Subject_Subjects" FromRole="Subjects" ToRole="Degree_Subject" />
+          <NavigationProperty Name="Teacher_Subject" Relationship="RCIS3Model.FK_Teacher_Subject_Subjects" FromRole="Subject" ToRole="Teacher_Subject" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="TeacherID" />
+          </Key>
+          <Property Name="TeacherID" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Date_of_Birth" Type="DateTime" Precision="0" />
+          <Property Name="Martial_Status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Graduation_Details" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Post_Graduation_Details" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Year_of_Graduation" Type="Int32" />
+          <Property Name="Year_of_Post_Graduation" Type="Int32" />
+          <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Status" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Major_Subject" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Teacher_Attendance" Relationship="Self.FK_Teacher_Attendance_Teacher" FromRole="Teacher" ToRole="Teacher_Attendance" />
+          <NavigationProperty Name="Teachers_Batches" Relationship="Self.FK_Teachers_Batches_Teacher" FromRole="Teacher" ToRole="Teachers_Batches" />
+        </EntityType>
+        <EntityType Name="Teacher_Attendance">
+          <Key>
+            <PropertyRef Name="TeacherID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="TeacherID" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Present" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_Teacher_Attendance_Teacher" FromRole="Teacher_Attendance" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Teacher_Subject">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SubjectID" Type="Guid" />
+          <Property Name="Teacher_BatchID" Type="Guid" />
+          <NavigationProperty Name="Subject" Relationship="RCIS3Model.FK_Teacher_Subject_Subjects" FromRole="Teacher_Subject" ToRole="Subject" />
+          <NavigationProperty Name="Teachers_Batches" Relationship="RCIS3Model.FK_Teacher_Subject_Teachers_Batches" FromRole="Teacher_Subject" ToRole="Teachers_Batches" />
+        </EntityType>
+        <EntityType Name="Teachers_Batches">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="TeacherID" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="BatchName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_Teachers_Batches_Batch" FromRole="Teachers_Batches" ToRole="Batch" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_Teachers_Batches_Teacher" FromRole="Teachers_Batches" ToRole="Teacher" />
+          <NavigationProperty Name="Teacher_Subject" Relationship="RCIS3Model.FK_Teacher_Subject_Teachers_Batches" FromRole="Teachers_Batches" ToRole="Teacher_Subject" />
+        </EntityType>
+        <EntityType Name="Time_Table">
+          <Key>
+            <PropertyRef Name="BatchName" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="BatchName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TimeTable" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Year">
+          <Key>
+            <PropertyRef Name="YearID" />
+          </Key>
+          <Property Name="YearID" Type="Guid" Nullable="false" />
+          <Property Name="FromYear" Type="Int32" />
+          <Property Name="ToYear" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Batches" Relationship="Self.FK_Batch_Year" FromRole="Year" ToRole="Batch" />
+        </EntityType>
+        <Association Name="FK_Assign_Subject_Batch_Subjects_Parts">
+          <End Role="Batch_Subjects_Parts" Type="Self.Batch_Subjects_Parts" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Assign_Subject" Type="Self.Assign_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch_Subjects_Parts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Assign_Subject">
+              <PropertyRef Name="Batch_Subject_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assign_Subject_Registeration">
+          <End Role="Registeration" Type="Self.Registeration" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Assign_Subject" Type="Self.Assign_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registeration">
+              <PropertyRef Name="Rollno" />
+            </Principal>
+            <Dependent Role="Assign_Subject">
+              <PropertyRef Name="Rollno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Marks_Assign_Subject">
+          <End Role="Assign_Subject" Type="Self.Assign_Subject" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Student_Marks" Type="Self.Student_Marks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assign_Subject">
+              <PropertyRef Name="AssignID" />
+            </Principal>
+            <Dependent Role="Student_Marks">
+              <PropertyRef Name="SubjectAssignID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Attendance_Assign_Subject">
+          <End Role="Assign_Subject" Type="Self.Assign_Subject" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Students_Attendance" Type="Self.Students_Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assign_Subject">
+              <PropertyRef Name="AssignID" />
+            </Principal>
+            <Dependent Role="Students_Attendance">
+              <PropertyRef Name="SubjectAssignID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batch_Degree_Program">
+          <End Role="Degree_Program" Type="Self.Degree_Program" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degree_Program">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="DegreeProgram_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batch_Section">
+          <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+          <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batch_Subjects_Parts_Batch">
+          <End Role="Batch" Type="Self.Batch" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batch_Subjects_Parts" Type="Self.Batch_Subjects_Parts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchName" />
+            </Principal>
+            <Dependent Role="Batch_Subjects_Parts">
+              <PropertyRef Name="BatchName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batch_Year">
+          <End Role="Year" Type="Self.Year" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Year">
+              <PropertyRef Name="YearID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="YearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registeration_Batch">
+          <End Role="Batch" Type="Self.Batch" Multiplicity="0..1" />
+          <End Role="Registeration" Type="Self.Registeration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchName" />
+            </Principal>
+            <Dependent Role="Registeration">
+              <PropertyRef Name="BatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_Batches_Batch">
+          <End Role="Batch" Type="Self.Batch" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Teachers_Batches" Type="Self.Teachers_Batches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchName" />
+            </Principal>
+            <Dependent Role="Teachers_Batches">
+              <PropertyRef Name="BatchName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batch_Subjects_Parts_Part">
+          <End Role="Part" Type="Self.Part" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batch_Subjects_Parts" Type="Self.Batch_Subjects_Parts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="Batch_Subjects_Parts">
+              <PropertyRef Name="Part" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batch_Subjects_Parts_Subjects">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batch_Subjects_Parts" Type="Self.Batch_Subjects_Parts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Batch_Subjects_Parts">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Degree_Program_Levels">
+          <End Role="Levels" Type="Self.Level" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Degree_Program" Type="Self.Degree_Program" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Levels">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="Degree_Program">
+              <PropertyRef Name="LevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Degree_Subject_Degree_Program">
+          <End Role="Degree_Program" Type="Self.Degree_Program" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Degree_Subject" Type="Self.Degree_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degree_Program">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="Degree_Subject">
+              <PropertyRef Name="DegreeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Degree_Subject_Subjects">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Degree_Subject" Type="Self.Degree_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Degree_Subject">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Levels_Duration">
+          <End Role="Duration" Type="Self.Duration" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Levels" Type="Self.Level" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Duration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Levels">
+              <PropertyRef Name="DurationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fees_Registeration">
+          <End Role="Registeration" Type="Self.Registeration" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Fees" Type="Self.Fee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registeration">
+              <PropertyRef Name="Rollno" />
+            </Principal>
+            <Dependent Role="Fees">
+              <PropertyRef Name="Rollno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registeration_Part">
+          <End Role="Part" Type="Self.Part" Multiplicity="0..1" />
+          <End Role="Registeration" Type="Self.Registeration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="Registeration">
+              <PropertyRef Name="Part" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registeration_Student_Profile">
+          <End Role="Student_Profile" Type="Self.Student_Profile" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Registeration" Type="Self.Registeration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student_Profile">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="Registeration">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_Attendance_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Teacher_Attendance" Type="Self.Teacher_Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherID" />
+            </Principal>
+            <Dependent Role="Teacher_Attendance">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_Batches_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Teachers_Batches" Type="Self.Teachers_Batches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherID" />
+            </Principal>
+            <Dependent Role="Teachers_Batches">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RCIS2Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Assign_Subject" EntityType="Self.Assign_Subject" />
+          <EntitySet Name="Batches" EntityType="Self.Batch" />
+          <EntitySet Name="Batch_Subjects_Parts" EntityType="Self.Batch_Subjects_Parts" />
+          <EntitySet Name="BoardResults" EntityType="Self.BoardResult" />
+          <EntitySet Name="Degree_Program" EntityType="Self.Degree_Program" />
+          <EntitySet Name="Degree_Subject" EntityType="Self.Degree_Subject" />
+          <EntitySet Name="Durations" EntityType="Self.Duration" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Fees" EntityType="Self.Fee" />
+          <EntitySet Name="Levels" EntityType="Self.Level" />
+          <EntitySet Name="Parts" EntityType="Self.Part" />
+          <EntitySet Name="Registerations" EntityType="Self.Registeration" />
+          <EntitySet Name="Sections" EntityType="Self.Section" />
+          <EntitySet Name="Student_Marks" EntityType="Self.Student_Marks" />
+          <EntitySet Name="Student_Profile" EntityType="Self.Student_Profile" />
+          <EntitySet Name="Students_Attendance" EntityType="Self.Students_Attendance" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+          <EntitySet Name="Teacher_Attendance" EntityType="Self.Teacher_Attendance" />
+          <EntitySet Name="Teacher_Subject" EntityType="Self.Teacher_Subject" />
+          <EntitySet Name="Teachers_Batches" EntityType="Self.Teachers_Batches" />
+          <EntitySet Name="Time_Table" EntityType="Self.Time_Table" />
+          <EntitySet Name="Years" EntityType="Self.Year" />
+          <AssociationSet Name="FK_Assign_Subject_Batch_Subjects_Parts" Association="Self.FK_Assign_Subject_Batch_Subjects_Parts">
+            <End Role="Batch_Subjects_Parts" EntitySet="Batch_Subjects_Parts" />
+            <End Role="Assign_Subject" EntitySet="Assign_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assign_Subject_Registeration" Association="Self.FK_Assign_Subject_Registeration">
+            <End Role="Registeration" EntitySet="Registerations" />
+            <End Role="Assign_Subject" EntitySet="Assign_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Marks_Assign_Subject" Association="Self.FK_Student_Marks_Assign_Subject">
+            <End Role="Assign_Subject" EntitySet="Assign_Subject" />
+            <End Role="Student_Marks" EntitySet="Student_Marks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Attendance_Assign_Subject" Association="Self.FK_Students_Attendance_Assign_Subject">
+            <End Role="Assign_Subject" EntitySet="Assign_Subject" />
+            <End Role="Students_Attendance" EntitySet="Students_Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batch_Degree_Program" Association="Self.FK_Batch_Degree_Program">
+            <End Role="Degree_Program" EntitySet="Degree_Program" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batch_Section" Association="Self.FK_Batch_Section">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batch_Subjects_Parts_Batch" Association="Self.FK_Batch_Subjects_Parts_Batch">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="Batch_Subjects_Parts" EntitySet="Batch_Subjects_Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batch_Year" Association="Self.FK_Batch_Year">
+            <End Role="Year" EntitySet="Years" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registeration_Batch" Association="Self.FK_Registeration_Batch">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="Registeration" EntitySet="Registerations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_Batches_Batch" Association="Self.FK_Teachers_Batches_Batch">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="Teachers_Batches" EntitySet="Teachers_Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batch_Subjects_Parts_Part" Association="Self.FK_Batch_Subjects_Parts_Part">
+            <End Role="Part" EntitySet="Parts" />
+            <End Role="Batch_Subjects_Parts" EntitySet="Batch_Subjects_Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batch_Subjects_Parts_Subjects" Association="Self.FK_Batch_Subjects_Parts_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Batch_Subjects_Parts" EntitySet="Batch_Subjects_Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Degree_Program_Levels" Association="Self.FK_Degree_Program_Levels">
+            <End Role="Levels" EntitySet="Levels" />
+            <End Role="Degree_Program" EntitySet="Degree_Program" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Degree_Subject_Degree_Program" Association="Self.FK_Degree_Subject_Degree_Program">
+            <End Role="Degree_Program" EntitySet="Degree_Program" />
+            <End Role="Degree_Subject" EntitySet="Degree_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Degree_Subject_Subjects" Association="Self.FK_Degree_Subject_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Degree_Subject" EntitySet="Degree_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Levels_Duration" Association="Self.FK_Levels_Duration">
+            <End Role="Duration" EntitySet="Durations" />
+            <End Role="Levels" EntitySet="Levels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fees_Registeration" Association="Self.FK_Fees_Registeration">
+            <End Role="Registeration" EntitySet="Registerations" />
+            <End Role="Fees" EntitySet="Fees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registeration_Part" Association="Self.FK_Registeration_Part">
+            <End Role="Part" EntitySet="Parts" />
+            <End Role="Registeration" EntitySet="Registerations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registeration_Student_Profile" Association="Self.FK_Registeration_Student_Profile">
+            <End Role="Student_Profile" EntitySet="Student_Profile" />
+            <End Role="Registeration" EntitySet="Registerations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Attendance_Teacher" Association="Self.FK_Teacher_Attendance_Teacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="Teacher_Attendance" EntitySet="Teacher_Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_Batches_Teacher" Association="Self.FK_Teachers_Batches_Teacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="Teachers_Batches" EntitySet="Teachers_Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Degree_Subject_Part" Association="RCIS3Model.FK_Degree_Subject_Part">
+            <End Role="Part" EntitySet="Parts" />
+            <End Role="Degree_Subject" EntitySet="Degree_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Subject_Subjects" Association="RCIS3Model.FK_Teacher_Subject_Subjects">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Teacher_Subject" EntitySet="Teacher_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Subject_Teachers_Batches" Association="RCIS3Model.FK_Teacher_Subject_Teachers_Batches">
+            <End Role="Teachers_Batches" EntitySet="Teachers_Batches" />
+            <End Role="Teacher_Subject" EntitySet="Teacher_Subject" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Degree_Subject_Part">
+          <End Type="RCIS3Model.Part" Role="Part" Multiplicity="0..1" />
+          <End Type="RCIS3Model.Degree_Subject" Role="Degree_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="PartID" />
+            </Principal>
+            <Dependent Role="Degree_Subject">
+              <PropertyRef Name="Part" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_Subject_Subjects">
+          <End Type="RCIS3Model.Subject" Role="Subject" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="RCIS3Model.Teacher_Subject" Role="Teacher_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Teacher_Subject">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_Subject_Teachers_Batches">
+          <End Type="RCIS3Model.Teachers_Batches" Role="Teachers_Batches" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="RCIS3Model.Teacher_Subject" Role="Teacher_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers_Batches">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Teacher_Subject">
+              <PropertyRef Name="Teacher_BatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RCIS3ModelStoreContainer" CdmEntityContainer="RCIS2Entities1">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="RCIS3Model.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Assign_Subject">
+            <EntityTypeMapping TypeName="RCIS3Model.Assign_Subject">
+              <MappingFragment StoreEntitySet="Assign_Subject">
+                <ScalarProperty Name="AssignID" ColumnName="AssignID" />
+                <ScalarProperty Name="Rollno" ColumnName="Rollno" />
+                <ScalarProperty Name="Batch_Subject_ID" ColumnName="Batch_Subject_ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Batches">
+            <EntityTypeMapping TypeName="RCIS3Model.Batch">
+              <MappingFragment StoreEntitySet="Batch">
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="BatchName" ColumnName="BatchName" />
+                <ScalarProperty Name="YearID" ColumnName="YearID" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="DegreeProgram_ID" ColumnName="DegreeProgram_ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Batch_Subjects_Parts">
+            <EntityTypeMapping TypeName="RCIS3Model.Batch_Subjects_Parts">
+              <MappingFragment StoreEntitySet="Batch_Subjects_Parts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BatchName" ColumnName="BatchName" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BoardResults">
+            <EntityTypeMapping TypeName="RCIS3Model.BoardResult">
+              <MappingFragment StoreEntitySet="BoardResults">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Rollno" ColumnName="Rollno" />
+                <ScalarProperty Name="FirstYearMarkSheet" ColumnName="FirstYearMarkSheet" />
+                <ScalarProperty Name="SecondYearMarkSheet" ColumnName="SecondYearMarkSheet" />
+                <ScalarProperty Name="ThirdYearMarkSheet" ColumnName="ThirdYearMarkSheet" />
+                <ScalarProperty Name="FourthYearMarkSheet" ColumnName="FourthYearMarkSheet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Degree_Program">
+            <EntityTypeMapping TypeName="RCIS3Model.Degree_Program">
+              <MappingFragment StoreEntitySet="Degree_Program">
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="Degree_ProgramName" ColumnName="Degree_ProgramName" />
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Degree_Subject">
+            <EntityTypeMapping TypeName="RCIS3Model.Degree_Subject">
+              <MappingFragment StoreEntitySet="Degree_Subject">
+                <ScalarProperty Name="Part" ColumnName="Part" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DegreeID" ColumnName="DegreeID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Durations">
+            <EntityTypeMapping TypeName="RCIS3Model.Duration">
+              <MappingFragment StoreEntitySet="Duration">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Duration1" ColumnName="Duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="RCIS3Model.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date of Birth" />
+                <ScalarProperty Name="Martial_Status" ColumnName="Martial_Status" />
+                <ScalarProperty Name="Matric" ColumnName="Matric" />
+                <ScalarProperty Name="Intermediate" ColumnName="Intermediate" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fees">
+            <EntityTypeMapping TypeName="RCIS3Model.Fee">
+              <MappingFragment StoreEntitySet="Fees">
+                <ScalarProperty Name="Bill_No" ColumnName="Bill_No" />
+                <ScalarProperty Name="Rollno" ColumnName="Rollno" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="Dated" ColumnName="Dated" />
+                <ScalarProperty Name="Registeration_Fee" ColumnName="Registeration_Fee" />
+                <ScalarProperty Name="Tution_Fee" ColumnName="Tution Fee" />
+                <ScalarProperty Name="Admission_Fee" ColumnName="Admission_Fee" />
+                <ScalarProperty Name="Exam_Fee" ColumnName="Exam_Fee" />
+                <ScalarProperty Name="Total_Installments" ColumnName="Total_Installments" />
+                <ScalarProperty Name="Installment" ColumnName="Installment" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
+                <ScalarProperty Name="Total_Fee" ColumnName="Total_Fee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Levels">
+            <EntityTypeMapping TypeName="RCIS3Model.Level">
+              <MappingFragment StoreEntitySet="Levels">
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="Level_Name" ColumnName="Level_Name" />
+                <ScalarProperty Name="DurationID" ColumnName="DurationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parts">
+            <EntityTypeMapping TypeName="RCIS3Model.Part">
+              <MappingFragment StoreEntitySet="Part">
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="Part1" ColumnName="Part" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registerations">
+            <EntityTypeMapping TypeName="RCIS3Model.Registeration">
+              <MappingFragment StoreEntitySet="Registeration">
+                <ScalarProperty Name="Rollno" ColumnName="Rollno" />
+                <ScalarProperty Name="RegisterationNo" ColumnName="RegisterationNo" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="DateOfRegisteration" ColumnName="DateOfRegisteration" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="RCIS3Model.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_Marks">
+            <EntityTypeMapping TypeName="RCIS3Model.Student_Marks">
+              <MappingFragment StoreEntitySet="Student_Marks">
+                <ScalarProperty Name="ResultID" ColumnName="ResultID" />
+                <ScalarProperty Name="SubjectAssignID" ColumnName="SubjectAssignID" />
+                <ScalarProperty Name="Total_Marks" ColumnName="Total_Marks" />
+                <ScalarProperty Name="Obtained_Marks" ColumnName="Obtained_Marks" />
+                <ScalarProperty Name="Marks_Percentage" ColumnName="Marks_Percentage" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_Profile">
+            <EntityTypeMapping TypeName="RCIS3Model.Student_Profile">
+              <MappingFragment StoreEntitySet="Student_Profile">
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date of Birth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Matric_Marks" ColumnName="Matric Marks" />
+                <ScalarProperty Name="Intermediate_Marks" ColumnName="Intermediate Marks" />
+                <ScalarProperty Name="Domicile" ColumnName="Domicile" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="FatherName_Guardian_Name" ColumnName="FatherName/Guardian Name" />
+                <ScalarProperty Name="Father_Guardian_Contact" ColumnName="Father/Guardian Contact" />
+                <ScalarProperty Name="Father_Guardian_Occupation" ColumnName="Father/Guardian Occupation" />
+                <ScalarProperty Name="MatricFrom" ColumnName="MatricFrom" />
+                <ScalarProperty Name="IntermediateFrom" ColumnName="IntermediateFrom" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students_Attendance">
+            <EntityTypeMapping TypeName="RCIS3Model.Students_Attendance">
+              <MappingFragment StoreEntitySet="Students_Attendance">
+                <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+                <ScalarProperty Name="SubjectAssignID" ColumnName="SubjectAssignID" />
+                <ScalarProperty Name="Total_lectures" ColumnName="Total_lectures" />
+                <ScalarProperty Name="Attended_Lectures" ColumnName="Attended_Lectures" />
+                <ScalarProperty Name="Attendance_Percentage" ColumnName="Attendance_Percentage" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="RCIS3Model.Subject">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="RCIS3Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="RCIS3Model.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date of Birth" />
+                <ScalarProperty Name="Martial_Status" ColumnName="Martial_Status" />
+                <ScalarProperty Name="Graduation_Details" ColumnName="Graduation Details" />
+                <ScalarProperty Name="Post_Graduation_Details" ColumnName="Post Graduation Details" />
+                <ScalarProperty Name="Year_of_Graduation" ColumnName="Year of Graduation" />
+                <ScalarProperty Name="Year_of_Post_Graduation" ColumnName="Year of Post Graduation" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Major_Subject" ColumnName="Major_Subject" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher_Attendance">
+            <EntityTypeMapping TypeName="RCIS3Model.Teacher_Attendance">
+              <MappingFragment StoreEntitySet="Teacher_Attendance">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Present" ColumnName="Present" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher_Subject">
+            <EntityTypeMapping TypeName="RCIS3Model.Teacher_Subject">
+              <MappingFragment StoreEntitySet="Teacher_Subject">
+                <ScalarProperty Name="Teacher_BatchID" ColumnName="Teacher_BatchID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers_Batches">
+            <EntityTypeMapping TypeName="RCIS3Model.Teachers_Batches">
+              <MappingFragment StoreEntitySet="Teachers_Batches">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+                <ScalarProperty Name="BatchName" ColumnName="BatchName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Time_Table">
+            <EntityTypeMapping TypeName="RCIS3Model.Time_Table">
+              <MappingFragment StoreEntitySet="Time_Table">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BatchName" ColumnName="BatchName" />
+                <ScalarProperty Name="TimeTable" ColumnName="TimeTable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Years">
+            <EntityTypeMapping TypeName="RCIS3Model.Year">
+              <MappingFragment StoreEntitySet="Year">
+                <ScalarProperty Name="YearID" ColumnName="YearID" />
+                <ScalarProperty Name="FromYear" ColumnName="FromYear" />
+                <ScalarProperty Name="ToYear" ColumnName="ToYear" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

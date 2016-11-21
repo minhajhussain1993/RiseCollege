@@ -1,0 +1,114 @@
+﻿@model IEnumerable<FYP_6.Batch_Subjects_Parts>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Batches</title>
+    <link rel="icon" href="~/B-School-Free-Education-HTML5-Website-Template/images/work/logo2.ico" />
+</head>
+@Html.Partial("EmployeeView")
+@Html.Partial("JsEnableChecker")
+<body>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+
+        <br />
+        <br /><br />
+        <br /><br />
+        @if (ViewBag.Message != null)
+        {
+            if (ViewBag.Message == "Successfully Records Deleted")
+            {
+                <div class="alert bg-success" role="alert">
+                    <svg class="glyph stroked checkmark">
+                        <use xlink:href="#stroked-checkmark"></use>
+                    </svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+            else
+            {
+                <div class="alert bg-danger" role="alert">
+                    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+                    @ViewBag.Message<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            }
+        }
+
+        <div class="row">
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading" style="text-align:center">Subjects</div>
+                        <div class="panel-body">
+                            <div class="bootstrap-table">
+                                <div class="fixed-table-header"><table></table></div><div class="fixed-table-body">
+
+                                    @using (Html.BeginForm("EditBatch", "Batches", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                        <table border="1" data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style=""><div class="th-inner sortable">Select</div><div class="fht-cell"></div></th>
+                                                    <th style=""><div class="th-inner sortable">BatchName</div><div class="fht-cell"></div></th>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">
+                                                            Degree Program
+                                                        </div><div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style=""><div class="th-inner sortable">Part</div><div class="fht-cell"></div></th>
+                                                    <th style=""><div class="th-inner sortable">Section</div><div class="fht-cell"></div></th>
+                                                    <th style=""><div class="th-inner sortable">SubjectName</div><div class="fht-cell"></div></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td><input type="checkbox" value="@item.ID" name="BatchID" id="BatchID"></td>
+                                                        <td>@Html.DisplayFor(modelItem => item.BatchName)</td>
+                                                        <td>@Html.DisplayFor(modelItem => item.Batch.Degree_Program.Degree_ProgramName)</td>
+                                                        <td>
+                                                            @item.Part
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Batch.Section.SectionName)
+                                                        </td>
+                                                        <td>
+                                                            @item.Subject.SubjectName
+                                                        </td>
+
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                        <input type="submit" value="Remove Subjects" class="btn btn-primary" style="display:inline;" />
+                                        @Html.ActionLink("Back", "ViewBatches", "Batches", new { @class = "btn btn-warning", @style = "margin-left:10px" })
+                                    }
+
+
+
+                                    <br />
+                                    <br />
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div><!--/.panel-->
+                </div><!--/.col-->
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
